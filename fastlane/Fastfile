@@ -1,0 +1,95 @@
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+opt_out_usage
+
+# https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
+ENV["XC_PATH"] = "/Applications/Xcode_15.0.1.app"
+
+ENV["IOS_XC_SCAN_DESTINATION"] = "platform=iOS Simulator,name=iPhone SE (3rd generation),OS=17.0.1"
+ENV["TVOS_XC_SCAN_DESTINATION"] = "platform=tvOS Simulator,name=Apple TV 4k (3rd generation),OS=17.0"
+ENV["WATCHOS_XC_SCAN_DESTINATION"] = "platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=10.0"
+ENV["MACOS_XC_SCAN_DESTINATION"] = "platform=macOS,arch=x86_64"
+
+ENV["FASTLANE_BUILD_DIRECTORY"] = "fastlane_builds"
+ENV["TEST_BUILD_DIRECTORY"] = File.join(ENV["FASTLANE_BUILD_DIRECTORY"], "tests")
+ENV["REPORT_DIRECTORY"] = File.join(ENV["FASTLANE_BUILD_DIRECTORY"], "reports")
+
+before_all do |lane, options|
+  if is_ci
+    xcode_select(ENV["XC_PATH"])
+    setup_ci
+  end
+end
+
+desc "Run all tests for: macOS, iOS, tvOS & watchOS"
+lane :test_all do
+  test(platform: "iOS")
+  test(platform: "tvOS")
+  test(platform: "watchOS")
+  test(platform: "macOS")
+end
+
+desc "Run tests for a specific platform"
+desc "Optional: platform - Runs the unit tests for the given platform. Options are: macOS, iOS, watchOS or tvOS. The options are not case sensitive. Defaults to 'ios'"
+lane :test do |options|
+  platform = options[:platform].nil? ? "ios" : options[:platform]
+
+  set_destination(
+    platform: platform
+  )
+
+  scan(
+    project: project_path,
+    scheme: project_scheme,
+    clean: true,
+    code_coverage: true,
+    force_quit_simulator: true,
+    output_directory: ENV["REPORT_DIRECTORY"],
+    derived_data_path: ENV["TEST_BUILD_DIRECTORY"],
+    destination: ENV["XC_SCAN_DESTINATION"],
+    parallel_testing: false
+  )
+end
+
+### --- Private Lanes --- ###
+
+desc "Set scan destination in env."
+desc "Required: platform - The destination platform."
+private_lane :set_destination do |options|
+  platform = options[:platform].downcase
+
+  if platform.nil?
+    UI.user_error! "Missing parameter 'platform'"
+  end
+
+  case platform
+  when "ios"
+    destination = ENV["IOS_XC_SCAN_DESTINATION"]
+  when "macos"
+    destination = ENV["MACOS_XC_SCAN_DESTINATION"]
+  when "tvos"
+    destination = ENV["TVOS_XC_SCAN_DESTINATION"]
+  when "watchos"
+    destination = ENV["WATCHOS_XC_SCAN_DESTINATION"]
+  else
+    destination = nil
+  end
+
+  unless destination.nil?
+    UI.important "Destination: #{destination}"
+  else
+    UI.user_error! "Unknown platform '#{platform}'"
+  end
+
+  ENV["XC_SCAN_DESTINATION"] = destination
+end
+
+### --- Helpers --- ###
+
+def project_path
+  "NSAttributedStringBuilder.xcodeproj"
+end
+
+def project_scheme
+  "NSAttributedStringBuilder"
+end

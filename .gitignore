@@ -32,6 +32,8 @@ Pods/
 # Fastlane.swift runner binary
 **/fastlane/FastlaneRunner
 
+fastlane_builds/
+
 ### macOS ###
 # General
 .DS_Store
