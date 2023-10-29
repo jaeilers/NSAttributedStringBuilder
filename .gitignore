@@ -127,7 +127,6 @@ Packages
 .build/
 xcuserdata
 DerivedData/
-*.xcodeproj
 .swiftpm
 
 

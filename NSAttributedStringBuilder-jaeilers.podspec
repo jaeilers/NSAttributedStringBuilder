@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target = "13.0"
   spec.osx.deployment_target = "11.0"
-  spec.watchos.deployment_target = "4.0"
+  spec.watchos.deployment_target = "6.0"
   spec.tvos.deployment_target = "13.0"
 
   spec.source       = { :git => "https://github.com/jaeilers/NSAttributedStringBuilder.git", :tag => "#{spec.version}" }
