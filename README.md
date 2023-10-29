@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/badge/Swift-5.8_5.9-orange) ![](https://img.shields.io/badge/Platforms-macOS_|_iOS_|_tvOS_|_watchOS-lightblue) ![](https://img.shields.io/badge/License-MIT-green) ![](https://img.shields.io/badge/SwiftUI-compatible-blue) 
 
-An `NSAttributedString` builder inspired by [ethanhuang13/NSAttributedStringBuilder](https://github.com/ethanhuang13/NSAttributedStringBuilder) that is highly customizable and with extended modifiers (e.g. bold/italic, image, custom spacing etc.) and accessibility support.
+The `NSAttributedStringBuilder` is an easy to use attributed string builder with extended modifier support (bold/italic, image, custom spacings etc.) that supports most platforms, can be extended easily and has accessibility support.
 
 ## Features
 
@@ -71,3 +71,7 @@ let attributedString = UIImage.checkmark
     .newline()
     .image(UIImage.add)
 ```
+
+## Other
+
+This project is inspired by [ethanhuang13/NSAttributedStringBuilder](https://github.com/ethanhuang13/NSAttributedStringBuilder) and [svdo/swift-RichString](https://github.com/svdo/swift-RichString).
