@@ -1,5 +1,5 @@
 #if canImport(UIKit) && !os(watchOS)
-@testable import NSAttributedStringBuilder
+import NSAttributedStringBuilder
 import XCTest
 
 final class AttributedStringBuildingiOSTests: XCTestCase {

@@ -1,5 +1,5 @@
 #if canImport(AppKit)
-@testable import NSAttributedStringBuilder
+import NSAttributedStringBuilder
 import XCTest
 
 final class AttributedStringBuildingMacOSTests: XCTestCase {
@@ -30,7 +30,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         expected.addAttributes(attributes, range: NSRange(location: 0, length: expected.length))
 
         // When
-        let result = attributedString.image(try NSImage.pencil(), size: size, accessibilityDescription: accessibilityDescription)
+        let result = try attributedString.image(NSImage.pencil(), size: size, accessibilityDescription: accessibilityDescription)
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)

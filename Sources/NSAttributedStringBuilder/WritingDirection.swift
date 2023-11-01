@@ -1,9 +1,9 @@
 import Foundation
 
-extension NSAttributedStringBuilder {
+public extension NSAttributedStringBuilder {
 
     /// Combines `NSWritingDirection` and `NSWritingDirectionFormatType`.
-    public enum WritingDirection: NSNumber {
+    enum WritingDirection: NSNumber {
         case leftToRightDirectionEmbedding
         case rightToLeftDirectionEmbedding
         case leftToRightDirectionOverride

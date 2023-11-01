@@ -1,0 +1,18 @@
+--swiftversion 5.8
+
+# rules
+
+--enable isEmpty
+--disable blankLinesAtStartOfScope
+--disable spaceAroundOperators
+--disable wrapMultilineStatementBraces
+
+# format options
+
+--commas inline
+--ifdef no-indent
+--stripunusedargs closure-only
+--trimwhitespace nonblank-lines
+--wraparguments before-first
+--wrapcollections before-first
+--xcodeindentation enabled

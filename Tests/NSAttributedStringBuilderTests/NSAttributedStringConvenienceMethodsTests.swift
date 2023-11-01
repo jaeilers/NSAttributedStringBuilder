@@ -1,4 +1,4 @@
-@testable import NSAttributedStringBuilder
+import NSAttributedStringBuilder
 import XCTest
 
 final class NSAttributedStringConvenienceMethodsTests: XCTestCase {

@@ -1,4 +1,4 @@
-@testable import NSAttributedStringBuilder
+import NSAttributedStringBuilder
 import XCTest
 #if canImport(UIKit)
 typealias AFontDescriptor = UIFontDescriptor
@@ -192,7 +192,8 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
             attributes: [
                 .font: AFont.preferredFont(forTextStyle: .footnote),
                 .foregroundColor: AColor.blue
-            ])
+            ]
+        )
 
         // When
         let result = attributedString
@@ -420,8 +421,8 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expected = AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let expected = try AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
 
@@ -440,8 +441,8 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let trait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let expected = AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let expected = try AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
         let attributedString = NSAttributedString(string: string, attributes: [.font: font])
@@ -462,8 +463,8 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expected = AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let expected = try AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
 
@@ -479,7 +480,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
     #if !os(watchOS)
     func testAttributeFromImageReturnsNil() throws {
         // When
-        let result: AFont? = (try AImage.pencil()).attribute(.font)
+        let result: AFont? = try AImage.pencil().attribute(.font)
 
         // Then
         XCTAssertNil(result)
@@ -487,7 +488,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
     func testAttributesFromImageReturnsEmpty() throws {
         // When
-        let attributes = (try AImage.pencil()).attributes()
+        let attributes = try AImage.pencil().attributes()
 
         // Then
         XCTAssertTrue(attributes.isEmpty)
@@ -495,7 +496,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
     func testMutableParagraphStyleFromImageReturnsEmpty() throws {
         // When
-        let result = (try AImage.pencil()).mutableParagraphStyle()
+        let result = try AImage.pencil().mutableParagraphStyle()
 
         // Then
         XCTAssertEqual(result, NSMutableParagraphStyle())
@@ -613,8 +614,8 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expected = AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let expected = try AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
 

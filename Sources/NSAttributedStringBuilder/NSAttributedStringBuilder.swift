@@ -1,7 +1,7 @@
 import Foundation
 
 @resultBuilder
-public struct NSAttributedStringBuilder {
+public enum NSAttributedStringBuilder {
 
     public static func buildBlock(_ components: NSAttributedString...) -> NSAttributedString {
         components.reduce(into: NSMutableAttributedString()) { result, element in

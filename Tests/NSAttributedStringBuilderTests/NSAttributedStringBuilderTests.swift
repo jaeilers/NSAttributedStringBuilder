@@ -1,5 +1,5 @@
+import NSAttributedStringBuilder
 import XCTest
-@testable import NSAttributedStringBuilder
 
 final class NSAttributedStringBuilderTests: XCTestCase {
 
@@ -24,7 +24,7 @@ final class NSAttributedStringBuilderTests: XCTestCase {
         let space = NSAttributedString(string: " ")
 
         let worldFont = try XCTUnwrap(AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits(traits)),
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits(traits)),
             size: 0.0
         ))
         let world = NSAttributedString(

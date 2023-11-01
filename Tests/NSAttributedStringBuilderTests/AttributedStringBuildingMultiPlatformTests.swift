@@ -1,4 +1,4 @@
-@testable import NSAttributedStringBuilder
+import NSAttributedStringBuilder
 import XCTest
 
 final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
@@ -308,8 +308,6 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Then
         XCTAssertEqual(result, expected)
     }
-
-
 
     func testTextEffectWithAttributedStringAndLetterpressStyle() {
         // Given
@@ -1256,13 +1254,13 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
     func testStrikethroughWithAttributedStringOverridesExistingValue() {
         // Given
         let attributes: [NSAttributedString.Key: Any] = [
-            .strikethroughStyle: NSNumber(value: NSUnderlineStyle.double.rawValue),
+            .strikethroughStyle: NSNumber(value: NSUnderlineStyle.double.rawValue)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
         let expected = NSAttributedString(
             string: string,
             attributes: [
-                .strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
+                .strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)
             ]
         )
 
@@ -1645,7 +1643,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let attributedString = NSAttributedString(string: string)
         let font = AFont.preferredFont(forTextStyle: .body)
         let expectedFont = try XCTUnwrap(AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
@@ -1667,7 +1665,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let string = String.unique()
         let font = AFont.preferredFont(forTextStyle: .headline)
         let expectedFont = try XCTUnwrap(AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
@@ -1690,7 +1688,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let string = String.unique()
         let font = AFont.preferredFont(forTextStyle: .body)
         let expectedFont = try XCTUnwrap(AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
@@ -1715,11 +1713,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let string = String.unique()
         let attributedString = NSAttributedString(string: string)
         let bold = try XCTUnwrap(AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         ))
         let boldItalic = try XCTUnwrap(AFont(
-            descriptor: try XCTUnwrap(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits])),
+            descriptor: XCTUnwrap(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits])),
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: boldItalic])
@@ -1745,11 +1743,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #endif
         let string = String.unique()
         let bold = try XCTUnwrap(AFont(
-            descriptor: try XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         ))
         let boldItalic = try XCTUnwrap(AFont(
-            descriptor: try XCTUnwrap(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits])),
+            descriptor: XCTUnwrap(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits])),
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: boldItalic])

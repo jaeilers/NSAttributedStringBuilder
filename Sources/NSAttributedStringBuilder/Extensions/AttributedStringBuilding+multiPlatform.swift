@@ -4,13 +4,13 @@ import UIKit
 import AppKit
 #endif
 
-extension AttributedStringBuilding {
+public extension AttributedStringBuilding {
 
     /// Adds a string to the current context. The existing attributes are applied to the string.
     /// - Parameters:
     ///   - newString: The string will be added to at the end.
     /// - Returns: The modified attributed string.
-    public func text(_ newString: String) -> NSAttributedString {
+    func text(_ newString: String) -> NSAttributedString {
         addingString(newString)
     }
 
@@ -18,7 +18,7 @@ extension AttributedStringBuilding {
     /// - Parameters:
     ///   - kerning: The text kerning.
     /// - Returns: The modified attributed string.
-    public func kerning(_ kerning: Double) -> NSAttributedString {
+    func kerning(_ kerning: Double) -> NSAttributedString {
         addingAttribute(.kern, value: NSNumber(value: kerning))
     }
 
@@ -26,7 +26,7 @@ extension AttributedStringBuilding {
     /// - Parameters:
     ///   - spacing: The type of `Spacing`. Default is `.standard` whitespace.
     /// - Returns: The modified attributed string.
-    public func space(_ spacing: Spacing = .standard) -> NSAttributedString {
+    func space(_ spacing: Spacing = .standard) -> NSAttributedString {
         switch spacing {
         case .standard:
             return addingString("\u{0020}")
@@ -43,106 +43,106 @@ extension AttributedStringBuilding {
         }
     }
 
-    public func nonBreakingSpace() -> NSAttributedString {
+    func nonBreakingSpace() -> NSAttributedString {
         addingString("\u{00A0}")
     }
 
-    public func newline() -> NSAttributedString {
+    func newline() -> NSAttributedString {
         addingString("\n")
     }
 
-    public func link(_ url: URL) -> NSAttributedString {
+    func link(_ url: URL) -> NSAttributedString {
         addingAttribute(.link, value: url as NSURL)
     }
 
-    public func baselineOffset(_ offset: Double) -> NSAttributedString {
+    func baselineOffset(_ offset: Double) -> NSAttributedString {
         addingAttribute(.baselineOffset, value: NSNumber(value: offset))
     }
 
-    public func ligature(_ option: Ligature) -> NSAttributedString {
+    func ligature(_ option: Ligature) -> NSAttributedString {
         addingAttribute(.ligature, value: option.rawValue)
     }
 
-    public func textEffect(_ style: NSAttributedString.TextEffectStyle) -> NSAttributedString {
+    func textEffect(_ style: NSAttributedString.TextEffectStyle) -> NSAttributedString {
         addingAttribute(.textEffect, value: style as NSString)
     }
 
-    public func writingDirection(_ direction: NSAttributedStringBuilder.WritingDirection) -> NSAttributedString {
+    func writingDirection(_ direction: NSAttributedStringBuilder.WritingDirection) -> NSAttributedString {
         addingAttribute(.writingDirection, value: [direction.rawValue])
     }
 
     // MARK: - Paragraph styles
 
-    public func paragraphStyle(_ paragraphStyle: NSParagraphStyle) -> NSAttributedString {
+    func paragraphStyle(_ paragraphStyle: NSParagraphStyle) -> NSAttributedString {
         addingAttribute(.paragraphStyle, value: paragraphStyle)
     }
 
-    public func alignment(_ alignment: NSTextAlignment) -> NSAttributedString {
+    func alignment(_ alignment: NSTextAlignment) -> NSAttributedString {
         addingParagraphStyle(alignment, keyPath: \.alignment)
     }
 
-    public func firstLineHeadIndent(_ indent: CGFloat) -> NSAttributedString {
+    func firstLineHeadIndent(_ indent: CGFloat) -> NSAttributedString {
         addingParagraphStyle(indent, keyPath: \.firstLineHeadIndent)
     }
 
-    public func headIndent(_ headIndent: CGFloat) -> NSAttributedString {
+    func headIndent(_ headIndent: CGFloat) -> NSAttributedString {
         addingParagraphStyle(headIndent, keyPath: \.headIndent)
     }
 
-    public func tailIndent(_ tailIndent: CGFloat) -> NSAttributedString {
+    func tailIndent(_ tailIndent: CGFloat) -> NSAttributedString {
         addingParagraphStyle(tailIndent, keyPath: \.tailIndent)
     }
 
-    public func lineHeightMultiple(_ height: CGFloat) -> NSAttributedString {
+    func lineHeightMultiple(_ height: CGFloat) -> NSAttributedString {
         addingParagraphStyle(height, keyPath: \.lineHeightMultiple)
     }
 
-    public func maximumLineHeight(_ height: CGFloat) -> NSAttributedString {
+    func maximumLineHeight(_ height: CGFloat) -> NSAttributedString {
         addingParagraphStyle(height, keyPath: \.maximumLineHeight)
     }
 
-    public func minimumLineHeight(_ height: CGFloat) -> NSAttributedString {
+    func minimumLineHeight(_ height: CGFloat) -> NSAttributedString {
         addingParagraphStyle(height, keyPath: \.minimumLineHeight)
     }
 
-    public func lineSpacing(_ spacing: CGFloat) -> NSAttributedString {
+    func lineSpacing(_ spacing: CGFloat) -> NSAttributedString {
         addingParagraphStyle(spacing, keyPath: \.lineSpacing)
     }
 
-    public func paragraphSpacing(_ spacing: CGFloat) -> NSAttributedString {
+    func paragraphSpacing(_ spacing: CGFloat) -> NSAttributedString {
         addingParagraphStyle(spacing, keyPath: \.paragraphSpacing)
     }
 
-    public func paragraphSpacingBefore(_ spacing: CGFloat) -> NSAttributedString {
+    func paragraphSpacingBefore(_ spacing: CGFloat) -> NSAttributedString {
         addingParagraphStyle(spacing, keyPath: \.paragraphSpacingBefore)
     }
 
-    public func lineBreakMode(_ lineBreakMode: NSLineBreakMode) -> NSAttributedString {
+    func lineBreakMode(_ lineBreakMode: NSLineBreakMode) -> NSAttributedString {
         addingParagraphStyle(lineBreakMode, keyPath: \.lineBreakMode)
     }
 
-    public func lineBreakStrategy(_ strategy: NSParagraphStyle.LineBreakStrategy) -> NSAttributedString {
+    func lineBreakStrategy(_ strategy: NSParagraphStyle.LineBreakStrategy) -> NSAttributedString {
         addingParagraphStyle(strategy, keyPath: \.lineBreakStrategy)
     }
 
-    public func hyphenationFactor(_ factor: Float) -> NSAttributedString {
+    func hyphenationFactor(_ factor: Float) -> NSAttributedString {
         addingParagraphStyle(factor, keyPath: \.hyphenationFactor)
     }
 
     @available(iOS 15, macOS 13, watchOS 8, tvOS 15, *)
-    public func usesDefaultHyphenation(_ usesDefaultHyphenation: Bool) -> NSAttributedString {
+    func usesDefaultHyphenation(_ usesDefaultHyphenation: Bool) -> NSAttributedString {
         addingParagraphStyle(usesDefaultHyphenation, keyPath: \.usesDefaultHyphenation)
     }
 
-    public func allowsDefaultTighteningForTruncation(_ allows: Bool) -> NSAttributedString {
+    func allowsDefaultTighteningForTruncation(_ allows: Bool) -> NSAttributedString {
         addingParagraphStyle(allows, keyPath: \.allowsDefaultTighteningForTruncation)
     }
 
-    public func baseWritingDirection(_ direction: NSWritingDirection) -> NSAttributedString {
+    func baseWritingDirection(_ direction: NSWritingDirection) -> NSAttributedString {
         addingParagraphStyle(direction, keyPath: \.baseWritingDirection)
     }
 
-    public func tabStops(_ tabStops: [NSTextTab], defaultInterval: CGFloat = 0) -> NSAttributedString {
+    func tabStops(_ tabStops: [NSTextTab], defaultInterval: CGFloat = 0) -> NSAttributedString {
         let paragraphStyle = mutableParagraphStyle()
         paragraphStyle.tabStops = tabStops
         paragraphStyle.defaultTabInterval = defaultInterval
@@ -151,19 +151,19 @@ extension AttributedStringBuilding {
 
     // MARK: - Platform dependent (typealias)
 
-    public func font(_ font: AFont) -> NSAttributedString {
+    func font(_ font: AFont) -> NSAttributedString {
         addingAttribute(.font, value: font)
     }
 
-    public func foregroundColor(_ color: AColor) -> NSAttributedString {
+    func foregroundColor(_ color: AColor) -> NSAttributedString {
         addingAttribute(.foregroundColor, value: color)
     }
 
-    public func backgroundColor(_ color: AColor) -> NSAttributedString {
+    func backgroundColor(_ color: AColor) -> NSAttributedString {
         addingAttribute(.backgroundColor, value: color)
     }
 
-    public func underline(_ style: NSUnderlineStyle = .single, color: AColor? = nil) -> NSAttributedString {
+    func underline(_ style: NSUnderlineStyle = .single, color: AColor? = nil) -> NSAttributedString {
         var newAttributes: Attributes = [
             .underlineStyle: NSNumber(value: style.rawValue)
         ]
@@ -175,7 +175,7 @@ extension AttributedStringBuilding {
         return addingAttributes(newAttributes)
     }
 
-    public func strikethrough(_ style: NSUnderlineStyle = .single, color: AColor? = nil) -> NSAttributedString {
+    func strikethrough(_ style: NSUnderlineStyle = .single, color: AColor? = nil) -> NSAttributedString {
         var newAttributes: Attributes = [
             .strikethroughStyle: NSNumber(value: style.rawValue)
         ]
@@ -187,7 +187,7 @@ extension AttributedStringBuilding {
         return addingAttributes(newAttributes)
     }
 
-    public func shadow(offset: CGSize = .init(width: 1, height: 1), blurRadius: Double = 5.0, color: AColor? = nil) -> NSAttributedString {
+    func shadow(offset: CGSize = .init(width: 1, height: 1), blurRadius: Double = 5.0, color: AColor? = nil) -> NSAttributedString {
         let shadow: NSShadow = attribute(.shadow) ?? NSShadow()
         shadow.shadowOffset = offset
         shadow.shadowBlurRadius = CGFloat(blurRadius)
@@ -198,7 +198,7 @@ extension AttributedStringBuilding {
         return addingAttribute(.shadow, value: shadow)
     }
 
-    public func stroke(width: Double = 2.0, color: AColor? = nil) -> NSAttributedString {
+    func stroke(width: Double = 2.0, color: AColor? = nil) -> NSAttributedString {
         var newAttributes: Attributes = [
             .strokeWidth: NSNumber(value: width)
         ]
@@ -214,9 +214,9 @@ extension AttributedStringBuilding {
 // MARK: - All platforms but watchOS
 
 #if !os(watchOS)
-extension AttributedStringBuilding {
+public extension AttributedStringBuilding {
 
-    public func attachment(_ attachment: NSTextAttachment) -> NSAttributedString {
+    func attachment(_ attachment: NSTextAttachment) -> NSAttributedString {
         addingAttribute(.attachment, value: attachment)
     }
 }

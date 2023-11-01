@@ -1,8 +1,8 @@
 #if canImport(AppKit)
-extension NSAttributedStringBuilder {
+public extension NSAttributedStringBuilder {
 
     /// Defines a spelling state for the attributed string. (macOS only)
-    public enum SpellingState: Int {
+    enum SpellingState: Int {
         /// Indicates that the attributed string has no spelling errors.
         case noGrammarOrSpellingIssues
         /// Flag for spelling issues.
