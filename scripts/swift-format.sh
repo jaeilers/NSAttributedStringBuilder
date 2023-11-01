@@ -10,5 +10,4 @@ swift run \
   --package-path "${ROOT_PATH}/BuildTools" \
   swiftformat "$SOURCE_PATH" \
   --config "${CONFIG_PATH}" \
-  --exclude "${EXCLUDE_PATHS}" \
-  --lint
+  --exclude "${EXCLUDE_PATHS}"

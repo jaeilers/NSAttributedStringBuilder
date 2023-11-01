@@ -28,14 +28,14 @@ public protocol AttributedStringBuilding {
     /// - Returns: The current context as mutable attributed string.
     func mutableAttributedString() -> NSMutableAttributedString
 
-    /// Adds new attributes to the current attributed string. The new attributes are applied to the whole range 
+    /// Adds new attributes to the current attributed string. The new attributes are applied to the whole range
     /// and existing attributes are overridden.
     /// - Parameters:
     ///   - newAttributes: The new attributes that will be added to the string.
     /// - Returns: The modified attributed string.
     func addingAttributes(_ newAttributes: Attributes) -> NSAttributedString
 
-    /// Adds an attributed string with its attributes to the current string. The string is appended 
+    /// Adds an attributed string with its attributes to the current string. The string is appended
     /// and the attributes of both strings are merged.
     /// The new attributes override existing attributes and new attributes are added.
     /// - Parameters:
@@ -46,7 +46,7 @@ public protocol AttributedStringBuilding {
     #if canImport(UIKit)
     /// Adds a font trait (e.g. bold, italic etc.) to the current attributed string.
     /// - Parameters:
-    ///   - trait: The new font trait that will be added to the existing font. 
+    ///   - trait: The new font trait that will be added to the existing font.
     ///   Default font is `.preferredFont(forTextStyle: .body)`.
     /// - Returns: A font with the given trait.
     func fontWithTrait(_ trait: UIFontDescriptor.SymbolicTraits) -> UIFont
@@ -55,7 +55,7 @@ public protocol AttributedStringBuilding {
     #if canImport(AppKit)
     /// Adds a font trait (e.g. bold, italic etc.) to the current attributed string.
     /// - Parameters:
-    ///   - trait: The new font trait that will be added to the existing font. 
+    ///   - trait: The new font trait that will be added to the existing font.
     ///   Default font is `.preferredFont(forTextStyle: .body)`.
     /// - Returns: A font with the given trait.
     func fontWithTrait(_ trait: NSFontDescriptor.SymbolicTraits) -> NSFont
