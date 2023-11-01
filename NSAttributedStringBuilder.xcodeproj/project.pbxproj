@@ -80,8 +80,6 @@
 		897F9DF72AEE525100709693 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		897F9DF82AEE526400709693 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		897F9DF92AEE526F00709693 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		898955FF2AF2AB580080CD6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		898956002AF2AB600080CD6E /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				897F9DF72AEE525100709693 /* .gitignore */,
-				898955FF2AF2AB580080CD6E /* .swiftlint.yml */,
-				898956002AF2AB600080CD6E /* .swiftformat */,
 				897F9DF32AEE51BB00709693 /* Package.swift */,
 				897F9DF42AEE51CE00709693 /* Package@swift-5.8.swift */,
 				897F9DF92AEE526F00709693 /* README.md */,
@@ -222,11 +218,11 @@
 				897F9D8E2AEE4BF300709693 /* Sources */,
 				897F9D8F2AEE4BF300709693 /* Frameworks */,
 				897F9D902AEE4BF300709693 /* Resources */,
+				89540EEE2AF2D5FA00D1AF93 /* Swiftlint Run Script */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				898956022AF2AE150080CD6E /* PBXTargetDependency */,
 			);
 			name = NSAttributedStringBuilder;
 			productName = NSAttributedStringBuilder;
@@ -279,9 +275,6 @@
 				Base,
 			);
 			mainGroup = 897F9D882AEE4BF300709693;
-			packageReferences = (
-				898955FC2AF2A6270080CD6E /* XCRemoteSwiftPackageReference "SwiftLint" */,
-			);
 			productRefGroup = 897F9D932AEE4BF300709693 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -308,6 +301,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		89540EEE2AF2D5FA00D1AF93 /* Swiftlint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swiftlint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		897F9D8E2AEE4BF300709693 /* Sources */ = {
@@ -357,10 +372,6 @@
 			target = 897F9D912AEE4BF300709693 /* NSAttributedStringBuilder */;
 			targetProxy = 897F9D9C2AEE4BF400709693 /* PBXContainerItemProxy */;
 		};
-		898956022AF2AE150080CD6E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 898956012AF2AE150080CD6E /* SwiftLintPlugin */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -402,7 +413,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -470,7 +481,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -632,25 +643,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		898955FC2AF2A6270080CD6E /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.53.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		898956012AF2AE150080CD6E /* SwiftLintPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 898955FC2AF2A6270080CD6E /* XCRemoteSwiftPackageReference "SwiftLint" */;
-			productName = "plugin:SwiftLintPlugin";
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 897F9D892AEE4BF300709693 /* Project object */;
 }

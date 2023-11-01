@@ -131,6 +131,8 @@ xcuserdata
 DerivedData/
 .swiftpm
 
+### Homebrew ###
+Brewfile.lock.json
 
 ### Xcode ###
 ## User settings
