@@ -187,7 +187,11 @@ public extension AttributedStringBuilding {
         return addingAttributes(newAttributes)
     }
 
-    func shadow(offset: CGSize = .init(width: 1, height: 1), blurRadius: Double = 5.0, color: AColor? = nil) -> NSAttributedString {
+    func shadow(
+        offset: CGSize = .init(width: 1, height: 1),
+        blurRadius: Double = 5.0,
+        color: AColor? = nil
+    ) -> NSAttributedString {
         let shadow: NSShadow = attribute(.shadow) ?? NSShadow()
         shadow.shadowOffset = offset
         shadow.shadowBlurRadius = CGFloat(blurRadius)

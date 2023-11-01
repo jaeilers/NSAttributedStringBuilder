@@ -55,7 +55,9 @@ extension NSAttributedString: AttributedStringBuilding {
     public func fontWithTrait(_ trait: UIFontDescriptor.SymbolicTraits) -> UIFont {
         let font: UIFont = attribute(.font) ?? UIFont.preferredFont(forTextStyle: .body)
 
-        guard let descriptor = font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]) else {
+        guard let descriptor = font.fontDescriptor.withSymbolicTraits(
+            [trait, font.fontDescriptor.symbolicTraits]
+        ) else {
             return font
         }
 
