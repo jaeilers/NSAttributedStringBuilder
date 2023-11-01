@@ -105,6 +105,16 @@ public extension AttributedStringBuilding {
         addingAttribute(.writingDirection, value: [direction.rawValue])
     }
 
+    @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+    func languageIdentifier(_ languageCode: String) -> NSAttributedString {
+        addingAttribute(.languageIdentifier, value: languageCode)
+    }
+
+    @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+    func languageIdentifier(_ languageCode: Locale.LanguageCode) -> NSAttributedString {
+        addingAttribute(.languageIdentifier, value: languageCode.identifier)
+    }
+
     // MARK: - Paragraph styles
 
     func paragraphStyle(_ paragraphStyle: NSParagraphStyle) -> NSAttributedString {

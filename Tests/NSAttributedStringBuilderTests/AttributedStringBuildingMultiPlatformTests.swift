@@ -459,6 +459,66 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
+    @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+    func testLanguageIdentifierWithAttributedString() {
+        // Given
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .footnote)
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let newAttributes = attributes.merging([.languageIdentifier: "en"], uniquingKeysWith: { _, new in new })
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.languageIdentifier(Locale.LanguageCode.english.identifier)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+    func testLanguageIdentifierWithString() {
+        // Given
+        let expected = NSAttributedString(string: string, attributes: [.languageIdentifier: "de"])
+
+        // When
+        let result = string.languageIdentifier(Locale.LanguageCode.german.identifier)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+    func testLanguageIdentifierWithLanguageCodeAndAttributedString() {
+        // Given
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .footnote)
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let newAttributes = attributes.merging([.languageIdentifier: "it"], uniquingKeysWith: { _, new in new })
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.languageIdentifier(.italian)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+    func testLanguageIdentifierWithLanguageIdentifierAndString() {
+        // Given
+        let expected = NSAttributedString(string: string, attributes: [.languageIdentifier: "fr"])
+
+        // When
+        let result = string.languageIdentifier(.french)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    // MARK: - Paragraph Styles
+
     func testParagraphStyleWithAttributedString() {
         // Given
         let attributes: [NSAttributedString.Key: Any] = [
