@@ -15,11 +15,10 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
 
-        let size = CGSize(width: 1, height: 1)
+        let bounds = CGRect(origin: .zero, size: .init(width: 1, height: 1))
         let accessibilityDescription = String.unique()
         let image = try NSImage.pencil()
         image.accessibilityDescription = accessibilityDescription
-        image.size = size
 
         let attachment = NSTextAttachment()
         attachment.image = image
@@ -30,14 +29,14 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         expected.addAttributes(attributes, range: NSRange(location: 0, length: expected.length))
 
         // When
-        let result = try attributedString.image(NSImage.pencil(), size: size, accessibilityDescription: accessibilityDescription)
+        let result = try attributedString.image(NSImage.pencil(), bounds: bounds, accessibilityDescription: accessibilityDescription)
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
         let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
         XCTAssertNotNil(resultAttachment.image)
         XCTAssertEqual(resultAttachment.image?.accessibilityDescription, accessibilityDescription)
-        XCTAssertEqual(resultAttachment.image?.size, size)
+        XCTAssertEqual(resultAttachment.bounds, bounds)
         XCTAssertEqual(resultAttributes[.font] as? NSFont, NSFont.preferredFont(forTextStyle: .headline))
         XCTAssertEqual(resultAttributes[.foregroundColor] as? NSColor, NSColor.textColor)
         XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))
@@ -55,11 +54,10 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
 
-        let size = CGSize(width: 1, height: 1)
+        let bounds = CGRect(origin: .zero, size: .init(width: 1, height: 1))
         let accessibilityDescription = String.unique()
         let image = try NSImage.pencil()
         image.accessibilityDescription = accessibilityDescription
-        image.size = size
 
         let attachment = NSTextAttachment()
         attachment.image = image
@@ -70,14 +68,14 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         expected.addAttributes(attributes, range: NSRange(location: 0, length: expected.length))
 
         // When
-        let result = attributedString.image(systemName: "pencil", size: size, accessibilityDescription: accessibilityDescription)
+        let result = attributedString.image(systemName: "pencil", bounds: bounds, accessibilityDescription: accessibilityDescription)
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
         let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
         XCTAssertNotNil(resultAttachment.image)
         XCTAssertEqual(resultAttachment.image?.accessibilityDescription, accessibilityDescription)
-        XCTAssertEqual(resultAttachment.image?.size, size)
+        XCTAssertEqual(resultAttachment.bounds, bounds)
         XCTAssertEqual(resultAttributes[.font] as? NSFont, NSFont.preferredFont(forTextStyle: .headline))
         XCTAssertEqual(resultAttributes[.foregroundColor] as? NSColor, NSColor.textColor)
         XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))

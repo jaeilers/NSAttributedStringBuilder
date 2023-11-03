@@ -22,8 +22,11 @@ public extension AttributedStringBuilding {
         accessibilityLabel: String? = nil,
         accessibilityHint: String? = nil
     ) -> NSAttributedString {
-        let attachment = NSTextAttachment()
-        attachment.image = image
+        let attachment = NSTextAttachment(image: image)
+
+        bounds.map {
+            attachment.bounds = $0
+        }
 
         accessibilityLabel.map {
             attachment.accessibilityLabel = $0
@@ -31,10 +34,6 @@ public extension AttributedStringBuilding {
 
         accessibilityHint.map {
             attachment.accessibilityHint = $0
-        }
-
-        bounds.map {
-            attachment.bounds = $0
         }
 
         return addingAttributedString(NSAttributedString(attachment: attachment))
@@ -47,7 +46,7 @@ public extension AttributedStringBuilding {
         accessibilityHint: String? = nil
     ) -> NSAttributedString {
         guard let img = UIImage(systemName: systemName) else {
-            return mutableAttributedString()
+            return attributedString()
         }
 
         return image(img, bounds: bounds, accessibilityLabel: accessibilityLabel, accessibilityHint: accessibilityHint)

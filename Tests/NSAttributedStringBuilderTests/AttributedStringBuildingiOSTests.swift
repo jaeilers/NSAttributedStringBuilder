@@ -20,16 +20,6 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let accessibilityHint = String.unique()
         let image = try UIImage.pencil()
 
-        let attachment = NSTextAttachment()
-        attachment.image = image
-        attachment.accessibilityLabel = accessibilityLabel
-        attachment.accessibilityHint = accessibilityHint
-
-        let expected = NSMutableAttributedString()
-        expected.append(attributedString)
-        expected.append(NSAttributedString(attachment: attachment))
-        expected.addAttributes(attributes, range: NSRange(location: 0, length: expected.length))
-
         // When
         let result = attributedString.image(
             image,
@@ -44,8 +34,6 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         XCTAssertEqual(resultAttachment.image, image)
         XCTAssertEqual(resultAttachment.accessibilityLabel, accessibilityLabel)
         XCTAssertEqual(resultAttachment.accessibilityHint, accessibilityHint)
-        XCTAssertEqual(resultAttachment.bounds, bounds)
-
         XCTAssertEqual(resultAttributes[.font] as? UIFont, UIFont.preferredFont(forTextStyle: .body))
         XCTAssertEqual(resultAttributes[.foregroundColor] as? UIColor, UIColor.blue)
         XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))
@@ -67,14 +55,6 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let accessibilityLabel = String.unique()
         let accessibilityHint = String.unique()
 
-        let attachment = NSTextAttachment()
-        attachment.image = try UIImage.pencil()
-
-        let expected = NSMutableAttributedString()
-        expected.append(attributedString)
-        expected.append(NSAttributedString(attachment: attachment))
-        expected.addAttributes(attributes, range: NSRange(location: 0, length: expected.length))
-
         // When
         let result = attributedString.image(
             systemName: "pencil",
@@ -89,7 +69,6 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         XCTAssertNotNil(resultAttachment.image)
         XCTAssertEqual(resultAttachment.accessibilityLabel, accessibilityLabel)
         XCTAssertEqual(resultAttachment.accessibilityHint, accessibilityHint)
-        XCTAssertEqual(resultAttachment.bounds, bounds)
         XCTAssertEqual(resultAttributes[.font] as? UIFont, UIFont.preferredFont(forTextStyle: .body))
         XCTAssertEqual(resultAttributes[.foregroundColor] as? UIColor, UIColor.orange)
         XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))

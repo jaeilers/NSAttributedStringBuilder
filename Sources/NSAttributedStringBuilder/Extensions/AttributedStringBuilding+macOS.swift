@@ -11,27 +11,31 @@ public extension AttributedStringBuilding {
         addingAttribute(.font, value: fontWithTrait(.italic))
     }
 
-    func image(_ image: NSImage, size: CGSize? = nil, accessibilityDescription: String? = nil) -> NSAttributedString {
-        size.map {
-            image.size = $0
+    func image(_ image: NSImage, bounds: CGRect? = nil, accessibilityDescription: String? = nil) -> NSAttributedString {
+        let attachment = NSTextAttachment()
+        attachment.image = image
+
+        bounds.map {
+            attachment.bounds = $0
         }
 
         accessibilityDescription.map {
             image.accessibilityDescription = $0
         }
 
-        let attachment = NSTextAttachment()
-        attachment.image = image
-
         return addingAttributedString(NSAttributedString(attachment: attachment))
     }
 
-    func image(systemName: String, size: CGSize? = nil, accessibilityDescription: String? = nil) -> NSAttributedString {
+    func image(
+        systemName: String,
+        bounds: CGRect? = nil,
+        accessibilityDescription: String? = nil
+    ) -> NSAttributedString {
         guard let img = NSImage(systemSymbolName: systemName, accessibilityDescription: accessibilityDescription) else {
-            return mutableAttributedString()
+            return attributedString()
         }
 
-        return image(img, size: size, accessibilityDescription: accessibilityDescription)
+        return image(img, bounds: bounds, accessibilityDescription: accessibilityDescription)
     }
 
     func cursor(_ cursor: NSCursor) -> NSAttributedString {
