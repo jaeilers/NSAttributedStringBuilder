@@ -459,30 +459,28 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
-    @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
-    func testLanguageIdentifierWithAttributedString() {
+    func testLanguageWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let newAttributes = attributes.merging([.languageIdentifier: "en"], uniquingKeysWith: { _, new in new })
+        let newAttributes = attributes.merging([NSAttributedString.Key(String(kCTLanguageAttributeName)): "en"], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
-        let result = attributedString.languageIdentifier(Locale.LanguageCode.english.identifier)
+        let result = attributedString.language(.english)
 
         // Then
         XCTAssertEqual(result, expected)
     }
 
-    @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
     func testLanguageIdentifierWithString() {
         // Given
-        let expected = NSAttributedString(string: string, attributes: [.languageIdentifier: "de"])
+        let expected = NSAttributedString(string: string, attributes: [NSAttributedString.Key(String(kCTLanguageAttributeName)): "de"])
 
         // When
-        let result = string.languageIdentifier(Locale.LanguageCode.german.identifier)
+        let result = string.language(.german)
 
         // Then
         XCTAssertEqual(result, expected)

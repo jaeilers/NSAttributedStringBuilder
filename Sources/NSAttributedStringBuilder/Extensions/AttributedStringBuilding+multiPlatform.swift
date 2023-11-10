@@ -105,11 +105,19 @@ public extension AttributedStringBuilding {
         addingAttribute(.writingDirection, value: [direction.rawValue])
     }
 
-    @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-    func languageIdentifier(_ languageCode: String) -> NSAttributedString {
-        addingAttribute(.languageIdentifier, value: languageCode)
+    /// Set the language of the text. This provides a backport for the key `.languageIdentifier`. When this attribute is set,
+    /// it will be used to select localized glyphs (if supported by the font), and locale-specific line-breaking rules.
+    /// - Parameters:
+    ///   - languageCode: The language code of the language.
+    /// - Returns: The modified attributed string.
+    func language(_ languageCode: NSAttributedStringBuilder.LanguageCode) -> NSAttributedString {
+        addingAttribute(NSAttributedString.Key(kCTLanguageAttributeName as String), value: languageCode.rawValue)
     }
 
+    /// Set the language identifier of the text. The language identifier will be used for locale-specific line-breaking rules.
+    /// - Parameters:
+    ///   - languageCode: The language code identifier.
+    /// - Returns: The modified attributed string.
     @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
     func languageIdentifier(_ languageCode: Locale.LanguageCode) -> NSAttributedString {
         addingAttribute(.languageIdentifier, value: languageCode.identifier)
@@ -264,6 +272,10 @@ public extension AttributedStringBuilding {
 #if !os(watchOS)
 public extension AttributedStringBuilding {
 
+    /// Adds an attachment to the whole string.
+    /// - Parameters:
+    ///   - attachment: The text attachment that will be added to the attributed string.
+    /// - Returns: The modified attributed string.
     func attachment(_ attachment: NSTextAttachment) -> NSAttributedString {
         addingAttribute(.attachment, value: attachment)
     }
