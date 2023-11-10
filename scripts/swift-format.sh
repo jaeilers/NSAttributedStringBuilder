@@ -1,13 +1,15 @@
 #!/bin/bash
 
+set -e
+
 if ! (which swiftformat > /dev/null); then
-  echo "Warning: Swiftformat is not installed. download from https://github.com/nicklockwood/SwiftFormat"
+  echo "⚠️  SwiftFormat is not installed. Download from https://github.com/nicklockwood/SwiftFormat"
+  exit 1
 fi
 
 ROOT_PATH=$(git rev-parse --show-toplevel)
 CONFIG_PATH="${ROOT_PATH}/.swiftformat"
-EXCLUDE_PATHS="${ROOT_PATH}/vendor,${ROOT_PATH}/fastlane,${ROOT_PATH}/fastlane_builds"
+SOURCE_PATH="${ROOT_PATH}/Sources"
 
-swiftformat "$ROOT_PATH" \
-  --config "$CONFIG_PATH" \
-  --exclude "${EXCLUDE_PATHS}"
+swiftformat "$SOURCE_PATH" \
+  --config "$CONFIG_PATH"

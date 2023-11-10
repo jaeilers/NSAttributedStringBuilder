@@ -1,0 +1,29 @@
+# This pre-commit hook executes swift-format.
+
+set -e
+
+if ! (which swiftformat > /dev/null); then
+  echo "⚠️  SwiftFormat is not installed. Please install SwiftFormat via homebrew: brew install swiftformat"
+  exit 1
+fi
+
+STAGED_SWIFT_FILES=$(git --no-pager diff --staged --name-only --diff-filter=d | grep .swift)
+ROOT_PATH=$(git rev-parse --show-toplevel)
+CONFIG_PATH="${ROOT_PATH}/.swiftformat"
+SOURCE_PATH="${ROOT_PATH}/Sources"
+
+if [[ -z "$STAGED_SWIFT_FILES" ]]; then
+  exit 0
+fi
+
+PRE_FORMAT_HASH=$(echo "$STAGED_SWIFT_FILES" | xargs git --no-pager diff | md5)
+
+swiftformat "$SOURCE_PATH" \
+  --config "$CONFIG_PATH"
+
+POST_FORMAT_HASH=$(echo "$STAGED_SWIFT_FILES" | xargs git --no-pager diff | md5)
+
+if [[ "$PRE_FORMAT_HASH" != "$POST_FORMAT_HASH" ]]; then
+  echo "⚠️  Abort commit. Files have been modified during commit."
+  exit 1
+fi

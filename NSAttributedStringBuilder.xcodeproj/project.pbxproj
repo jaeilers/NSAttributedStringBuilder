@@ -225,6 +225,7 @@
 				897F9D8F2AEE4BF300709693 /* Frameworks */,
 				897F9D902AEE4BF300709693 /* Resources */,
 				89540EEE2AF2D5FA00D1AF93 /* Swiftlint Run Script */,
+				89BB67782AFE73DA00C32777 /* SwiftFormat Commit Hook Run Script */,
 			);
 			buildRules = (
 			);
@@ -327,6 +328,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		89BB67782AFE73DA00C32777 /* SwiftFormat Commit Hook Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftFormat Commit Hook Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Installs the swift-format pre-commit hook\nbash \"${SRCROOT}/scripts/setup_pre_commit_hook.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
