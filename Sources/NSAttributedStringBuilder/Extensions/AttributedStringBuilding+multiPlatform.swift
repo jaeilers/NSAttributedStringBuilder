@@ -105,8 +105,9 @@ public extension AttributedStringBuilding {
         addingAttribute(.writingDirection, value: [direction.rawValue])
     }
 
-    /// Set the language of the text. This provides a backport for the key `.languageIdentifier`. When this attribute is set,
-    /// it will be used to select localized glyphs (if supported by the font), and locale-specific line-breaking rules.
+    /// Set the language of the text. This provides a backport for the key `.languageIdentifier`.
+    /// When this attribute is set, it will be used to select localized glyphs (if supported by the font),
+    /// and locale-specific line-breaking rules.
     /// - Parameters:
     ///   - languageCode: The language code of the language.
     /// - Returns: The modified attributed string.
@@ -114,7 +115,8 @@ public extension AttributedStringBuilding {
         addingAttribute(NSAttributedString.Key(kCTLanguageAttributeName as String), value: languageCode.rawValue)
     }
 
-    /// Set the language identifier of the text. The language identifier will be used for locale-specific line-breaking rules.
+    /// Set the language identifier of the text. The language identifier will be used for locale-specific
+    /// line-breaking rules.
     /// - Parameters:
     ///   - languageCode: The language code identifier.
     /// - Returns: The modified attributed string.
