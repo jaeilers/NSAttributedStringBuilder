@@ -1,7 +1,5 @@
 # This pre-commit hook executes swift-format.
 
-set -e
-
 if ! (which swiftformat > /dev/null); then
   echo "⚠️  SwiftFormat is not installed. Please install SwiftFormat via homebrew: brew install swiftformat"
   exit 1
@@ -13,6 +11,7 @@ CONFIG_PATH="${ROOT_PATH}/.swiftformat"
 SOURCE_PATH="${ROOT_PATH}/Sources"
 
 if [[ -z "$STAGED_SWIFT_FILES" ]]; then
+  echo "No staged swift files that could be formatted."
   exit 0
 fi
 
