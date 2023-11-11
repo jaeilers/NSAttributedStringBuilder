@@ -27,9 +27,7 @@ Run all tests for: macOS, iOS, tvOS & watchOS
 [bundle exec] fastlane test
 ```
 
-Run tests for a specific platform
-
-Optional: platform - Runs the unit tests for the given platform. Options are: macOS, iOS, watchOS or tvOS. The options are not case sensitive. Defaults to 'ios'
+Run tests for a specific platform. Use --env to select an environment. (ios, macos, tvos or watchos)
 
 ----
 
