@@ -6,6 +6,7 @@ public enum ListItemFactory {
     public static func makeListItems() -> [ListItem] {
         [
             ListItem(text: NSAttributedString {
+                #if !os(watchOS)
                 AImage.globe()
                     .image(systemName: "star.fill", bounds: .init(origin: .zero, size: .init(width: 100, height: 90)))
                     .image(.globe())
@@ -13,6 +14,7 @@ public enum ListItemFactory {
                     .alignment(.center)
 
                 Newline()
+                #endif
 
                 "Hello, world!"
                     .alignment(.center)
@@ -45,8 +47,15 @@ public enum ListItemFactory {
                     .hyphenationFactor(1.0)
                     .language(.german)
                     .lineBreakMode(.byWordWrapping)
+                    .lineBreakStrategy(.standard)
                     .font(.systemFont(ofSize: 20))
-            )
+            ),
+            ListItem(text: NSAttributedString {
+                "The quick brown fox jumps over the lazy dog."
+                    .font(.systemFont(ofSize: 30))
+                    .stroke()
+                    .foregroundColor(.systemTeal)
+            })
         ]
     }
 }

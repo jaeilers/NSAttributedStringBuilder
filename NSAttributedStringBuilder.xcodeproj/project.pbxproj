@@ -35,6 +35,7 @@
 		897F9DF22AEE505000709693 /* NSAttributedStringConvenienceMethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DD02AEE4F9C00709693 /* NSAttributedStringConvenienceMethodsTests.swift */; };
 		89BB67752AFE37D400C32777 /* LanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB67742AFE37D400C32777 /* LanguageCode.swift */; };
 		89BB67772AFE3F3800C32777 /* LanguageCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB67762AFE3F3800C32777 /* LanguageCodeTests.swift */; };
+		89BB677A2AFFD73700C32777 /* AttributedStringBuilding+multiPlatformParagraphStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB67792AFFD73600C32777 /* AttributedStringBuilding+multiPlatformParagraphStyles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		897F9DF92AEE526F00709693 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		89BB67742AFE37D400C32777 /* LanguageCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCode.swift; sourceTree = "<group>"; };
 		89BB67762AFE3F3800C32777 /* LanguageCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCodeTests.swift; sourceTree = "<group>"; };
+		89BB67792AFFD73600C32777 /* AttributedStringBuilding+multiPlatformParagraphStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedStringBuilding+multiPlatformParagraphStyles.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				897F9DC42AEE4F8100709693 /* AttributedStringBuilding+iOS.swift */,
 				897F9DC82AEE4F8100709693 /* AttributedStringBuilding+macOS.swift */,
 				897F9DC62AEE4F8100709693 /* AttributedStringBuilding+multiPlatform.swift */,
+				89BB67792AFFD73600C32777 /* AttributedStringBuilding+multiPlatformParagraphStyles.swift */,
 				897F9DC22AEE4F8100709693 /* NSAttributedString+append.swift */,
 				897F9DC32AEE4F8100709693 /* NSAttributedString+AttributedStringBuilding.swift */,
 				897F9DC72AEE4F8100709693 /* String+AttributedStringBuilding.swift */,
@@ -358,6 +361,7 @@
 				897F9DBA2AEE4F6E00709693 /* WritingDirection.swift in Sources */,
 				897F9DBD2AEE4F6E00709693 /* NonBreakingSpace.swift in Sources */,
 				897F9DB12AEE4F5E00709693 /* AttributedStringBuilding.swift in Sources */,
+				89BB677A2AFFD73700C32777 /* AttributedStringBuilding+multiPlatformParagraphStyles.swift in Sources */,
 				897F9DC92AEE4F8100709693 /* NSAttributedString+append.swift in Sources */,
 				897F9DCB2AEE4F8100709693 /* AttributedStringBuilding+iOS.swift in Sources */,
 				897F9DBE2AEE4F6E00709693 /* SpellingState.swift in Sources */,

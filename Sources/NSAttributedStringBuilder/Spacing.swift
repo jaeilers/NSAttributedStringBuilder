@@ -6,6 +6,10 @@ public enum Spacing: Equatable {
     case enSpace
     /// An Em-Space.
     case emSpace
+    /// A non-breaking space.
+    case nonBreakingSpace
+    /// A narrow non-breaking space that creates tighter binding between multi-part abbreviations.
+    case narrowNonBreakingSpace
 
     #if !os(watchOS)
     /// Defines a custom spacing.

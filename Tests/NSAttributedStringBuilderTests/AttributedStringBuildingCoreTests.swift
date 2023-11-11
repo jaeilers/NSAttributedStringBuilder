@@ -475,6 +475,37 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
+    func testAttributedStringAndColorIsChangedResultIsCopied() {
+        // Given
+        let string1 = String.unique()
+            .foregroundColor(.red)
+            .font(.boldSystemFont(ofSize: 10))
+
+        let string2 = string1
+            .foregroundColor(.blue)
+
+        // Then
+        XCTAssertFalse(string1 === string2)
+        XCTAssertFalse(string1 == string2)
+    }
+
+    func testAttributedStringConcatStringsResultIsCopied() {
+        // Given
+        let string1 = String.unique()
+            .alignment(.center)
+            .backgroundColor(.yellow)
+
+        let string2 = String.unique()
+            .foregroundColor(.red)
+
+        // When
+        let result = string1.addingAttributedString(string2)
+
+        // Then
+        XCTAssertFalse(result === string1)
+        XCTAssertFalse(result == string1)
+    }
+
     // MARK: - All platforms but watchOS
 
     #if !os(watchOS)

@@ -170,6 +170,33 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
+    func testNarrowNonBreakingSpaceWithAttributedString() {
+        // Given
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .foregroundColor: AColor.blue
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let expected = NSAttributedString(string: string + "\u{202F}", attributes: attributes)
+
+        // When
+        let result = attributedString.space(.narrowNonBreakingSpace)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testNarrowNonBreakingSpaceWithString() {
+        // Given
+        let expected = NSAttributedString(string: string + "\u{202F}")
+
+        // When
+        let result = string.space(.narrowNonBreakingSpace)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
     func testNewlineWithAttributedString() {
         // Given
         let attributes: [NSAttributedString.Key: Any] = [
