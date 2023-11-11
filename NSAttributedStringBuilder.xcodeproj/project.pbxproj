@@ -78,7 +78,6 @@
 		897F9DE22AEE4FE700709693 /* String+unique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+unique.swift"; sourceTree = "<group>"; };
 		897F9DF32AEE51BB00709693 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		897F9DF42AEE51CE00709693 /* Package@swift-5.8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Package@swift-5.8.swift"; sourceTree = "<group>"; };
-		897F9DF52AEE51E800709693 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		897F9DF62AEE51F800709693 /* NSAttributedStringBuilder-jaeilers.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "NSAttributedStringBuilder-jaeilers.podspec"; sourceTree = "<group>"; };
 		897F9DF72AEE525100709693 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		897F9DF82AEE526400709693 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -116,7 +115,6 @@
 				897F9DF92AEE526F00709693 /* README.md */,
 				897F9DF82AEE526400709693 /* LICENSE.md */,
 				897F9DF62AEE51F800709693 /* NSAttributedStringBuilder-jaeilers.podspec */,
-				897F9DF52AEE51E800709693 /* Gemfile */,
 				897F9D942AEE4BF300709693 /* Sources */,
 				897F9D9E2AEE4BF400709693 /* Tests */,
 				897F9D932AEE4BF300709693 /* Products */,
