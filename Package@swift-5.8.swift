@@ -19,13 +19,11 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "NSAttributedStringBuilder",
-            path: "Sources"
+            name: "NSAttributedStringBuilder"
         ),
         .testTarget(
             name: "NSAttributedStringBuilderTests",
-            dependencies: ["NSAttributedStringBuilder"],
-            path: "Tests"
+            dependencies: ["NSAttributedStringBuilder"]
         )
     ],
     swiftLanguageVersions: [.v5]
