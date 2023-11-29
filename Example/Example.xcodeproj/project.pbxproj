@@ -11,7 +11,7 @@
 		893D9AF12AF54E4600C1E69C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D9AF02AF54E4600C1E69C /* SceneDelegate.swift */; };
 		893D9AF32AF54E4600C1E69C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D9AF22AF54E4600C1E69C /* ViewController.swift */; };
 		893D9AF82AF54E4800C1E69C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 893D9AF72AF54E4800C1E69C /* Assets.xcassets */; };
-		893D9AFB2AF54E4800C1E69C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 893D9AF92AF54E4800C1E69C /* LaunchScreen.storyboard */; };
+		893D9AFB2AF54E4800C1E69C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 893D9AF92AF54E4800C1E69C /* LaunchScreen.storyboard */; platformFilter = ios; };
 		893D9B142AF5540C00C1E69C /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 893D9B132AF5540C00C1E69C /* Core */; };
 		893D9B1C2AF5642800C1E69C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D9B1B2AF5642800C1E69C /* AppDelegate.swift */; };
 		893D9B1E2AF5642800C1E69C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893D9B1D2AF5642800C1E69C /* ViewController.swift */; };
@@ -314,6 +314,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 			};
 			name = Debug;
 		};
@@ -370,6 +371,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -394,9 +396,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.je.ExampleIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Debug;
 		};
@@ -420,9 +424,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.je.ExampleIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Release;
 		};
@@ -443,7 +449,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.je.ExampleMacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -470,7 +475,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.je.ExampleMacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
