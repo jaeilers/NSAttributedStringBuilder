@@ -63,9 +63,35 @@ public enum ListItemFactory {
             ),
             ListItem(text: NSAttributedString {
                 "The quick brown fox jumps over the lazy dog."
+                    .language(.english)
                     .font(.systemFont(ofSize: 30))
                     .stroke()
                     .foregroundColor(.coreTeal)
+            }),
+            ListItem(text: NSAttributedString {
+                "The quick brown fox jumps over the lazy dog."
+                    .writingDirection(.rightToLeftDirectionOverride)
+                    .baseWritingDirection(.rightToLeft)
+
+                Newline()
+
+                "—"
+                    .newline()
+                    .text("نصٌّ حكيمٌ لهُ سِرٌّ قاطِعٌ وَذُو شَأنٍ عَظيمٍ مكتوبٌ على ثوبٍ أخضرَ ومُغلفٌ بجلدٍ أزرق")
+                    .font(.systemFont(ofSize: 40))
+                    .baseWritingDirection(.rightToLeft)
+                    .language(.arabic)
+
+                Newline()
+
+                "—"
+                    .font(.systemFont(ofSize: 40))
+                    .baseWritingDirection(.leftToRight)
+
+                Newline()
+
+                "דג סקרן שט בים מאוכזב ולפתע מצא חברה"
+                    .baseWritingDirection(.rightToLeft)
             })
         ]
     }
