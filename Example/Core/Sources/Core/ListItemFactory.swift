@@ -10,14 +10,25 @@ public enum ListItemFactory {
                 AImage.globe()
                     .image(systemName: "star.fill", bounds: .init(origin: .zero, size: .init(width: 100, height: 90)))
                     .image(.globe())
-                    .foregroundColor(.systemOrange)
+                    .foregroundColor(.coreOrange)
                     .alignment(.center)
+                    .underline()
 
                 Newline()
                 #endif
 
-                "Hello, world!"
+                "Hello,"
                     .alignment(.center)
+                    .italic()
+                    .bold()
+
+                Space()
+
+                "world!"
+                    .foregroundColor(.coreRed)
+                    .bold()
+                    .strikethrough(color: .coreOrange)
+                    .backgroundColor(.coreYellow)
             }),
             ListItem(text: NSAttributedString {
                 "Hello"
@@ -27,11 +38,11 @@ public enum ListItemFactory {
 
                 "SwiftUI!"
                     .bold()
-                    .foregroundColor(.systemPurple)
+                    .foregroundColor(.corePurple)
             }),
             ListItem(text: NSAttributedString {
                 "Hello"
-                    .foregroundColor(.systemOrange)
+                    .foregroundColor(.coreOrange)
                     .underline()
                     .italic()
                     .kerning(1.5)
@@ -39,7 +50,7 @@ public enum ListItemFactory {
                 Space()
 
                 "World."
-                    .foregroundColor(.systemRed)
+                    .foregroundColor(.coreRed)
                     .bold()
             }),
             ListItem(
@@ -52,10 +63,81 @@ public enum ListItemFactory {
             ),
             ListItem(text: NSAttributedString {
                 "The quick brown fox jumps over the lazy dog."
+                    .language(.english)
                     .font(.systemFont(ofSize: 30))
                     .stroke()
-                    .foregroundColor(.systemTeal)
+                    .foregroundColor(.coreTeal)
+            }),
+            ListItem(text: NSAttributedString {
+                "The quick brown fox jumps over the lazy dog."
+                    .writingDirection(.rightToLeftDirectionOverride)
+                    .baseWritingDirection(.rightToLeft)
+
+                Newline()
+
+                "—"
+                    .newline()
+                    .text("نصٌّ حكيمٌ لهُ سِرٌّ قاطِعٌ وَذُو شَأنٍ عَظيمٍ مكتوبٌ على ثوبٍ أخضرَ ومُغلفٌ بجلدٍ أزرق")
+                    .font(.systemFont(ofSize: 40))
+                    .baseWritingDirection(.rightToLeft)
+                    .language(.arabic)
+
+                Newline()
+
+                "—"
+                    .font(.systemFont(ofSize: 40))
+                    .baseWritingDirection(.leftToRight)
+
+                Newline()
+
+                "דג סקרן שט בים מאוכזב ולפתע מצא חברה"
+                    .baseWritingDirection(.rightToLeft)
             })
         ]
+    }
+}
+
+// MARK: - Helpers
+
+private extension AColor {
+
+    static var coreRed: AColor {
+        #if os(watchOS)
+        return AColor.red
+        #else
+        return AColor.systemRed
+        #endif
+    }
+
+    static var coreTeal: AColor {
+        #if os(watchOS)
+        return AColor.green
+        #else
+        return AColor.systemTeal
+        #endif
+    }
+
+    static var coreOrange: AColor {
+        #if os(watchOS)
+        return AColor.orange
+        #else
+        return AColor.systemOrange
+        #endif
+    }
+
+    static var corePurple: AColor {
+        #if os(watchOS)
+        return AColor.purple
+        #else
+        return AColor.systemPurple
+        #endif
+    }
+
+    static var coreYellow: AColor {
+        #if os(watchOS)
+        return AColor.yellow
+        #else
+        return AColor.systemYellow
+        #endif
     }
 }

@@ -6,7 +6,7 @@ final class ViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         return tableView
     }()
 
@@ -24,8 +24,13 @@ final class ViewController: UIViewController {
     }
 
     private func setupTableView() {
+        #if !os(tvOS)
         view.backgroundColor = .systemBackground
+        #endif
+
         view.addSubview(tableView)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 40
 
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -51,7 +56,7 @@ private enum DataSourceFactory {
 
     static func makeDataSource(with tableView: UITableView) -> UITableViewDiffableDataSource<Int, ListItem> {
         UITableViewDiffableDataSource<Int, ListItem>(tableView: tableView) { tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
             cell.selectionStyle = .none
 
             var config = cell.defaultContentConfiguration()
@@ -60,5 +65,13 @@ private enum DataSourceFactory {
 
             return cell
         }
+    }
+}
+
+private extension UITableViewCell {
+
+    /// Returns: Convenience identifier for cell registration.
+    static var reuseIdentifier: String {
+        String(describing: self)
     }
 }
