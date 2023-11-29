@@ -11,17 +11,12 @@ end
 
 desc "Run all tests for: macOS, iOS, tvOS & watchOS"
 lane :test_all do
-  Dotenv.overload ".env.ios"
-  test
+  env_names = [".env.ios", ".env.macos", ".env.tvos", ".env.watchos"]
 
-  Dotenv.overload ".env.macos"
-  test
-
-  Dotenv.overload ".env.tvos"
-  test
-
-  Dotenv.overload ".env.watchos"
-  test
+  env_names.each do |env|
+    Dotenv.overload "#{env}"
+    test
+  end
 end
 
 desc "Run tests for a specific platform. Use --env to select an environment. (ios, macos, tvos or watchos)"
