@@ -22,8 +22,7 @@ let package = Package(
     targets: [
         .target(
             name: "Core",
-            dependencies: ["NSAttributedStringBuilder"],
-            path: "Sources"
+            dependencies: ["NSAttributedStringBuilder"]
         )
     ]
 )
