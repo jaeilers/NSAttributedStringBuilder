@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/jaeilers/NSAttributedStringBuilder.git", :tag => "#{spec.version}" }
 
-  spec.source_files  = "Sources", "Sources/**/*.{swift}"
+  spec.source_files  = "Sources/**/*.swift"
 
   spec.swift_version = "5.8"
 
