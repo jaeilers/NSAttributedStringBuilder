@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Improve fastlane lane test_all
 - Add examples for watchOS and tvOS
+- Changed module name to NSAttributedStringBuilder
+- Updated podspec summary and improved source files specification
 
 ## [0.1.0] - 2023-11-11
 
