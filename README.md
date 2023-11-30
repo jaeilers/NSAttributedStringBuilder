@@ -2,16 +2,40 @@
 
 ![CI workflow](https://github.com/jaeilers/NSAttributedStringBuilder/actions/workflows/ci.yml/badge.svg?branch=main) ![](https://img.shields.io/badge/Swift-5.8_5.9-orange) ![](https://img.shields.io/badge/Platforms-macOS_|_iOS_|_tvOS_|_watchOS-lightblue) ![](https://img.shields.io/badge/License-MIT-green) ![](https://img.shields.io/badge/SwiftUI-compatible-blue)
 
-The `NSAttributedStringBuilder` is an easy to use attributed string builder with extended modifier support (bold/italic, image, custom spacings etc.) that supports most platforms, can be extended easily and has accessibility support.
+The `NSAttributedStringBuilder` is an easy to use attributed string builder with extended modifier support (bold/italic, image, custom spacings etc.) that supports most platforms, can be extended easily and has accessibility support. 
+
+You can add more functionality by extending `AttributedStringBuilding`. All extensions of `AttributedStringBuilding` are available to `String`, `NSAttributedString`, `UIImage` and `NSImage` which conform to the protocol.
 
 ## Features
 
-- Supports most of `NSAttributedString.Key`
-- Flexible composition of strings, images etc.
-- Declarative syntax
-- SwiftUI compatible
-- Accessibility support
-- Fully covered by unit tests
+- [x] Supports most of `NSAttributedString.Key`
+- [x] Flexible composition of strings, images etc.
+- [x] Declarative syntax
+- [x] SwiftUI compatible
+- [x] Accessibility support
+- [x] Fully covered by unit tests
+
+## Installation
+
+### CocoaPods
+
+Add the following to your `Podfile` to integrate `NSAttributedStringBuilder` into your project:
+
+```
+pod 'NSAttributedStringBuilder-jaeilers', :git => 'https://github.com/jaeilers/NSAttributedStringBuilder.git', :tag => '0.1.0'
+```
+
+### Swift Package Manager
+
+If you're using Xcode to manage your dependencies, select your project, **Package Dependencies** and add the package by entering the url [https://github.com/jaeilers/NSAttributedStringBuilder](https://github.com/jaeilers/NSAttributedStringBuilder).
+
+For projects with a separate `Package.swift`, add the dependency to your package manifest:
+
+```
+dependencies: [
+    .package(url: "https://github.com/jaeilers/NSAttributedStringBuilder", .upToNextMajor(from: "0.1.0"))
+]
+```
 
 ## Examples
 
