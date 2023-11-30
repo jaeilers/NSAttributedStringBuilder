@@ -1,0 +1,24 @@
+name: Release
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  release:
+    name: Run tests and push release to CocoaPods trunk
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Run tests
+        run: bundle exec fastlane test_all
+
+      - name: Push to CocoaPods trunk
+        run: sh "${GITHUB_WORKSPACE}/scripts/ci/push_to_trunk.sh"
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
