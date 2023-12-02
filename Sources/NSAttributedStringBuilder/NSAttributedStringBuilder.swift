@@ -12,8 +12,8 @@ public enum NSAttributedStringBuilder {
 
 public extension NSAttributedString {
 
-    /// Builds an attributed string from given attributed strings provided by the result builder.
-    func callAsFunction(@NSAttributedStringBuilder _ builder: () -> NSAttributedString) -> NSAttributedString {
-        builder()
+    /// Initializes an attributed string from given attributed strings provided by the result builder.
+    convenience init(@NSAttributedStringBuilder _ builder: () -> NSAttributedString) {
+        self.init(attributedString: builder())
     }
 }
