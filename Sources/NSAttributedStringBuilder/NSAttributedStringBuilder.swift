@@ -8,6 +8,22 @@ public enum NSAttributedStringBuilder {
             result.append(element)
         }
     }
+
+    public static func buildOptional(_ component: NSAttributedString?) -> NSAttributedString {
+        component ?? NSAttributedString()
+    }
+
+    public static func buildEither(first component: NSAttributedString) -> NSAttributedString {
+        component
+    }
+
+    public static func buildEither(second component: NSAttributedString) -> NSAttributedString {
+        component
+    }
+
+    public static func buildLimitedAvailability(_ component: NSAttributedString) -> NSAttributedString {
+        component
+    }
 }
 
 public extension NSAttributedString {
