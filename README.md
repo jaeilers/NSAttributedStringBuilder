@@ -21,7 +21,7 @@ You can add more functionality by extending `AttributedStringBuilding`. All exte
 Add the following to your `Podfile` to integrate `NSAttributedStringBuilder` into your project:
 
 ```Ruby
-pod 'NSAttributedStringBuilder-jaeilers', :git => 'https://github.com/jaeilers/NSAttributedStringBuilder.git', :tag => '0.1.0'
+pod 'NSAttributedStringBuilder-jaeilers', '~> 0.2.0'
 ```
 
 ### Swift Package Manager
@@ -32,7 +32,7 @@ For projects with a separate `Package.swift`, add the dependency to your package
 
 ```Swift
 dependencies: [
-    .package(url: "https://github.com/jaeilers/NSAttributedStringBuilder", .upToNextMajor(from: "0.1.0"))
+    .package(url: "https://github.com/jaeilers/NSAttributedStringBuilder", .upToNextMajor(from: "0.2.0"))
 ]
 ```
 

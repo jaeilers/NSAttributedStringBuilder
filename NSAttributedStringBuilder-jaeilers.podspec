@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "NSAttributedStringBuilder-jaeilers"
   spec.module_name  = "NSAttributedStringBuilder"
-  spec.version      = "0.1.0"
+  spec.version      = "0.2.0"
   spec.summary      = "An easy to use NSAttributedString builder with extended modifier support (bold, italic, image, custom spacings etc.)"
 
   spec.description  = <<-DESC
