@@ -128,6 +128,16 @@ public extension AttributedStringBuilding {
         return addingAttributes(newAttributes)
     }
 
+    /// Set the index of the marked clause segment.
+    ///
+    /// The value of this attribute contains an integer, as an index in marked text indicating clause segments.
+    /// - Parameters:
+    ///   - segmentIndex: The index of the marked clause segment.
+    /// - Returns: A copy of the modified attributed string.
+    func markedClauseSegment(_ segmentIndex: Int) -> NSAttributedString {
+        addingAttribute(.markedClauseSegment, value: NSNumber(value: segmentIndex))
+    }
+
     /// Set the paragraph’s header level for HTML generation.
     /// - Parameters:
     ///   - headerLevel: The header level as an integer value. If the paragraph is a header,

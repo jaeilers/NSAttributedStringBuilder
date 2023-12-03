@@ -371,6 +371,36 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
+    func testMarkedClauseSegmentWithAttributedString() {
+        // Given
+        let attributes: Attributes = [
+            .baselineOffset: NSNumber(value: 1),
+            .font: AFont.preferredFont(forTextStyle: .callout)
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let newAttributes = attributes.merging([.markedClauseSegment: NSNumber(value: 2)], uniquingKeysWith: { _, new in new })
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString
+            .markedClauseSegment(2)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testMarkedClauseSegmentWithString() {
+        // Given
+        let expected = NSAttributedString(string: string, attributes: [.markedClauseSegment: NSNumber(value: 1)])
+
+        // When
+        let result = string
+            .markedClauseSegment(1)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
     func testHeaderLevelWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
