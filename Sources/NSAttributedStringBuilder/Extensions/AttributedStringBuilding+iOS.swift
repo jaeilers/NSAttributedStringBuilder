@@ -27,27 +27,14 @@ public extension AttributedStringBuilding {
     ///   - image: The image that will be added to the string.
     ///   - bounds: The bounds of the image. The bounds changes the default size
     ///   If no bounds are provided, then the default asset size is used. Default is `nil`.
-    ///   - accessibilityLabel: The accessibility label of the image attachment. Default is `nil`.
-    ///   - accessibilityHint: The accessibility hint of the image attachment. Default is `nil`.
     /// - Returns: A copy of the modified attributed string.
     func image(
         _ image: UIImage,
-        bounds: CGRect? = nil,
-        accessibilityLabel: String? = nil,
-        accessibilityHint: String? = nil
+        bounds: CGRect? = nil
     ) -> NSAttributedString {
         let attachment = NSTextAttachment(image: image)
-
         bounds.map {
             attachment.bounds = $0
-        }
-
-        accessibilityLabel.map {
-            attachment.accessibilityLabel = $0
-        }
-
-        accessibilityHint.map {
-            attachment.accessibilityHint = $0
         }
 
         return addingAttributedString(NSAttributedString(attachment: attachment))
@@ -60,20 +47,16 @@ public extension AttributedStringBuilding {
     ///   - systemName: The SF Symbol name (system name) of the image.
     ///   - bounds: The bounds of the image. The bounds changes the default size and placement of the image.
     ///   If no bounds are provided, then the default asset size is used. Default is `nil`.
-    ///   - accessibilityLabel: The accessibility label of the image attachment. Default is `nil`.
-    ///   - accessibilityHint: The accessibility hint of the image attachment. Default is `nil`.
     /// - Returns: A copy of the modified attributed string.
     func image(
         systemName: String,
-        bounds: CGRect? = nil,
-        accessibilityLabel: String? = nil,
-        accessibilityHint: String? = nil
+        bounds: CGRect? = nil
     ) -> NSAttributedString {
         guard let img = UIImage(systemName: systemName) else {
             return attributedString()
         }
 
-        return image(img, bounds: bounds, accessibilityLabel: accessibilityLabel, accessibilityHint: accessibilityHint)
+        return image(img, bounds: bounds)
     }
 }
 #endif

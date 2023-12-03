@@ -9,15 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add Changelog
-- Add CI workflow status badge
+- Added Changelog
+- Added CI workflow status badge
+- Added support for glyphInfo and markedClauseSegment
+- Added support for optionals, conditionals and limited availability in result builder 
 
 ### Changed
 
-- Improve fastlane lane test_all
-- Add examples for watchOS and tvOS
+- Improved fastlane lane test_all
+- Added examples for watchOS and tvOS
 - Changed module name to NSAttributedStringBuilder
 - Updated podspec summary and improved source files specification
+- Restricted result build to initialization only
+
+### Removed
+
+- Accessibility label and hint from image modifier for iOS/tvOS
 
 ## [0.1.0] - 2023-11-11
 

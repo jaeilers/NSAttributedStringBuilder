@@ -6,7 +6,7 @@ Pod::Spec.new do |spec|
   spec.summary      = "An easy to use NSAttributedString builder with extended modifier support (bold, italic, image, custom spacings etc.)"
 
   spec.description  = <<-DESC
-  The `NSAttributedStringBuilder` is an easy to use attributed string builder with extended modifier support (bold/italic, image, custom spacings etc.) that supports most platforms, can be extended easily and has accessibility support.
+  The `NSAttributedStringBuilder` is an easy to use attributed string builder with extended modifier support (bold/italic, image, custom spacings etc.) that supports most platforms and can be extended easily.
   DESC
 
   spec.homepage     = "https://github.com/jaeilers/NSAttributedStringBuilder"

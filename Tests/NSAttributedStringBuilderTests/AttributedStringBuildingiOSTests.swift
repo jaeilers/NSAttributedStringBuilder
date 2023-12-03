@@ -14,26 +14,16 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
             .kern: NSNumber(value: 1.0)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-
         let bounds = CGRect(origin: .zero, size: .init(width: 1, height: 1))
-        let accessibilityLabel = String.unique()
-        let accessibilityHint = String.unique()
         let image = try UIImage.pencil()
 
         // When
-        let result = attributedString.image(
-            image,
-            bounds: bounds,
-            accessibilityLabel: accessibilityLabel,
-            accessibilityHint: accessibilityHint
-        )
+        let result = attributedString.image(image, bounds: bounds)
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
         let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
         XCTAssertEqual(resultAttachment.image, image)
-        XCTAssertEqual(resultAttachment.accessibilityLabel, accessibilityLabel)
-        XCTAssertEqual(resultAttachment.accessibilityHint, accessibilityHint)
         XCTAssertEqual(resultAttributes[.font] as? UIFont, UIFont.preferredFont(forTextStyle: .body))
         XCTAssertEqual(resultAttributes[.foregroundColor] as? UIColor, UIColor.blue)
         XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))
@@ -50,25 +40,15 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
             .kern: NSNumber(value: 1.0)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-
         let bounds = CGRect(origin: .zero, size: .init(width: 1, height: 1))
-        let accessibilityLabel = String.unique()
-        let accessibilityHint = String.unique()
 
         // When
-        let result = attributedString.image(
-            systemName: "pencil",
-            bounds: bounds,
-            accessibilityLabel: accessibilityLabel,
-            accessibilityHint: accessibilityHint
-        )
+        let result = attributedString.image(systemName: "pencil", bounds: bounds)
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
         let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
         XCTAssertNotNil(resultAttachment.image)
-        XCTAssertEqual(resultAttachment.accessibilityLabel, accessibilityLabel)
-        XCTAssertEqual(resultAttachment.accessibilityHint, accessibilityHint)
         XCTAssertEqual(resultAttributes[.font] as? UIFont, UIFont.preferredFont(forTextStyle: .body))
         XCTAssertEqual(resultAttributes[.foregroundColor] as? UIColor, UIColor.orange)
         XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))

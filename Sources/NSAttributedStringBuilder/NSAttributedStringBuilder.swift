@@ -8,12 +8,28 @@ public enum NSAttributedStringBuilder {
             result.append(element)
         }
     }
+
+    public static func buildOptional(_ component: NSAttributedString?) -> NSAttributedString {
+        component ?? NSAttributedString()
+    }
+
+    public static func buildEither(first component: NSAttributedString) -> NSAttributedString {
+        component
+    }
+
+    public static func buildEither(second component: NSAttributedString) -> NSAttributedString {
+        component
+    }
+
+    public static func buildLimitedAvailability(_ component: NSAttributedString) -> NSAttributedString {
+        component
+    }
 }
 
 public extension NSAttributedString {
 
-    /// Builds an attributed string from given attributed strings provided by the result builder.
-    func callAsFunction(@NSAttributedStringBuilder _ builder: () -> NSAttributedString) -> NSAttributedString {
-        builder()
+    /// Initializes an attributed string from given attributed strings provided by the result builder.
+    convenience init(@NSAttributedStringBuilder _ builder: () -> NSAttributedString) {
+        self.init(attributedString: builder())
     }
 }
