@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2023-12-03
+
 ### Added
 
 - Added Changelog
@@ -33,5 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Release
 
-[unreleased]: https://github.com/jaeilers/NSAttributedStringBuilder/compare/0.1.0...HEAD
+[unreleased]: https://github.com/jaeilers/NSAttributedStringBuilder/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.2.0
 [0.1.0]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.1.0
