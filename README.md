@@ -99,17 +99,17 @@ let attributedString = UIImage.checkmark
     .image(UIImage.add)
 ```
 
-## How to add modifier
+## How to add your own modifiers
 
-You can add modifier for missing attributes or combine multiple attributes by extending `AttributedStringBuilding`.
-All extensions are automatically available to all types conforming to the protocol (e.g. UIImage/NSImage, String, NSAttributedString).
+You can add your own modifiers for missing attributes or combine multiple attributes by extending `AttributedStringBuilding`.
+All extensions are automatically available to all types conforming to the protocol (UIImage/NSImage, String & NSAttributedString).
 
-Adding an extension isn't always necessary. If you just want to add an attribute, call `addingAttribute(_:value:)` to add an attribute to the whole range of the string.
+Adding an extension isn't always necessary. If you just want to add an attribute, call `addingAttribute(_:value:)` to add an attribute to the whole range of the attributed string.
 
 ```Swift
 public extension AttributedStringBuilding {
 
-    /// Combine multiple modifier in one.
+    /// Combine multiple modifiers in one.
     func linebreak(_ breakMode: NSLineBreakMode, strategy: NSParagraphStyle.LineBreakStrategy = .standard) -> NSAttributedString {
         lineBreakMode(breakMode)
             .lineBreakStrategy(strategy)
