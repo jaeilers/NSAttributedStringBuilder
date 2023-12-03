@@ -2,7 +2,7 @@
 
 ![CI workflow](https://github.com/jaeilers/NSAttributedStringBuilder/actions/workflows/ci.yml/badge.svg?branch=main) ![](https://img.shields.io/badge/Swift-5.8_5.9-orange) ![](https://img.shields.io/badge/Platforms-macOS_|_iOS_|_tvOS_|_watchOS-lightblue) ![](https://img.shields.io/badge/License-MIT-green) ![](https://img.shields.io/badge/SwiftUI-compatible-blue)
 
-The `NSAttributedStringBuilder` is an easy to use attributed string builder with extended modifier support (bold/italic, image, custom spacings etc.) that supports most platforms, can be extended easily and has accessibility support. 
+The `NSAttributedStringBuilder` is an easy to use attributed string builder with extended modifier support (bold/italic, image, custom spacings etc.) that supports most platforms and can be extended easily.
 
 You can add more functionality by extending `AttributedStringBuilding`. All extensions of `AttributedStringBuilding` are available to `String`, `NSAttributedString`, `UIImage` and `NSImage` which conform to the protocol.
 
@@ -12,7 +12,6 @@ You can add more functionality by extending `AttributedStringBuilding`. All exte
 - [x] Flexible composition of strings, images etc.
 - [x] Declarative syntax
 - [x] SwiftUI compatible
-- [x] Accessibility support
 - [x] Fully covered by unit tests
 
 ## Installation
