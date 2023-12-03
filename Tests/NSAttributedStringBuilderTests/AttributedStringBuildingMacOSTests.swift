@@ -332,6 +332,45 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
+    func testGlpyhInfoWithAttributedString() throws {
+        // Given
+        let baseString = "\u{FFFD}" // �
+        let font = NSFont.systemFont(ofSize: 12)
+        let glyphInfo = try XCTUnwrap(NSGlyphInfo(cgGlyph: 2590, for: font, baseString: baseString))
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: NSColor.gray,
+            .font: font
+        ]
+        let attributedString = NSAttributedString(string: baseString, attributes: attributes)
+        let newAttributes = attributes.merging([.glyphInfo: glyphInfo], uniquingKeysWith: { _, new in new })
+        let expected = NSAttributedString(string: baseString, attributes: newAttributes)
+
+        // When
+        let result = attributedString.glyphInfo(glyphInfo)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testGlpyhInfoWithString() throws {
+        // Given
+        let baseString = "\u{FFFD}" // �
+        let font = NSFont.preferredFont(forTextStyle: .body)
+        let glyphInfo = try XCTUnwrap(NSGlyphInfo(cgGlyph: 2590, for: font, baseString: baseString))
+        let attributes: [NSAttributedString.Key: Any] = [
+            .glyphInfo: glyphInfo,
+            .font: font
+        ]
+        let expected = NSAttributedString(string: baseString, attributes: attributes)
+
+        // When
+        let result = baseString.glyphInfo(glyphInfo)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
     func testHeaderLevelWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()

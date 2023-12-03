@@ -106,6 +106,28 @@ public extension AttributedStringBuilding {
         addingAttribute(.toolTip, value: tip as NSString)
     }
 
+    /// The glyph info is assigned by the `NSLayoutManager` object.
+    ///
+    /// The specified glyph needs to be available in the font specified in `NSAttributedString.Key.font`.
+    /// To replace a character use for example the replacement character (� U+FFFD) as a base string for `NSGlyphInfo`.
+    /// All occurrences of the replacement character are replaced with the specified glyph.
+    /// - Parameters:
+    ///   - glyphInfo: The glyph info object to use by the layout manager. You need to specify a `font`
+    ///   to use for the `glyphInfo`. If the attributed string does not have a font specified yet,
+    ///   a default font will be set: `NSFont.preferredFont(forTextStyle: .body)`.
+    /// - Returns: A copy of the modified attributed string.
+    func glyphInfo(_ glyphInfo: NSGlyphInfo) -> NSAttributedString {
+        var newAttributes: Attributes = [
+            .glyphInfo: glyphInfo
+        ]
+
+        if (attribute(.font) as NSFont?) == nil {
+            newAttributes[.font] = NSFont.preferredFont(forTextStyle: .body)
+        }
+
+        return addingAttributes(newAttributes)
+    }
+
     /// Set the paragraph’s header level for HTML generation.
     /// - Parameters:
     ///   - headerLevel: The header level as an integer value. If the paragraph is a header,
