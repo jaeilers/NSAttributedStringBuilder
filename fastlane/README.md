@@ -29,6 +29,22 @@ Run all tests for: macOS, iOS, tvOS & watchOS
 
 Run tests for a specific platform. Use --env to select an environment. (ios, macos, tvos or watchos)
 
+### code_coverage_all
+
+```sh
+[bundle exec] fastlane code_coverage_all
+```
+
+Generate code coverage reports for: macOS, iOS, tvOS & watchOS
+
+### code_coverage
+
+```sh
+[bundle exec] fastlane code_coverage
+```
+
+Generate code coverage report for a specific platform. Use --env to select the environment. (ios, macos, tvos or watchos)
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

@@ -49,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		896CC15E2B1E1A6A00FC2206 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		897F9D922AEE4BF300709693 /* NSAttributedStringBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NSAttributedStringBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		897F9D9A2AEE4BF400709693 /* NSAttributedStringBuilderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NSAttributedStringBuilderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		897F9DB02AEE4F5E00709693 /* AttributedStringBuilding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringBuilding.swift; sourceTree = "<group>"; };
@@ -112,6 +113,7 @@
 				897F9DF72AEE525100709693 /* .gitignore */,
 				897F9DF32AEE51BB00709693 /* Package.swift */,
 				897F9DF42AEE51CE00709693 /* Package@swift-5.8.swift */,
+				896CC15E2B1E1A6A00FC2206 /* CHANGELOG.md */,
 				897F9DF92AEE526F00709693 /* README.md */,
 				897F9DF82AEE526400709693 /* LICENSE.md */,
 				897F9DF62AEE51F800709693 /* NSAttributedStringBuilder-jaeilers.podspec */,

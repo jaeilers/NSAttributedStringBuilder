@@ -1,0 +1,30 @@
+name: Code Coverage
+description: Upload code coverage reports to Codecov.io
+
+inputs:
+  codecov-token:
+    description: The codecov upload token
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Generate code coverage reports
+      run: bundle exec fastlane code_coverage_all
+      shell: bash
+
+    - name: Export file paths as comma separated string
+      id: coverage-reports
+      run: |
+        FILE_PATHS=$(sh "${GITHUB_WORKSPACE}/scripts/ci/get_code_coverage_file_paths.sh")
+        echo "file-paths=$FILE_PATHS" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Upload coverage to Codecov.io
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ env.CODECOV_TOKEN }}
+        files: '${{ env.FILE_PATHS }}'
+      env:
+        CODECOV_TOKEN: ${{ inputs.codecov-token }}
+        FILE_PATHS: ${{ steps.coverage-reports.outputs.file-paths }}
