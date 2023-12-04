@@ -11,8 +11,6 @@ end
 
 desc "Run all tests for: macOS, iOS, tvOS & watchOS"
 lane :test_all do
-  env_names = [".env.ios", ".env.macos", ".env.tvos", ".env.watchos"]
-
   env_names.each do |env|
     Dotenv.overload "#{env}"
     test
@@ -21,6 +19,7 @@ end
 
 desc "Run tests for a specific platform. Use --env to select an environment. (ios, macos, tvos or watchos)"
 lane :test do |options|
+  UI.important("Test #{ENV['PLATFORM_BUILD_DIRECTORY']}")
   scan(
     project: project_path,
     scheme: ENV["SCHEME"],
@@ -31,6 +30,28 @@ lane :test do |options|
     derived_data_path: derived_data_path,
     destination: ENV["XC_SCAN_DESTINATION"],
     parallel_testing: false
+  )
+end
+
+desc "Generate code coverage reports for: macOS, iOS, tvOS & watchOS"
+lane :code_coverage_all do |options|
+  env_names.each do |env|
+    Dotenv.overload "#{env}"
+    code_coverage
+  end
+end
+
+desc "Generate code coverage report for a specific platform. Use --env to select the environment. (ios, macos, tvos or watchos)"
+lane :code_coverage do |options|
+  UI.important("Generate coverage for #{ENV['PLATFORM_BUILD_DIRECTORY']}")
+  slather(
+    proj: project_path,
+    scheme: ENV["SCHEME"],
+    build_directory: derived_data_path,
+    output_directory: coverage_output_directory,
+    binary_basename: ENV["TARGET_NAME"],
+    github: is_ci,
+    cobertura_xml: true
   )
 end
 
@@ -46,4 +67,12 @@ end
 
 def output_directory
   File.join(ENV["FASTLANE_BUILD_DIRECTORY"], ENV["PLATFORM_BUILD_DIRECTORY"], "reports")
+end
+
+def coverage_output_directory
+  File.join(ENV["FASTLANE_BUILD_DIRECTORY"], ENV["PLATFORM_BUILD_DIRECTORY"], "coverage")
+end
+
+def env_names
+  [".env.ios", ".env.macos", ".env.tvos", ".env.watchos"]
 end
