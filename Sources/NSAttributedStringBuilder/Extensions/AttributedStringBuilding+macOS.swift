@@ -15,6 +15,12 @@ public extension AttributedStringBuilding {
         addingAttribute(.font, value: fontWithTrait(.italic))
     }
 
+    /// Modifies the font of the text to used fixed-width variant of the current font, if possible.
+    /// - Returns: A copy of the modified attributed string.
+    func monospaced() -> NSAttributedString {
+        addingAttribute(.font, value: fontWithTrait(.monoSpace))
+    }
+
     /// Adds an image at the end of the attributed string.
     /// - Parameters:
     ///   - image: The image that will be added to the string.

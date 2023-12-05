@@ -40,6 +40,7 @@ public enum ListItemFactory {
                     .bold()
                     .foregroundColor(.corePurple)
             }),
+            ListItem(text: "Here is some monospaced text.".foregroundColor(.coreBlue).monospaced()),
             ListItem(text: NSAttributedString {
                 "Hello"
                     .foregroundColor(.coreOrange)
@@ -101,6 +102,14 @@ public enum ListItemFactory {
 
 private extension AColor {
 
+    static var coreBlue: AColor {
+        #if os(watchOS)
+        return AColor.blue
+        #else
+        return AColor.systemBlue
+        #endif
+    }
+
     static var coreRed: AColor {
         #if os(watchOS)
         return AColor.red
@@ -111,7 +120,7 @@ private extension AColor {
 
     static var coreTeal: AColor {
         #if os(watchOS)
-        return AColor.green
+        return AColor(red: 0.25098039215686274, green: 0.7843137254901961, blue: 0.8784313725490196, alpha: 1.0)
         #else
         return AColor.systemTeal
         #endif
