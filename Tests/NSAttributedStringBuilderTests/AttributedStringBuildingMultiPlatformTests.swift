@@ -1890,4 +1890,49 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Then
         XCTAssertEqual(result, expected)
     }
+
+    func testCondensedWithAttributedString() throws {
+        // Given
+        let font = AFont.preferredFont(forTextStyle: .body)
+        #if canImport(UIKit)
+        let trait: UIFontDescriptor.SymbolicTraits = .traitCondensed
+        #elseif canImport(AppKit)
+        let trait: NSFontDescriptor.SymbolicTraits = .condensed
+        #endif
+
+        let attributedString = NSAttributedString(string: string, attributes: [.font: font])
+        let condensed = try XCTUnwrap(AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            size: 0.0
+        ))
+        let expected = NSAttributedString(string: string, attributes: [.font: condensed])
+
+        // When
+        let result = attributedString.condensed()
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testCondensedWithString() throws {
+        // Given
+        let font = AFont.preferredFont(forTextStyle: .body)
+        #if canImport(UIKit)
+        let trait: UIFontDescriptor.SymbolicTraits = .traitCondensed
+        #elseif canImport(AppKit)
+        let trait: NSFontDescriptor.SymbolicTraits = .condensed
+        #endif
+
+        let condensed = try XCTUnwrap(AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            size: 0.0
+        ))
+        let expected = NSAttributedString(string: string, attributes: [.font: condensed])
+
+        // When
+        let result = string.condensed()
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
 }

@@ -20,6 +20,12 @@ public extension AttributedStringBuilding {
     func monospaced() -> NSAttributedString {
         addingAttribute(.font, value: fontWithTrait(.traitMonoSpace))
     }
+
+    /// Adds the condensed trait to the current font, if possible.
+    /// - Returns: A copy of the modified attributed string.
+    func condensed() -> NSAttributedString {
+        addingAttribute(.font, value: fontWithTrait(.traitCondensed))
+    }
 }
 #endif
 

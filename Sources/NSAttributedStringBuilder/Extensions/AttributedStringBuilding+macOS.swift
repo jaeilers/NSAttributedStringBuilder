@@ -21,6 +21,12 @@ public extension AttributedStringBuilding {
         addingAttribute(.font, value: fontWithTrait(.monoSpace))
     }
 
+    /// Adds the condensed trait to the current font, if possible.
+    /// - Returns: A copy of the modified attributed string.
+    func condensed() -> NSAttributedString {
+        addingAttribute(.font, value: fontWithTrait(.condensed))
+    }
+
     /// Adds an image at the end of the attributed string.
     /// - Parameters:
     ///   - image: The image that will be added to the string.
