@@ -542,6 +542,39 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
+    @available(iOS 14, tvOS 14, watchOS 7, *)
+    func testTrackingWithAttributedString() {
+        // Given
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .foregroundColor: AColor.yellow
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let newAttributes = attributes.merging([.tracking: NSNumber(value: 2)], uniquingKeysWith: { _, new in new })
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.tracking(2)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    @available(iOS 14, tvOS 14, watchOS 7, *)
+    func testTrackingWithString() {
+        // Given
+        let attributes: Attributes = [
+            .tracking: NSNumber(value: 5)
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.tracking(5)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
     // MARK: - Paragraph Styles
 
     func testParagraphStyleWithAttributedString() {

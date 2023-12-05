@@ -52,7 +52,7 @@ public extension AttributedStringBuilding {
 
     /// Set the kerning of the text.
     /// - Parameters:
-    ///   - kerning: The text kerning.
+    ///   - kerning: The text kerning. A kerning of 0 means it is disabled.
     /// - Returns: A copy of the modified attributed string.
     func kerning(_ kerning: Double) -> NSAttributedString {
         addingAttribute(.kern, value: NSNumber(value: kerning))
@@ -156,6 +156,19 @@ public extension AttributedStringBuilding {
     @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
     func languageIdentifier(_ languageCode: Locale.LanguageCode) -> NSAttributedString {
         addingAttribute(.languageIdentifier, value: languageCode.identifier)
+    }
+
+    /// Set the tracking of the text.
+    ///
+    /// 'Tracking' is similar to kerning that it changes the spacing between the letters,
+    /// but kerning tries to keep ligatures where tracking does not. If you set tracking and kerning at the same time
+    /// then tracking overrides kerning. Both cannot be used a the same time.
+    /// - Parameters:
+    ///   - tracking: The tracking changes the spacing between the letters. A tracking of 0 means it is disabled.
+    /// - Returns: A copy of the modified attributed string.
+    @available(iOS 14, tvOS 14, watchOS 7, *)
+    func tracking(_ tracking: Double) -> NSAttributedString {
+        addingAttribute(.tracking, value: NSNumber(value: tracking))
     }
 
     // MARK: - Platform dependent (typealias)

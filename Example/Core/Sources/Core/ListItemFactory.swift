@@ -55,6 +55,18 @@ public enum ListItemFactory {
                     .bold()
             }),
             ListItem(text: "And some condensed text as well.".condensed().alignment(.center)),
+            ListItem(text: NSAttributedString {
+                "Ταχίστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός Takhístè alôpèx vaphês psèménè gè, draskelízei ypér nòthroý kynós"
+                    .kerning(5.0)
+                    .language(.greek)
+            }),
+            ListItem(text: NSAttributedString {
+                "ABCDEF".tracking(-3)
+                Newline()
+                "ABCDEF".tracking(0)
+                Newline()
+                "ABCDEF".tracking(3)
+            }),
             ListItem(
                 text: "Eine wunderbare Heiterkeit hat meine ganze Seele eingenommen, gleich den süßen Frühlingsmorgen, die ich mit ganzem Herzen genieße. Ich bin allein und freue mich meines Lebens in dieser Gegend, die für solche Seelen geschaffen ist wie die meine. Ich bin so glücklich, mein Bester, so ganz in dem Gefühle von ruhigem Dasein versunken, daß meine Kunst darunter leidet."
                     .hyphenationFactor(1.0)
