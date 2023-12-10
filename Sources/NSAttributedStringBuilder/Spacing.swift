@@ -1,5 +1,6 @@
-/// The type of whitespace.
+/// The type of whitespace that can be added to an attributed string.
 public enum Spacing: Equatable {
+
     /// The default whitespace.
     case standard
     /// An En-Space.
