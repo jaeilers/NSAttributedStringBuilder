@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "Core",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v15),
         .macOS(.v12),
@@ -22,7 +23,10 @@ let package = Package(
     targets: [
         .target(
             name: "Core",
-            dependencies: ["NSAttributedStringBuilder"]
+            dependencies: ["NSAttributedStringBuilder"],
+            resources: [
+                .copy("Resources/Localizable.xcstrings")
+            ]
         )
     ]
 )

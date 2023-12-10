@@ -56,5 +56,22 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let resultAttributedString = result.attributedSubstring(from: NSRange(location: 0, length: attributedString.length))
         XCTAssertEqual(resultAttributedString, attributedString)
     }
+
+    func testUIImageWithAttributedStringAndWrongSystemName() {
+        // Given
+        let attributedString = NSAttributedString(
+            string: string, attributes: [
+                .font: UIFont.preferredFont(forTextStyle: .callout),
+                .backgroundColor: UIColor.yellow,
+                .baselineOffset: NSNumber(value: 1)
+            ]
+        )
+
+        // When
+        let result = attributedString.image(systemName: .unique())
+
+        // Then
+        XCTAssertEqual(result, attributedString)
+    }
 }
 #endif

@@ -542,6 +542,39 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
+    @available(iOS 14, tvOS 14, watchOS 7, *)
+    func testTrackingWithAttributedString() {
+        // Given
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .foregroundColor: AColor.yellow
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let newAttributes = attributes.merging([.tracking: NSNumber(value: 2)], uniquingKeysWith: { _, new in new })
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.tracking(2)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    @available(iOS 14, tvOS 14, watchOS 7, *)
+    func testTrackingWithString() {
+        // Given
+        let attributes: Attributes = [
+            .tracking: NSNumber(value: 5)
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.tracking(5)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
     // MARK: - Paragraph Styles
 
     func testParagraphStyleWithAttributedString() {
@@ -1724,7 +1757,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #elseif canImport(AppKit)
         let trait: NSFontDescriptor.SymbolicTraits = .bold
         #endif
-        let string = String.unique()
+
         let attributedString = NSAttributedString(string: string)
         let font = AFont.preferredFont(forTextStyle: .body)
         let expectedFont = try XCTUnwrap(AFont(
@@ -1747,7 +1780,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #elseif canImport(AppKit)
         let trait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
-        let string = String.unique()
+
         let font = AFont.preferredFont(forTextStyle: .headline)
         let expectedFont = try XCTUnwrap(AFont(
             descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
@@ -1770,7 +1803,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #elseif canImport(AppKit)
         let trait: NSFontDescriptor.SymbolicTraits = .bold
         #endif
-        let string = String.unique()
+
         let font = AFont.preferredFont(forTextStyle: .body)
         let expectedFont = try XCTUnwrap(AFont(
             descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
@@ -1795,7 +1828,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let boldTrait: NSFontDescriptor.SymbolicTraits = .bold
         let italicTrait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
-        let string = String.unique()
+
         let attributedString = NSAttributedString(string: string)
         let bold = try XCTUnwrap(AFont(
             descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
@@ -1826,7 +1859,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let boldTrait: NSFontDescriptor.SymbolicTraits = .bold
         let italicTrait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
-        let string = String.unique()
+
         let bold = try XCTUnwrap(AFont(
             descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
@@ -1841,6 +1874,96 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string
             .bold()
             .italic()
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testMonospacedWithAttributedString() throws {
+        // Given
+        let font = AFont.preferredFont(forTextStyle: .body)
+        #if canImport(UIKit)
+        let trait: UIFontDescriptor.SymbolicTraits = .traitMonoSpace
+        #elseif canImport(AppKit)
+        let trait: NSFontDescriptor.SymbolicTraits = .monoSpace
+        #endif
+
+        let attributedString = NSAttributedString(string: string, attributes: [.font: font])
+        let monospaced = try XCTUnwrap(AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            size: 0.0
+        ))
+        let expected = NSAttributedString(string: string, attributes: [.font: monospaced])
+
+        // When
+        let result = attributedString.monospaced()
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testMonospacedWithString() throws {
+        // Given
+        let font = AFont.preferredFont(forTextStyle: .body)
+        #if canImport(UIKit)
+        let trait: UIFontDescriptor.SymbolicTraits = .traitMonoSpace
+        #elseif canImport(AppKit)
+        let trait: NSFontDescriptor.SymbolicTraits = .monoSpace
+        #endif
+
+        let monospaced = try XCTUnwrap(AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            size: 0.0
+        ))
+        let expected = NSAttributedString(string: string, attributes: [.font: monospaced])
+
+        // When
+        let result = string.monospaced()
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testCondensedWithAttributedString() throws {
+        // Given
+        let font = AFont.preferredFont(forTextStyle: .body)
+        #if canImport(UIKit)
+        let trait: UIFontDescriptor.SymbolicTraits = .traitCondensed
+        #elseif canImport(AppKit)
+        let trait: NSFontDescriptor.SymbolicTraits = .condensed
+        #endif
+
+        let attributedString = NSAttributedString(string: string, attributes: [.font: font])
+        let condensed = try XCTUnwrap(AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            size: 0.0
+        ))
+        let expected = NSAttributedString(string: string, attributes: [.font: condensed])
+
+        // When
+        let result = attributedString.condensed()
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testCondensedWithString() throws {
+        // Given
+        let font = AFont.preferredFont(forTextStyle: .body)
+        #if canImport(UIKit)
+        let trait: UIFontDescriptor.SymbolicTraits = .traitCondensed
+        #elseif canImport(AppKit)
+        let trait: NSFontDescriptor.SymbolicTraits = .condensed
+        #endif
+
+        let condensed = try XCTUnwrap(AFont(
+            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            size: 0.0
+        ))
+        let expected = NSAttributedString(string: string, attributes: [.font: condensed])
+
+        // When
+        let result = string.condensed()
 
         // Then
         XCTAssertEqual(result, expected)

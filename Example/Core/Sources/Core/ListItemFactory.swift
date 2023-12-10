@@ -40,6 +40,7 @@ public enum ListItemFactory {
                     .bold()
                     .foregroundColor(.corePurple)
             }),
+            ListItem(text: L10n.monospacedText.foregroundColor(.coreBlue).monospaced()),
             ListItem(text: NSAttributedString {
                 "Hello"
                     .foregroundColor(.coreOrange)
@@ -53,8 +54,28 @@ public enum ListItemFactory {
                     .foregroundColor(.coreRed)
                     .bold()
             }),
+            ListItem(text: NSAttributedString {
+                L10n.pangramEnglish
+                    .language(.english)
+                    .font(.systemFont(ofSize: 30))
+                    .stroke()
+                    .foregroundColor(.coreTeal)
+            }),
+            ListItem(text: L10n.condensedText.condensed().alignment(.center)),
+            ListItem(text: NSAttributedString {
+                L10n.pangramGreek
+                    .kerning(5.0)
+                    .language(.greek)
+            }),
+            ListItem(text: NSAttributedString {
+                "ABCDEF".tracking(-3)
+                Newline()
+                "ABCDEF".tracking(0)
+                Newline()
+                "ABCDEF".tracking(3)
+            }),
             ListItem(
-                text: "Eine wunderbare Heiterkeit hat meine ganze Seele eingenommen, gleich den süßen Frühlingsmorgen, die ich mit ganzem Herzen genieße. Ich bin allein und freue mich meines Lebens in dieser Gegend, die für solche Seelen geschaffen ist wie die meine. Ich bin so glücklich, mein Bester, so ganz in dem Gefühle von ruhigem Dasein versunken, daß meine Kunst darunter leidet."
+                text: L10n.dummyTextGerman
                     .hyphenationFactor(1.0)
                     .language(.german)
                     .lineBreakMode(.byWordWrapping)
@@ -62,14 +83,7 @@ public enum ListItemFactory {
                     .font(.systemFont(ofSize: 20))
             ),
             ListItem(text: NSAttributedString {
-                "The quick brown fox jumps over the lazy dog."
-                    .language(.english)
-                    .font(.systemFont(ofSize: 30))
-                    .stroke()
-                    .foregroundColor(.coreTeal)
-            }),
-            ListItem(text: NSAttributedString {
-                "The quick brown fox jumps over the lazy dog."
+                L10n.pangramEnglish
                     .writingDirection(.rightToLeftDirectionOverride)
                     .baseWritingDirection(.rightToLeft)
 
@@ -77,7 +91,7 @@ public enum ListItemFactory {
 
                 "—"
                     .newline()
-                    .text("نصٌّ حكيمٌ لهُ سِرٌّ قاطِعٌ وَذُو شَأنٍ عَظيمٍ مكتوبٌ على ثوبٍ أخضرَ ومُغلفٌ بجلدٍ أزرق")
+                    .text(L10n.pangramArabic)
                     .font(.systemFont(ofSize: 40))
                     .baseWritingDirection(.rightToLeft)
                     .language(.arabic)
@@ -90,7 +104,7 @@ public enum ListItemFactory {
 
                 Newline()
 
-                "דג סקרן שט בים מאוכזב ולפתע מצא חברה"
+                L10n.pangramHebrew
                     .baseWritingDirection(.rightToLeft)
             })
         ]
@@ -100,6 +114,14 @@ public enum ListItemFactory {
 // MARK: - Helpers
 
 private extension AColor {
+
+    static var coreBlue: AColor {
+        #if os(watchOS)
+        return AColor.blue
+        #else
+        return AColor.systemBlue
+        #endif
+    }
 
     static var coreRed: AColor {
         #if os(watchOS)
@@ -111,7 +133,7 @@ private extension AColor {
 
     static var coreTeal: AColor {
         #if os(watchOS)
-        return AColor.green
+        return AColor(red: 0.25098039215686274, green: 0.7843137254901961, blue: 0.8784313725490196, alpha: 1.0)
         #else
         return AColor.systemTeal
         #endif
