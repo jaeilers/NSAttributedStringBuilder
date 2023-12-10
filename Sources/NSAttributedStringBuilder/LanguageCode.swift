@@ -5,10 +5,11 @@ import Foundation
 public extension NSAttributedStringBuilder {
 
     /// The language code describes the code associated with a language.
+    ///
     /// The identifier conforms to [UTS #35](https://unicode.org/reports/tr35/).
     /// This language code provides the functionality of [Locale.LanguageCode](https://developer.apple.com/documentation/foundation/locale/languagecode)
     /// and `NSAttributedString.Key`
-    /// [languageIdentifier](https://developer.apple.com/documentation/foundation/nsattributedstring/key/3809904-languageidentifier)
+    /// [languageIdentifier](https://developer.apple.com/documentation/foundation/nsattributedstring/key/3809904-languageidentifier).
     enum LanguageCode: String, Codable, Hashable {
 
         case ainu = "ain"
