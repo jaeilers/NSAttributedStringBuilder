@@ -15,13 +15,13 @@ public extension AttributedStringBuilding {
         addingAttribute(.font, value: fontWithTrait(.italic))
     }
 
-    /// Modifies the font of the text to used fixed-width variant of the current font, if possible.
+    /// Modifies the font of the text to use a fixed-width variant of the current font, if possible.
     /// - Returns: A copy of the modified attributed string.
     func monospaced() -> NSAttributedString {
         addingAttribute(.font, value: fontWithTrait(.monoSpace))
     }
 
-    /// Adds the condensed trait to the current font, if possible.
+    /// Adds the condensed trait to the current font.
     /// - Returns: A copy of the modified attributed string.
     func condensed() -> NSAttributedString {
         addingAttribute(.font, value: fontWithTrait(.condensed))
