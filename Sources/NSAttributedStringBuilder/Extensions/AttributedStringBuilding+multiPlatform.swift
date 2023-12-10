@@ -44,7 +44,7 @@ public extension AttributedStringBuilding {
     ///
     /// The existing attributes are applied to the string.
     /// - Parameters:
-    ///   - newString: The string will be added to at the end.
+    ///   - newString: The string will be appended to the current string.
     /// - Returns: A copy of the modified attributed string.
     func text(_ newString: String) -> NSAttributedString {
         addingString(newString)
