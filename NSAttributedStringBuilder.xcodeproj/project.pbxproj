@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		895066CC2BBB0A1600DB4149 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 895066CB2BBB0A0C00DB4149 /* PrivacyInfo.xcprivacy */; };
 		897F9D9B2AEE4BF400709693 /* NSAttributedStringBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 897F9D922AEE4BF300709693 /* NSAttributedStringBuilder.framework */; };
 		897F9DB12AEE4F5E00709693 /* AttributedStringBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DB02AEE4F5E00709693 /* AttributedStringBuilding.swift */; };
 		897F9DBA2AEE4F6E00709693 /* WritingDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DB22AEE4F6E00709693 /* WritingDirection.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		895066CB2BBB0A0C00DB4149 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		896CC15E2B1E1A6A00FC2206 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		897F9D922AEE4BF300709693 /* NSAttributedStringBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NSAttributedStringBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		897F9D9A2AEE4BF400709693 /* NSAttributedStringBuilderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NSAttributedStringBuilderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,7 @@
 				897F9DB82AEE4F6E00709693 /* Spacing.swift */,
 				897F9DB62AEE4F6E00709693 /* SpellingState.swift */,
 				897F9DB22AEE4F6E00709693 /* WritingDirection.swift */,
+				895066CB2BBB0A0C00DB4149 /* PrivacyInfo.xcprivacy */,
 			);
 			path = NSAttributedStringBuilder;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				895066CC2BBB0A1600DB4149 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

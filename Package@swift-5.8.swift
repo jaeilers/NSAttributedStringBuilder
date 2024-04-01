@@ -19,7 +19,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "NSAttributedStringBuilder"
+            name: "NSAttributedStringBuilder",
+            resources: [
+                .copy("PrivacyInfo.xcprivacy")
+            ]
         ),
         .testTarget(
             name: "NSAttributedStringBuilderTests",

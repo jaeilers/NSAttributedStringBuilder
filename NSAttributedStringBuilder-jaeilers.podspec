@@ -22,6 +22,10 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "Sources/**/*.swift"
 
+  spec.resource_bundle = {
+    "NSAttributedStringBuilder-jaeilers" => ["Sources/NSAttributedStringBuilder/PrivacyInfo.xcprivacy"]
+  }
+
   spec.swift_version = "5.8"
 
 end
