@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2024-04-01
+
 ### Added
 
 - Added code coverage reports & badge for all platforms (iOS, macOS, tvOS & watchOS)
@@ -42,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Release
 
-[unreleased]: https://github.com/jaeilers/NSAttributedStringBuilder/compare/0.2.0...HEAD
+[unreleased]: https://github.com/jaeilers/NSAttributedStringBuilder/compare/0.2.1...HEAD
+[0.2.1]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.2.1
 [0.2.0]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.2.0
 [0.1.0]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.1.0
