@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added code coverage reports & badge for all platforms (iOS, macOS, tvOS & watchOS)
 - Added monospaced, condensed and tracking modifiers
 - Added Swift Package Index documentation
+- Added empty privacy manifest
 
 ## [0.2.0] - 2023-12-03
 
