@@ -9,7 +9,7 @@ public extension AttributedStringBuilding {
 
     /// Set the paragraph style of the attributed string.
     ///
-    /// Previously set paragraph options are overriden.
+    /// Previously set paragraph options are overridden.
     /// - Parameters:
     ///   - paragraphStyle: The paragraph style.
     /// - Returns: A copy of the modified attributed string.
@@ -22,7 +22,7 @@ public extension AttributedStringBuilding {
     ///   - alignment: The text alignment.
     /// - Returns: A copy of the modified attributed string.
     func alignment(_ alignment: NSTextAlignment) -> NSAttributedString {
-        addingParagraphStyle(alignment, keyPath: \.alignment)
+        addingAttributes(attributes().alignment(alignment))
     }
 
     /// Set first line head indent for the text.
@@ -30,7 +30,7 @@ public extension AttributedStringBuilding {
     ///   - indent: The first line head indent.
     /// - Returns: A copy of the modified attributed string.
     func firstLineHeadIndent(_ indent: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(indent, keyPath: \.firstLineHeadIndent)
+        addingAttributes(attributes().firstLineHeadIndent(indent))
     }
 
     /// Set the head indent for the text.
@@ -38,7 +38,7 @@ public extension AttributedStringBuilding {
     ///   - headIndent: The head indent of the attributed string.
     /// - Returns: A copy of the modified attributed string.
     func headIndent(_ headIndent: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(headIndent, keyPath: \.headIndent)
+        addingAttributes(attributes().headIndent(headIndent))
     }
 
     /// Set the tail indent for the text.
@@ -46,7 +46,7 @@ public extension AttributedStringBuilding {
     ///   - tailIndent: The tail indent of the attributed string.
     /// - Returns: A copy of the modified attributed string.
     func tailIndent(_ tailIndent: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(tailIndent, keyPath: \.tailIndent)
+        addingAttributes(attributes().tailIndent(tailIndent))
     }
 
     /// Set the line height multiple for the text.
@@ -54,15 +54,15 @@ public extension AttributedStringBuilding {
     ///   - height: The multiple line height as floating point number.
     /// - Returns: A copy of the modified attributed string.
     func lineHeightMultiple(_ height: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(height, keyPath: \.lineHeightMultiple)
+        addingAttributes(attributes().lineHeightMultiple(height))
     }
 
     /// Set the minimum line height for the text.
     /// - Parameters:
-    ///   - height: The minium line height as a floating point number.
+    ///   - height: The minimum line height as a floating point number.
     /// - Returns: A copy of the modified attributed string.
     func minimumLineHeight(_ height: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(height, keyPath: \.minimumLineHeight)
+        addingAttributes(attributes().minimumLineHeight(height))
     }
 
     /// Set the maximum line height for the text.
@@ -70,7 +70,7 @@ public extension AttributedStringBuilding {
     ///   - height: The maximum line height as a floating point number.
     /// - Returns: A copy of the modified attributed string.
     func maximumLineHeight(_ height: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(height, keyPath: \.maximumLineHeight)
+        addingAttributes(attributes().maximumLineHeight(height))
     }
 
     /// Set the line spacing for the text.
@@ -78,7 +78,7 @@ public extension AttributedStringBuilding {
     ///   - spacing: The spacing as a floating point number.
     /// - Returns: A copy of the modified attributed string.
     func lineSpacing(_ spacing: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(spacing, keyPath: \.lineSpacing)
+        addingAttributes(attributes().lineSpacing(spacing))
     }
 
     /// Set the paragraph spacing for the text.
@@ -86,7 +86,7 @@ public extension AttributedStringBuilding {
     ///   - spacing: The paragraph spacing as a floating point number.
     /// - Returns: A copy of the modified attributed string.
     func paragraphSpacing(_ spacing: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(spacing, keyPath: \.paragraphSpacing)
+        addingAttributes(attributes().paragraphSpacing(spacing))
     }
 
     /// Set the paragraph spacing between the current and the previous paragraph.
@@ -94,7 +94,7 @@ public extension AttributedStringBuilding {
     ///   - spacing: The spacing as a floating point number.
     /// - Returns: A copy of the modified attributed string.
     func paragraphSpacingBefore(_ spacing: CGFloat) -> NSAttributedString {
-        addingParagraphStyle(spacing, keyPath: \.paragraphSpacingBefore)
+        addingAttributes(attributes().paragraphSpacingBefore(spacing))
     }
 
     /// Set the line break mode for the text.
@@ -102,7 +102,7 @@ public extension AttributedStringBuilding {
     ///   - lineBreakMode: The line break mode to use for the text.
     /// - Returns: A copy of the modified attributed string.
     func lineBreakMode(_ lineBreakMode: NSLineBreakMode) -> NSAttributedString {
-        addingParagraphStyle(lineBreakMode, keyPath: \.lineBreakMode)
+        addingAttributes(attributes().lineBreakMode(lineBreakMode))
     }
 
     /// Set the line break strategy for the text.
@@ -110,7 +110,7 @@ public extension AttributedStringBuilding {
     ///   - strategy: The line break strategy of the text.
     /// - Returns: A copy of the modified attributed string.
     func lineBreakStrategy(_ strategy: NSParagraphStyle.LineBreakStrategy) -> NSAttributedString {
-        addingParagraphStyle(strategy, keyPath: \.lineBreakStrategy)
+        addingAttributes(attributes().lineBreakStrategy(strategy))
     }
 
     /// Set the paragraph's threshold for hyphenation.
@@ -118,7 +118,7 @@ public extension AttributedStringBuilding {
     ///   - factor: The hyphenation factor as a floating point number.
     /// - Returns: A copy of the modified attributed string.
     func hyphenationFactor(_ factor: Float) -> NSAttributedString {
-        addingParagraphStyle(factor, keyPath: \.hyphenationFactor)
+        addingAttributes(attributes().hyphenationFactor(factor))
     }
 
     /// Set the boolean value whether the paragraph style uses the system hyphenation settings.
@@ -127,7 +127,7 @@ public extension AttributedStringBuilding {
     /// - Returns: A copy of the modified attributed string.
     @available(iOS 15, macOS 13, watchOS 8, tvOS 15, *)
     func usesDefaultHyphenation(_ usesDefaultHyphenation: Bool) -> NSAttributedString {
-        addingParagraphStyle(usesDefaultHyphenation, keyPath: \.usesDefaultHyphenation)
+        addingAttributes(attributes().usesDefaultHyphenation(usesDefaultHyphenation))
     }
 
     /// Set the boolean value whether the system tightens character spacing before truncating text.
@@ -136,7 +136,7 @@ public extension AttributedStringBuilding {
     ///   before truncating text.
     /// - Returns: A copy of the modified attributed string.
     func allowsDefaultTighteningForTruncation(_ isAllowed: Bool) -> NSAttributedString {
-        addingParagraphStyle(isAllowed, keyPath: \.allowsDefaultTighteningForTruncation)
+        addingAttributes(attributes().allowsDefaultTighteningForTruncation(isAllowed))
     }
 
     /// Set the base writing direction of the text.
@@ -144,7 +144,7 @@ public extension AttributedStringBuilding {
     ///   - direction: The new writing direction of the text.
     /// - Returns: A copy of the modified attributed string.
     func baseWritingDirection(_ direction: NSWritingDirection) -> NSAttributedString {
-        addingParagraphStyle(direction, keyPath: \.baseWritingDirection)
+        addingAttributes(attributes().baseWritingDirection(direction))
     }
 
     /// Set the tab stops for the attributed string.
@@ -153,28 +153,6 @@ public extension AttributedStringBuilding {
     ///   - defaultInterval: The default interval of the text tab stops. Default is `0`.
     /// - Returns: A copy of the modified attributed string.
     func tabStops(_ tabStops: [NSTextTab], defaultInterval: CGFloat = 0) -> NSAttributedString {
-        let paragraphStyle = mutableParagraphStyle()
-        paragraphStyle.tabStops = tabStops
-        paragraphStyle.defaultTabInterval = defaultInterval
-        return addingAttribute(.paragraphStyle, value: paragraphStyle)
-    }
-}
-
-// MARK: - Internal Helpers
-
-extension AttributedStringBuilding {
-
-    /// Add or override an existing paragraph style attribute.
-    /// - Parameters:
-    ///   - value: The new value for the attribute.
-    ///   - keyPath: The keypath of the attribute in paragraph style.
-    /// - Returns: A copy of the modified attributed string.
-    func addingParagraphStyle<Value>(
-        _ value: Value,
-        keyPath: ReferenceWritableKeyPath<NSMutableParagraphStyle, Value>
-    ) -> NSAttributedString {
-        let paragraphStyle = mutableParagraphStyle()
-        paragraphStyle[keyPath: keyPath] = value
-        return addingAttribute(.paragraphStyle, value: paragraphStyle)
+        addingAttributes(attributes().tabStops(tabStops, defaultInterval: defaultInterval))
     }
 }
