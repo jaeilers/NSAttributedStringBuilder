@@ -6,7 +6,7 @@ import AppKit
 
 public extension Attributes {
 
-    /// Set the paragraph style..
+    /// Set the paragraph style.
     ///
     /// Previously set paragraph options are overridden.
     /// - Parameters:
