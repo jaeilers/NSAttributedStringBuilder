@@ -128,9 +128,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
     func testTighteningFactorForTruncationWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.hyphenationFactor = 2.0
         paragraphStyle.tighteningFactorForTruncation = 1.0
         let attributedString = NSAttributedString(string: string, attributes: [.paragraphStyle: paragraphStyle])
         let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.hyphenationFactor = 2.0
         newParagraphStyle.tighteningFactorForTruncation = 5.0
         let expected = NSAttributedString(string: string, attributes: [.paragraphStyle: newParagraphStyle])
 
@@ -405,6 +407,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headerLevel = 2
+        paragraphStyle.alignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: NSColor.red,
             .paragraphStyle: paragraphStyle
@@ -412,6 +415,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let attributedString = NSAttributedString(string: string, attributes: attributes)
         let newParagraphStyle = NSMutableParagraphStyle()
         newParagraphStyle.headerLevel = 1
+        newParagraphStyle.alignment = .center
         let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
