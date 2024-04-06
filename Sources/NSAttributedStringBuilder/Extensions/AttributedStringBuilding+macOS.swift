@@ -3,28 +3,15 @@ import AppKit
 
 public extension AttributedStringBuilding {
 
-    /// Adds the bold trait to the current font.
-    /// - Returns: A copy of the modified attributed string.
-    func bold() -> NSAttributedString {
-        addingAttribute(.font, value: fontWithTrait(.bold))
-    }
-
-    /// Adds the italic trait to the current font.
-    /// - Returns: A copy of the modified attributed string.
-    func italic() -> NSAttributedString {
-        addingAttribute(.font, value: fontWithTrait(.italic))
-    }
-
-    /// Modifies the font of the text to use a fixed-width variant of the current font, if possible.
-    /// - Returns: A copy of the modified attributed string.
-    func monospaced() -> NSAttributedString {
-        addingAttribute(.font, value: fontWithTrait(.monoSpace))
-    }
-
-    /// Adds the condensed trait to the current font.
-    /// - Returns: A copy of the modified attributed string.
-    func condensed() -> NSAttributedString {
-        addingAttribute(.font, value: fontWithTrait(.condensed))
+    /// Returns a copy of the current font with the added trait. (e.g. bold, italic etc.)
+    ///
+    /// The default font is the standard dynamic type font with style `body`.
+    /// - Parameters:
+    ///   - trait: The trait that will be added to the current font traits.
+    /// - Returns: A copy of the current font where the trait has been added.
+    func fontWithTrait(_ trait: NSFontDescriptor.SymbolicTraits) -> NSFont {
+        attributes()
+            .fontWithTrait(trait)
     }
 
     /// Adds an image at the end of the attributed string.
@@ -73,7 +60,7 @@ public extension AttributedStringBuilding {
     ///   - cursor: The cursor.
     /// - Returns: A copy of the modified attributed string.
     func cursor(_ cursor: NSCursor) -> NSAttributedString {
-        addingAttribute(.cursor, value: cursor)
+        addingAttributes(Attributes().cursor(cursor))
     }
 
     /// Set the threshold for using tightening as an alternative to truncation.
@@ -81,7 +68,7 @@ public extension AttributedStringBuilding {
     ///   - factor: The threshold as a floating point number.
     /// - Returns: A copy of the modified attributed string.
     func tighteningFactorForTruncation(_ factor: Float) -> NSAttributedString {
-        addingParagraphStyle(factor, keyPath: \.tighteningFactorForTruncation)
+        addingAttributes(attributes().tighteningFactorForTruncation(factor))
     }
 
     /// Set the spelling state for the attributed string.
@@ -89,7 +76,7 @@ public extension AttributedStringBuilding {
     ///   - state: The spelling state of the string.
     /// - Returns: A copy of the modified attributed string.
     func spellingState(_ state: NSAttributedStringBuilder.SpellingState) -> NSAttributedString {
-        addingAttribute(.spellingState, value: state.rawValue)
+        addingAttributes(Attributes().spellingState(state))
     }
 
     /// Set the superscript of the text.
@@ -97,7 +84,7 @@ public extension AttributedStringBuilding {
     ///   - value: The superscript value as an integer. Default is `1`.
     /// - Returns: A copy of the modified attributed string.
     func superscript(_ value: Int = 1) -> NSAttributedString {
-        addingAttribute(.superscript, value: NSNumber(value: value))
+        addingAttributes(Attributes().superscript(value))
     }
 
     /// Set the text alternatives for the attributed string.
@@ -106,8 +93,10 @@ public extension AttributedStringBuilding {
     ///   - alternativeStrings: The alternative strings.
     /// - Returns: A copy of the modified attributed string.
     func textAlternatives(primaryString: String, alternativeStrings: [String]) -> NSAttributedString {
-        let textAlternatives = NSTextAlternatives(primaryString: primaryString, alternativeStrings: alternativeStrings)
-        return addingAttribute(.textAlternatives, value: textAlternatives)
+        addingAttributes(
+            Attributes()
+                .textAlternatives(primaryString: primaryString, alternativeStrings: alternativeStrings)
+        )
     }
 
     /// Set the tool tip for the attributed string.
@@ -115,7 +104,7 @@ public extension AttributedStringBuilding {
     ///   - tip: The text to be displayed as tool tip.
     /// - Returns: A copy of the modified attributed string.
     func toolTip(_ tip: String) -> NSAttributedString {
-        addingAttribute(.toolTip, value: tip as NSString)
+        addingAttributes(Attributes().toolTip(tip))
     }
 
     /// The glyph info is assigned by the `NSLayoutManager` object.
@@ -129,15 +118,7 @@ public extension AttributedStringBuilding {
     ///   a default font will be set: `NSFont.preferredFont(forTextStyle: .body)`.
     /// - Returns: A copy of the modified attributed string.
     func glyphInfo(_ glyphInfo: NSGlyphInfo) -> NSAttributedString {
-        var newAttributes: Attributes = [
-            .glyphInfo: glyphInfo
-        ]
-
-        if (attribute(.font) as NSFont?) == nil {
-            newAttributes[.font] = NSFont.preferredFont(forTextStyle: .body)
-        }
-
-        return addingAttributes(newAttributes)
+        addingAttributes(attributes().glyphInfo(glyphInfo))
     }
 
     /// Set the index of the marked clause segment.
@@ -147,7 +128,7 @@ public extension AttributedStringBuilding {
     ///   - segmentIndex: The index of the marked clause segment.
     /// - Returns: A copy of the modified attributed string.
     func markedClauseSegment(_ segmentIndex: Int) -> NSAttributedString {
-        addingAttribute(.markedClauseSegment, value: NSNumber(value: segmentIndex))
+        addingAttributes(Attributes().markedClauseSegment(segmentIndex))
     }
 
     /// Set the paragraph’s header level for HTML generation.
@@ -156,7 +137,7 @@ public extension AttributedStringBuilding {
     ///   the value ranges from 1 to 6 depending on the header's level.
     /// - Returns: A copy of the modified attributed string.
     func headerLevel(_ headerLevel: Int) -> NSAttributedString {
-        addingParagraphStyle(headerLevel, keyPath: \.headerLevel)
+        addingAttributes(attributes().headerLevel(headerLevel))
     }
 }
 #endif

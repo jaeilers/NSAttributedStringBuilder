@@ -8,11 +8,11 @@ public extension AttributedStringBuilding {
 
     /// Get the attribute of the last character.
     /// - Parameters:
-    ///   - name: The name of the attribute.
+    ///   - key: The key of the attribute.
     /// - Returns: The current attribute for a given key.
-    func attribute<T>(_ name: NSAttributedString.Key) -> T? {
-        let attributes = attributes()
-        return attributes[name] as? T
+    func attribute<T>(_ key: NSAttributedString.Key) -> T? {
+        attributes()
+            .attribute(key)
     }
 
     /// Get the current attributed string.
@@ -30,6 +30,13 @@ public extension AttributedStringBuilding {
     /// - Returns: A copy of the modified attributed string.
     func addingAttribute(_ name: NSAttributedString.Key, value: Any) -> NSAttributedString {
         addingAttributes([name: value])
+    }
+
+    /// Get the mutable paragraph style of the last character. If none exist, a new paragraph style is created.
+    /// - Returns: A copy of the current paragraph style.
+    func mutableParagraphStyle() -> NSMutableParagraphStyle {
+        attributes()
+            .mutableParagraphStyle()
     }
 
     /// Appends a string to the existing attributed string. Existing attributes are added to the appended string.
@@ -55,7 +62,7 @@ public extension AttributedStringBuilding {
     ///   - kerning: The text kerning. A kerning of 0 means it is disabled.
     /// - Returns: A copy of the modified attributed string.
     func kerning(_ kerning: Double) -> NSAttributedString {
-        addingAttribute(.kern, value: NSNumber(value: kerning))
+        addingAttributes(Attributes().kerning(kerning))
     }
 
     /// Adds a spacing at the end of the attributed string.
@@ -100,7 +107,7 @@ public extension AttributedStringBuilding {
     ///   - url: The url for the link attribute.
     /// - Returns: A copy of the modified attributed string.
     func link(_ url: URL) -> NSAttributedString {
-        addingAttribute(.link, value: url as NSURL)
+        addingAttributes(Attributes().link(url))
     }
 
     /// Set the baseline offset for the attributed string.
@@ -108,7 +115,7 @@ public extension AttributedStringBuilding {
     ///   - offset: The baseline offset.
     /// - Returns: A copy of the modified attributed string.
     func baselineOffset(_ offset: Double) -> NSAttributedString {
-        addingAttribute(.baselineOffset, value: NSNumber(value: offset))
+        addingAttributes(Attributes().baselineOffset(offset))
     }
 
     /// Set the ligature option for the attributed string.
@@ -116,7 +123,7 @@ public extension AttributedStringBuilding {
     ///   - option: The ligature option. The font must support ligatures.
     /// - Returns: A copy of the modified attributed string.
     func ligature(_ option: Ligature) -> NSAttributedString {
-        addingAttribute(.ligature, value: option.rawValue)
+        addingAttributes(Attributes().ligature(option))
     }
 
     /// Set the text effect for attributed string.
@@ -124,7 +131,7 @@ public extension AttributedStringBuilding {
     ///   - style: The text effect style.
     /// - Returns: A copy of the modified attributed string.
     func textEffect(_ style: NSAttributedString.TextEffectStyle) -> NSAttributedString {
-        addingAttribute(.textEffect, value: style as NSString)
+        addingAttributes(Attributes().textEffect(style))
     }
 
     /// Set the writing direction for the attributed string.
@@ -132,7 +139,7 @@ public extension AttributedStringBuilding {
     ///   - direction: The direction options for string. See `WritingDirection` for options.
     /// - Returns: A copy of the modified attributed string.
     func writingDirection(_ direction: NSAttributedStringBuilder.WritingDirection) -> NSAttributedString {
-        addingAttribute(.writingDirection, value: [direction.rawValue])
+        addingAttributes(Attributes().writingDirection(direction))
     }
 
     /// Set the language of the text.
@@ -144,7 +151,7 @@ public extension AttributedStringBuilding {
     ///   - languageCode: The language code of the language.
     /// - Returns: A copy of the modified attributed string.
     func language(_ languageCode: NSAttributedStringBuilder.LanguageCode) -> NSAttributedString {
-        addingAttribute(NSAttributedString.Key(kCTLanguageAttributeName as String), value: languageCode.rawValue)
+        addingAttributes(Attributes().language(languageCode))
     }
 
     /// Set the language identifier of the text.
@@ -155,7 +162,7 @@ public extension AttributedStringBuilding {
     /// - Returns: A copy of the modified attributed string.
     @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
     func languageIdentifier(_ languageCode: Locale.LanguageCode) -> NSAttributedString {
-        addingAttribute(.languageIdentifier, value: languageCode.identifier)
+        addingAttributes(Attributes().languageIdentifier(languageCode))
     }
 
     /// Set the tracking of the text.
@@ -168,17 +175,20 @@ public extension AttributedStringBuilding {
     /// - Returns: A copy of the modified attributed string.
     @available(iOS 14, tvOS 14, watchOS 7, *)
     func tracking(_ tracking: Double) -> NSAttributedString {
-        addingAttribute(.tracking, value: NSNumber(value: tracking))
+        addingAttributes(Attributes().tracking(tracking))
     }
+}
 
-    // MARK: - Platform dependent (typealias)
+// MARK: - Platform dependent (typealias)
+
+public extension AttributedStringBuilding {
 
     /// Set the font of the attributed string.
     /// - Parameters:
     ///   - font: The platform dependent font.
     /// - Returns: A copy of the modified attributed string.
     func font(_ font: AFont) -> NSAttributedString {
-        addingAttribute(.font, value: font)
+        addingAttributes(Attributes().font(font))
     }
 
     /// Set the foreground color of the text and images.
@@ -186,7 +196,7 @@ public extension AttributedStringBuilding {
     ///   - color: The new color of the text and images.
     /// - Returns: A copy of the modified attributed string.
     func foregroundColor(_ color: AColor) -> NSAttributedString {
-        addingAttribute(.foregroundColor, value: color)
+        addingAttributes(Attributes().foregroundColor(color))
     }
 
     /// Set the background color of the attributed string.
@@ -194,7 +204,7 @@ public extension AttributedStringBuilding {
     ///   - color: The new background color.
     /// - Returns: A copy of the modified attributed string.
     func backgroundColor(_ color: AColor) -> NSAttributedString {
-        addingAttribute(.backgroundColor, value: color)
+        addingAttributes(Attributes().backgroundColor(color))
     }
 
     /// Set the underline style of the text.
@@ -203,13 +213,8 @@ public extension AttributedStringBuilding {
     ///   - color: The color of the underline. The `foregroundColor` is used when no color is set. Default is `nil`.
     /// - Returns: A copy of the modified attributed string.
     func underline(_ style: NSUnderlineStyle = .single, color: AColor? = nil) -> NSAttributedString {
-        var newAttributes: Attributes = [
-            .underlineStyle: NSNumber(value: style.rawValue)
-        ]
-
-        color.map {
-            newAttributes[.underlineColor] = $0
-        }
+        let newAttributes = attributes()
+            .underline(style, color: color)
 
         return addingAttributes(newAttributes)
     }
@@ -221,13 +226,8 @@ public extension AttributedStringBuilding {
     ///   Default is `nil`.
     /// - Returns: A copy of the modified attributed string.
     func strikethrough(_ style: NSUnderlineStyle = .single, color: AColor? = nil) -> NSAttributedString {
-        var newAttributes: Attributes = [
-            .strikethroughStyle: NSNumber(value: style.rawValue)
-        ]
-
-        color.map {
-            newAttributes[.strikethroughColor] = $0
-        }
+        let newAttributes = attributes()
+            .strikethrough(style, color: color)
 
         return addingAttributes(newAttributes)
     }
@@ -236,21 +236,17 @@ public extension AttributedStringBuilding {
     /// - Parameters:
     ///   - offset: The offset of the shadow. Default is `width: 1` and `height: 1`.
     ///   - blurRadius: The blur radius of the shadow. Default is `5.0`.
-    ///   - color: The color of the shadow. Default is `black` with an alpha value of 1/3.
+    ///   - color: The color of the shadow. Default is `nil` which results in `black` with an alpha value of 1/3.
     /// - Returns: A copy of the modified attributed string.
     func shadow(
         offset: CGSize = .init(width: 1, height: 1),
         blurRadius: Double = 5.0,
         color: AColor? = nil
     ) -> NSAttributedString {
-        let shadow: NSShadow = attribute(.shadow) ?? NSShadow()
-        shadow.shadowOffset = offset
-        shadow.shadowBlurRadius = CGFloat(blurRadius)
-        color.map {
-            shadow.shadowColor = $0
-        }
+        let newAttributes = attributes()
+            .shadow(offset: offset, blurRadius: blurRadius, color: color)
 
-        return addingAttribute(.shadow, value: shadow)
+        return addingAttributes(newAttributes)
     }
 
     /// Set the stroke around the glyphs of the text.
@@ -263,17 +259,43 @@ public extension AttributedStringBuilding {
     ///   - color: The color of the stroke. When no color is set, the `foregroundColor` is used. Default is `nil`.
     /// - Returns: A copy of the modified attributed string.
     func stroke(width: Double = 2.0, color: AColor? = nil) -> NSAttributedString {
-        var newAttributes: Attributes = [
-            .strokeWidth: NSNumber(value: width)
-        ]
-
-        color.map {
-            newAttributes[.strokeColor] = $0
-        }
+        let newAttributes = attributes()
+            .stroke(width: width, color: color)
 
         return addingAttributes(newAttributes)
     }
 }
+
+// MARK: - UIKit/AppKit
+
+#if canImport(AppKit) || canImport(UIKit)
+public extension AttributedStringBuilding {
+
+    /// Adds the bold trait to the current font.
+    /// - Returns: A copy of the modified attributed string.
+    func bold() -> NSAttributedString {
+        addingAttributes(attributes().bold())
+    }
+
+    /// Adds the italic trait to the current font.
+    /// - Returns: A copy of the modified attributed string.
+    func italic() -> NSAttributedString {
+        addingAttributes(attributes().italic())
+    }
+
+    /// Modifies the font of the text to use a fixed-width variant of the current font, if possible.
+    /// - Returns: A copy of the modified attributed string.
+    func monospaced() -> NSAttributedString {
+        addingAttributes(attributes().monospaced())
+    }
+
+    /// Adds the condensed trait to the current font.
+    /// - Returns: A copy of the modified attributed string.
+    func condensed() -> NSAttributedString {
+        addingAttributes(attributes().condensed())
+    }
+}
+#endif
 
 // MARK: - All platforms but watchOS
 
@@ -285,7 +307,7 @@ public extension AttributedStringBuilding {
     ///   - attachment: The text attachment that will be added to the attributed string.
     /// - Returns: A copy of the modified attributed string.
     func attachment(_ attachment: NSTextAttachment) -> NSAttributedString {
-        addingAttribute(.attachment, value: attachment)
+        addingAttributes(Attributes().attachment(attachment))
     }
 }
 #endif

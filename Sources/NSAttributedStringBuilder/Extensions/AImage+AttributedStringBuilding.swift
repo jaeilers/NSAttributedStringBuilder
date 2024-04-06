@@ -11,10 +11,6 @@ extension AImage: AttributedStringBuilding {
         [:]
     }
 
-    public func mutableParagraphStyle() -> NSMutableParagraphStyle {
-        NSMutableParagraphStyle()
-    }
-
     public func mutableAttributedString() -> NSMutableAttributedString {
         NSMutableAttributedString(attributedString: .init().image(self))
     }
@@ -30,21 +26,5 @@ extension AImage: AttributedStringBuilding {
             .image(self)
             .addingAttributedString(newString)
     }
-
-    #if canImport(UIKit)
-    public func fontWithTrait(_ trait: UIFontDescriptor.SymbolicTraits) -> UIFont {
-        NSAttributedString()
-            .image(self)
-            .fontWithTrait(trait)
-    }
-    #endif
-
-    #if canImport(AppKit)
-    public func fontWithTrait(_ trait: NSFontDescriptor.SymbolicTraits) -> NSFont {
-        NSAttributedString()
-            .image(self)
-            .fontWithTrait(trait)
-    }
-    #endif
 }
 #endif

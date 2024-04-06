@@ -16,14 +16,6 @@ extension NSAttributedString: AttributedStringBuilding {
             .filter { $0.key != .attachment }
     }
 
-    public func mutableParagraphStyle() -> NSMutableParagraphStyle {
-        guard let paragraphStyle: NSParagraphStyle = attribute(.paragraphStyle) else {
-            return NSMutableParagraphStyle()
-        }
-
-        return paragraphStyle.mutableCopy() as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
-    }
-
     public func mutableAttributedString() -> NSMutableAttributedString {
         mutableCopy() as? NSMutableAttributedString ?? NSMutableAttributedString()
     }
@@ -50,27 +42,4 @@ extension NSAttributedString: AttributedStringBuilding {
 
         return current
     }
-
-    #if canImport(UIKit)
-    public func fontWithTrait(_ trait: UIFontDescriptor.SymbolicTraits) -> UIFont {
-        let font: UIFont = attribute(.font) ?? UIFont.preferredFont(forTextStyle: .body)
-
-        guard let descriptor = font.fontDescriptor.withSymbolicTraits(
-            [trait, font.fontDescriptor.symbolicTraits]
-        ) else {
-            return font
-        }
-
-        return UIFont(descriptor: descriptor, size: 0.0)
-    }
-    #endif
-
-    #if canImport(AppKit)
-    public func fontWithTrait(_ trait: NSFontDescriptor.SymbolicTraits) -> NSFont {
-        let font: NSFont = attribute(.font) ?? NSFont.preferredFont(forTextStyle: .body)
-        let descriptor = font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])
-
-        return NSFont(descriptor: descriptor, size: 0.0) ?? font
-    }
-    #endif
 }

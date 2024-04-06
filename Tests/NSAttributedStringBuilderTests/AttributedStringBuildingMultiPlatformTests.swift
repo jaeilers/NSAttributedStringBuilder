@@ -638,13 +638,18 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testAlignmentWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 2.0
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .body)
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .natural
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.alignment = .natural
+        newParagraphStyle.lineSpacing = 2.0
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -669,13 +674,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testFirstLineHeadIndentWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .headline)
+            .font: AFont.preferredFont(forTextStyle: .headline),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.firstLineHeadIndent = 123.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.firstLineHeadIndent = 123.0
+        newParagraphStyle.alignment = .center
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -700,13 +709,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testHeadIndentWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .body)
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.headIndent = 42.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.headIndent = 42.0
+        newParagraphStyle.lineBreakMode = .byWordWrapping
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -731,13 +744,16 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testTailIndentWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .body)
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.tailIndent = 13.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.tailIndent = 13.0
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -762,13 +778,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testLineHeightMultipleWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .body)
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.lineHeightMultiple = 1.0
+        newParagraphStyle.alignment = .center
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -793,13 +813,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testMaximumLineHeightWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 20.0
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.maximumLineHeight = 5.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.maximumLineHeight = 5.0
+        newParagraphStyle.lineSpacing = 20.0
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -824,13 +848,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testMinimumLineHeightWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 8.0
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.minimumLineHeight = 1.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.minimumLineHeight = 1.0
+        newParagraphStyle.lineSpacing = 8.0
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -855,13 +883,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testLineSpacingWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .right
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.lineSpacing = 5.0
+        newParagraphStyle.alignment = .right
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -886,13 +918,16 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testParagraphSpacingWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.paragraphSpacing = 16.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.paragraphSpacing = 16.0
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -917,13 +952,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testParagraphSpacingBeforeWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.paragraphSpacingBefore = 3.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.paragraphSpacingBefore = 3.0
+        newParagraphStyle.alignment = .natural
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -948,13 +987,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testLineBreakModeWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 2.0
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineBreakMode = .byTruncatingTail
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.lineBreakMode = .byTruncatingTail
+        newParagraphStyle.lineSpacing = 2.0
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -979,13 +1022,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testLineBreakStrategyWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.hyphenationFactor = 2.0
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineBreakStrategy = .pushOut
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.lineBreakStrategy = .pushOut
+        newParagraphStyle.hyphenationFactor = 2.0
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -1010,13 +1057,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testHyphenationFactorWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.hyphenationFactor = 0.5
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.hyphenationFactor = 0.5
+        newParagraphStyle.alignment = .center
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -1042,13 +1093,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
     @available(iOS 15, macOS 13, watchOS 8, tvOS 15, *)
     func testUsesDefaultHyphenationWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.usesDefaultHyphenation = true
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.usesDefaultHyphenation = true
+        newParagraphStyle.alignment = .center
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -1074,13 +1129,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testAllowsDefaultTighteningForTruncationWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.allowsDefaultTighteningForTruncation = true
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.allowsDefaultTighteningForTruncation = true
+        newParagraphStyle.alignment = .center
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -1105,13 +1164,17 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testBaseWritingDirectionWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.baseWritingDirection = .leftToRight
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.baseWritingDirection = .leftToRight
+        newParagraphStyle.alignment = .center
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When
@@ -1136,14 +1199,18 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testTabStopsWithAttributedString() {
         // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: AFont.preferredFont(forTextStyle: .footnote)
+            .font: AFont.preferredFont(forTextStyle: .footnote),
+            .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 0)]
-        paragraphStyle.defaultTabInterval = 3.0
-        let newAttributes = attributes.merging([.paragraphStyle: paragraphStyle], uniquingKeysWith: { _, new in new })
+        let newParagraphStyle = NSMutableParagraphStyle()
+        newParagraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 0)]
+        newParagraphStyle.defaultTabInterval = 3.0
+        newParagraphStyle.alignment = .center
+        let newAttributes = attributes.merging([.paragraphStyle: newParagraphStyle], uniquingKeysWith: { _, new in new })
         let expected = NSAttributedString(string: string, attributes: newAttributes)
 
         // When

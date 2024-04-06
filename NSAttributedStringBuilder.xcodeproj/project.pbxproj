@@ -34,6 +34,13 @@
 		897F9DF02AEE504800709693 /* String+unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DE22AEE4FE700709693 /* String+unique.swift */; };
 		897F9DF12AEE504A00709693 /* NSAttributedStringAppendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DD22AEE4F9C00709693 /* NSAttributedStringAppendTests.swift */; };
 		897F9DF22AEE505000709693 /* NSAttributedStringConvenienceMethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DD02AEE4F9C00709693 /* NSAttributedStringConvenienceMethodsTests.swift */; };
+		898463582BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898463572BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift */; };
+		89A931BA2BC013A7002A1E67 /* Attributes+multiPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931B92BC013A7002A1E67 /* Attributes+multiPlatform.swift */; };
+		89A931BC2BC01478002A1E67 /* Attributes+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931BB2BC01478002A1E67 /* Attributes+macOS.swift */; };
+		89A931BE2BC0149E002A1E67 /* Attributes+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931BD2BC0149E002A1E67 /* Attributes+iOS.swift */; };
+		89A931C02BC01F97002A1E67 /* AttributesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931BF2BC01F97002A1E67 /* AttributesTests.swift */; };
+		89A931C22BC04C81002A1E67 /* AttributesiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931C12BC04C81002A1E67 /* AttributesiOSTests.swift */; };
+		89A931C42BC04D84002A1E67 /* AttributesMacOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931C32BC04D84002A1E67 /* AttributesMacOSTests.swift */; };
 		89BB67752AFE37D400C32777 /* LanguageCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB67742AFE37D400C32777 /* LanguageCode.swift */; };
 		89BB67772AFE3F3800C32777 /* LanguageCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB67762AFE3F3800C32777 /* LanguageCodeTests.swift */; };
 		89BB677A2AFFD73700C32777 /* AttributedStringBuilding+multiPlatformParagraphStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB67792AFFD73600C32777 /* AttributedStringBuilding+multiPlatformParagraphStyles.swift */; };
@@ -85,6 +92,13 @@
 		897F9DF72AEE525100709693 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		897F9DF82AEE526400709693 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		897F9DF92AEE526F00709693 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		898463572BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributes+multiPlatformParagraphStyles.swift"; sourceTree = "<group>"; };
+		89A931B92BC013A7002A1E67 /* Attributes+multiPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributes+multiPlatform.swift"; sourceTree = "<group>"; };
+		89A931BB2BC01478002A1E67 /* Attributes+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributes+macOS.swift"; sourceTree = "<group>"; };
+		89A931BD2BC0149E002A1E67 /* Attributes+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributes+iOS.swift"; sourceTree = "<group>"; };
+		89A931BF2BC01F97002A1E67 /* AttributesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesTests.swift; sourceTree = "<group>"; };
+		89A931C12BC04C81002A1E67 /* AttributesiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesiOSTests.swift; sourceTree = "<group>"; };
+		89A931C32BC04D84002A1E67 /* AttributesMacOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesMacOSTests.swift; sourceTree = "<group>"; };
 		89BB67742AFE37D400C32777 /* LanguageCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCode.swift; sourceTree = "<group>"; };
 		89BB67762AFE3F3800C32777 /* LanguageCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCodeTests.swift; sourceTree = "<group>"; };
 		89BB67792AFFD73600C32777 /* AttributedStringBuilding+multiPlatformParagraphStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedStringBuilding+multiPlatformParagraphStyles.swift"; sourceTree = "<group>"; };
@@ -173,6 +187,9 @@
 			isa = PBXGroup;
 			children = (
 				897F9DE02AEE4FE700709693 /* Helpers */,
+				89A931BF2BC01F97002A1E67 /* AttributesTests.swift */,
+				89A931C12BC04C81002A1E67 /* AttributesiOSTests.swift */,
+				89A931C32BC04D84002A1E67 /* AttributesMacOSTests.swift */,
 				897F9DD52AEE4F9C00709693 /* AttributedStringBuildingCoreTests.swift */,
 				897F9DD42AEE4F9C00709693 /* AttributedStringBuildingiOSTests.swift */,
 				897F9DD32AEE4F9C00709693 /* AttributedStringBuildingMacOSTests.swift */,
@@ -189,6 +206,10 @@
 			isa = PBXGroup;
 			children = (
 				897F9DC52AEE4F8100709693 /* AImage+AttributedStringBuilding.swift */,
+				89A931B92BC013A7002A1E67 /* Attributes+multiPlatform.swift */,
+				898463572BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift */,
+				89A931BB2BC01478002A1E67 /* Attributes+macOS.swift */,
+				89A931BD2BC0149E002A1E67 /* Attributes+iOS.swift */,
 				897F9DC42AEE4F8100709693 /* AttributedStringBuilding+iOS.swift */,
 				897F9DC82AEE4F8100709693 /* AttributedStringBuilding+macOS.swift */,
 				897F9DC62AEE4F8100709693 /* AttributedStringBuilding+multiPlatform.swift */,
@@ -369,6 +390,8 @@
 				897F9DC92AEE4F8100709693 /* NSAttributedString+append.swift in Sources */,
 				897F9DCB2AEE4F8100709693 /* AttributedStringBuilding+iOS.swift in Sources */,
 				897F9DBE2AEE4F6E00709693 /* SpellingState.swift in Sources */,
+				89A931BE2BC0149E002A1E67 /* Attributes+iOS.swift in Sources */,
+				898463582BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift in Sources */,
 				897F9DBC2AEE4F6E00709693 /* Newline.swift in Sources */,
 				897F9DC02AEE4F6E00709693 /* Spacing.swift in Sources */,
 				897F9DBF2AEE4F6E00709693 /* NSAttributedStringBuilder.swift in Sources */,
@@ -376,8 +399,10 @@
 				897F9DCF2AEE4F8100709693 /* AttributedStringBuilding+macOS.swift in Sources */,
 				897F9DBB2AEE4F6E00709693 /* Ligature.swift in Sources */,
 				897F9DC12AEE4F6E00709693 /* Space.swift in Sources */,
+				89A931BA2BC013A7002A1E67 /* Attributes+multiPlatform.swift in Sources */,
 				897F9DCA2AEE4F8100709693 /* NSAttributedString+AttributedStringBuilding.swift in Sources */,
 				897F9DCD2AEE4F8100709693 /* AttributedStringBuilding+multiPlatform.swift in Sources */,
+				89A931BC2BC01478002A1E67 /* Attributes+macOS.swift in Sources */,
 				897F9DCE2AEE4F8100709693 /* String+AttributedStringBuilding.swift in Sources */,
 				89BB67752AFE37D400C32777 /* LanguageCode.swift in Sources */,
 			);
@@ -387,11 +412,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A931C22BC04C81002A1E67 /* AttributesiOSTests.swift in Sources */,
 				897F9DEA2AEE503700709693 /* NSAttributedStringBuilderTests.swift in Sources */,
 				897F9DF12AEE504A00709693 /* NSAttributedStringAppendTests.swift in Sources */,
+				89A931C42BC04D84002A1E67 /* AttributesMacOSTests.swift in Sources */,
 				897F9DEF2AEE504500709693 /* AImageExtensions.swift in Sources */,
 				897F9DF22AEE505000709693 /* NSAttributedStringConvenienceMethodsTests.swift in Sources */,
 				897F9DEB2AEE503C00709693 /* AttributedStringBuildingCoreTests.swift in Sources */,
+				89A931C02BC01F97002A1E67 /* AttributesTests.swift in Sources */,
 				897F9DEE2AEE504300709693 /* AttributedStringBuildingMultiPlatformTests.swift in Sources */,
 				89BB67772AFE3F3800C32777 /* LanguageCodeTests.swift in Sources */,
 				897F9DF02AEE504800709693 /* String+unique.swift in Sources */,

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added Attributes extensions to create attributes separately from attributed strings
+
 ### Changed
 
 - Updated CI dependencies and Xcode project

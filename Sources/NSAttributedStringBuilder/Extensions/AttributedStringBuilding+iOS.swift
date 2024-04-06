@@ -3,28 +3,15 @@ import UIKit
 
 public extension AttributedStringBuilding {
 
-    /// Adds the bold trait to the current font.
-    /// - Returns: A copy of the modified attributed string.
-    func bold() -> NSAttributedString {
-        addingAttribute(.font, value: fontWithTrait(.traitBold))
-    }
-
-    /// Adds the italic trait to the current font.
-    /// - Returns: A copy of the modified attributed string.
-    func italic() -> NSAttributedString {
-        addingAttribute(.font, value: fontWithTrait(.traitItalic))
-    }
-
-    /// Modifies the font of the text to use a fixed-width variant of the current font, if possible.
-    /// - Returns: A copy of the modified attributed string.
-    func monospaced() -> NSAttributedString {
-        addingAttribute(.font, value: fontWithTrait(.traitMonoSpace))
-    }
-
-    /// Adds the condensed trait to the current font.
-    /// - Returns: A copy of the modified attributed string.
-    func condensed() -> NSAttributedString {
-        addingAttribute(.font, value: fontWithTrait(.traitCondensed))
+    /// Returns a copy of the current font with the added trait. (e.g. bold, italic etc.)
+    ///
+    /// The default font is the standard dynamic type font with style `body`.
+    /// - Parameters:
+    ///   - trait: The trait that will be added to the current font traits.
+    /// - Returns: A copy of the current font where the trait has been added.
+    func fontWithTrait(_ trait: UIFontDescriptor.SymbolicTraits) -> UIFont {
+        attributes()
+            .fontWithTrait(trait)
     }
 }
 #endif
