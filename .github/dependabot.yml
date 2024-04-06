@@ -12,6 +12,11 @@ updates:
     schedule:
       interval: "weekly"
 
+   - package-ecosystem: "github-actions"
+    directory: "/.github/actions/code-coverage"
+    schedule:
+      interval: "weekly"
+
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
