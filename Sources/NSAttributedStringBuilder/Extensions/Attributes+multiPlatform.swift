@@ -201,14 +201,15 @@ public extension Attributes {
         blurRadius: Double = 5.0,
         color: AColor? = nil
     ) -> Attributes {
-        let shadow: NSShadow = attribute(.shadow) ?? NSShadow()
-        shadow.shadowOffset = offset
-        shadow.shadowBlurRadius = CGFloat(blurRadius)
+        let shadow: NSShadow? = attribute(.shadow)
+        let shadowCopy = (shadow?.copy() as? NSShadow) ?? NSShadow()
+        shadowCopy.shadowOffset = offset
+        shadowCopy.shadowBlurRadius = CGFloat(blurRadius)
         color.map {
-            shadow.shadowColor = $0
+            shadowCopy.shadowColor = $0
         }
 
-        return addingAttribute(.shadow, value: shadow)
+        return addingAttribute(.shadow, value: shadowCopy)
     }
 
     /// Set the stroke around the glyphs of the text.

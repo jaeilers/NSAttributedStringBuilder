@@ -561,6 +561,38 @@ final class AttributesTests: XCTestCase {
         XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
     }
 
+    func testShadowIsCopiedWhenAttributesAreCopied() {
+        // Given
+        let shadow1 = NSShadow()
+        shadow1.shadowOffset = CGSize(width: 1, height: 1)
+        shadow1.shadowBlurRadius = 5.0
+
+        let shadow2 = NSShadow()
+        shadow2.shadowOffset = .init(width: 3, height: 3)
+        shadow2.shadowBlurRadius = 2.0
+        shadow2.shadowColor = AColor.yellow
+
+        let expected1: Attributes = [
+            .shadow: shadow1
+        ]
+
+        let expected2: Attributes = [
+            .shadow: shadow2
+        ]
+
+        // When
+        let attributes1 = Attributes()
+            .shadow()
+
+        let attributes2 = attributes1
+            .shadow(offset: .init(width: 3, height: 3), blurRadius: 2.0, color: .yellow)
+
+        // Then
+        XCTAssertFalse(NSDictionary(dictionary: attributes1).isEqual(to: attributes2))
+        XCTAssertTrue(NSDictionary(dictionary: attributes1).isEqual(to: expected1))
+        XCTAssertTrue(NSDictionary(dictionary: attributes2).isEqual(to: expected2))
+    }
+
     func testStroke() {
         // Given
         let attributes: Attributes = [
@@ -615,6 +647,60 @@ final class AttributesTests: XCTestCase {
         XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
     }
 
+    func testParagraphStyle() {
+        // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .right
+        paragraphStyle.hyphenationFactor = 3.0
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.paragraphSpacing = 2.0
+
+        let expected: Attributes = [
+            .paragraphStyle: paragraphStyle
+        ]
+
+        // When
+        let result = Attributes().paragraphStyle(paragraphStyle)
+
+        // Then
+        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+    }
+
+    func testParagraphStylesAreCopiedWhenAttributesAreCopied() {
+        // Given
+        let paragraphStyle1 = NSMutableParagraphStyle()
+        paragraphStyle1.alignment = .center
+
+        let paragraphStyle2 = NSMutableParagraphStyle()
+        paragraphStyle2.alignment = .center
+        paragraphStyle2.hyphenationFactor = 2.0
+        paragraphStyle2.lineBreakMode = .byCharWrapping
+
+        let expected1: Attributes = [
+            .paragraphStyle: paragraphStyle1
+        ]
+
+        let expected2: Attributes = [
+            .paragraphStyle: paragraphStyle2
+        ]
+
+        // When
+        let attributes1 = Attributes()
+            .alignment(.center)
+
+        let attributes2 = attributes1
+            .hyphenationFactor(2.0)
+            .lineBreakMode(.byCharWrapping)
+
+        // Then
+        XCTAssertFalse(NSDictionary(dictionary: attributes1).isEqual(to: attributes2))
+        XCTAssertTrue(NSDictionary(dictionary: attributes1).isEqual(to: expected1))
+        XCTAssertTrue(NSDictionary(dictionary: attributes2).isEqual(to: expected2))
+    }
+
+    // MARK: - All but watchOS
+
+    #if !os(watchOS)
     func testAttachment() throws {
         // Given
         let image = try AImage.pencil()
@@ -635,6 +721,7 @@ final class AttributesTests: XCTestCase {
         XCTAssertEqual(resultAttachment.bounds, bounds)
         XCTAssertEqual(result[.foregroundColor] as? AColor, AColor.brown)
     }
+    #endif
 
     // MARK: - UIKit/AppKit
 
@@ -678,25 +765,6 @@ final class AttributesTests: XCTestCase {
 
         // Then
         XCTAssertEqual(result, expected)
-    }
-
-    func testParagraphStyle() {
-        // Given
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .right
-        paragraphStyle.hyphenationFactor = 3.0
-        paragraphStyle.lineBreakMode = .byWordWrapping
-        paragraphStyle.paragraphSpacing = 2.0
-
-        let expected: Attributes = [
-            .paragraphStyle: paragraphStyle
-        ]
-
-        // When
-        let result = Attributes().paragraphStyle(paragraphStyle)
-
-        // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
     }
 
     func testAttributeComposition() throws {
