@@ -28,10 +28,4 @@ fi
 bundle config set --local path 'vendor/bundle'
 bundle install
 
-declare -a PLATFORMS=("ruby" "arm64-darwin-22" "x86_64-darwin-22")
-
-for platform in "${PLATFORMS[@]}"; do
-  bundle lock --add-platform "$platform"
-done
-
 popd
