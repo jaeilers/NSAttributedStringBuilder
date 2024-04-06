@@ -234,87 +234,6 @@ public extension Attributes {
     }
 }
 
-// MARK: - Paragraph Styles
-
-public extension Attributes {
-
-    func paragraphStyle(_ paragraphStyle: NSParagraphStyle) -> Attributes {
-        addingAttribute(.paragraphStyle, value: paragraphStyle)
-    }
-
-    func alignment(_ alignment: NSTextAlignment) -> Attributes {
-        addingParagraphStyle(alignment, keyPath: \.alignment)
-    }
-
-    func firstLineHeadIndent(_ indent: CGFloat) -> Attributes {
-        addingParagraphStyle(indent, keyPath: \.firstLineHeadIndent)
-    }
-
-    func headIndent(_ headIndent: CGFloat) -> Attributes {
-        addingParagraphStyle(headIndent, keyPath: \.headIndent)
-    }
-
-    func tailIndent(_ tailIndent: CGFloat) -> Attributes {
-        addingParagraphStyle(tailIndent, keyPath: \.tailIndent)
-    }
-
-    func lineHeightMultiple(_ height: CGFloat) -> Attributes {
-        addingParagraphStyle(height, keyPath: \.lineHeightMultiple)
-    }
-
-    func minimumLineHeight(_ height: CGFloat) -> Attributes {
-        addingParagraphStyle(height, keyPath: \.minimumLineHeight)
-    }
-
-    func maximumLineHeight(_ height: CGFloat) -> Attributes {
-        addingParagraphStyle(height, keyPath: \.maximumLineHeight)
-    }
-
-    func lineSpacing(_ spacing: CGFloat) -> Attributes {
-        addingParagraphStyle(spacing, keyPath: \.lineSpacing)
-    }
-
-    func paragraphSpacing(_ spacing: CGFloat) -> Attributes {
-        addingParagraphStyle(spacing, keyPath: \.paragraphSpacing)
-    }
-
-    func paragraphSpacingBefore(_ spacing: CGFloat) -> Attributes {
-        addingParagraphStyle(spacing, keyPath: \.paragraphSpacingBefore)
-    }
-
-    func lineBreakMode(_ lineBreakMode: NSLineBreakMode) -> Attributes {
-        addingParagraphStyle(lineBreakMode, keyPath: \.lineBreakMode)
-    }
-
-    func lineBreakStrategy(_ strategy: NSParagraphStyle.LineBreakStrategy) -> Attributes {
-        addingParagraphStyle(strategy, keyPath: \.lineBreakStrategy)
-    }
-
-    func hyphenationFactor(_ factor: Float) -> Attributes {
-        addingParagraphStyle(factor, keyPath: \.hyphenationFactor)
-    }
-
-    @available(iOS 15, macOS 13, watchOS 8, tvOS 15, *)
-    func usesDefaultHyphenation(_ usesDefaultHyphenation: Bool) -> Attributes {
-        addingParagraphStyle(usesDefaultHyphenation, keyPath: \.usesDefaultHyphenation)
-    }
-
-    func allowsDefaultTighteningForTruncation(_ isAllowed: Bool) -> Attributes {
-        addingParagraphStyle(isAllowed, keyPath: \.allowsDefaultTighteningForTruncation)
-    }
-
-    func baseWritingDirection(_ direction: NSWritingDirection) -> Attributes {
-        addingParagraphStyle(direction, keyPath: \.baseWritingDirection)
-    }
-
-    func tabStops(_ tabStops: [NSTextTab], defaultInterval: CGFloat = 0) -> Attributes {
-        let paragraphStyle = mutableParagraphStyle()
-        paragraphStyle.tabStops = tabStops
-        paragraphStyle.defaultTabInterval = defaultInterval
-        return addingAttribute(.paragraphStyle, value: paragraphStyle)
-    }
-}
-
 // MARK: - All platforms but watchOS
 
 #if !os(watchOS)
@@ -329,17 +248,3 @@ public extension Attributes {
     }
 }
 #endif
-
-// MARK: - Internal Helper
-
-extension Attributes {
-
-    func addingParagraphStyle<T>(
-        _ value: T,
-        keyPath: ReferenceWritableKeyPath<NSMutableParagraphStyle, T>
-    ) -> Attributes {
-        let paragraphStyle = mutableParagraphStyle()
-        paragraphStyle[keyPath: keyPath] = value
-        return addingAttribute(.paragraphStyle, value: paragraphStyle)
-    }
-}

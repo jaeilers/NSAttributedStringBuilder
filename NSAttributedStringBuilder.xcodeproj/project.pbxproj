@@ -34,6 +34,7 @@
 		897F9DF02AEE504800709693 /* String+unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DE22AEE4FE700709693 /* String+unique.swift */; };
 		897F9DF12AEE504A00709693 /* NSAttributedStringAppendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DD22AEE4F9C00709693 /* NSAttributedStringAppendTests.swift */; };
 		897F9DF22AEE505000709693 /* NSAttributedStringConvenienceMethodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F9DD02AEE4F9C00709693 /* NSAttributedStringConvenienceMethodsTests.swift */; };
+		898463582BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898463572BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift */; };
 		89A931BA2BC013A7002A1E67 /* Attributes+multiPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931B92BC013A7002A1E67 /* Attributes+multiPlatform.swift */; };
 		89A931BC2BC01478002A1E67 /* Attributes+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931BB2BC01478002A1E67 /* Attributes+macOS.swift */; };
 		89A931BE2BC0149E002A1E67 /* Attributes+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A931BD2BC0149E002A1E67 /* Attributes+iOS.swift */; };
@@ -91,6 +92,7 @@
 		897F9DF72AEE525100709693 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		897F9DF82AEE526400709693 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		897F9DF92AEE526F00709693 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		898463572BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributes+multiPlatformParagraphStyles.swift"; sourceTree = "<group>"; };
 		89A931B92BC013A7002A1E67 /* Attributes+multiPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributes+multiPlatform.swift"; sourceTree = "<group>"; };
 		89A931BB2BC01478002A1E67 /* Attributes+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributes+macOS.swift"; sourceTree = "<group>"; };
 		89A931BD2BC0149E002A1E67 /* Attributes+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributes+iOS.swift"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			children = (
 				897F9DC52AEE4F8100709693 /* AImage+AttributedStringBuilding.swift */,
 				89A931B92BC013A7002A1E67 /* Attributes+multiPlatform.swift */,
+				898463572BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift */,
 				89A931BB2BC01478002A1E67 /* Attributes+macOS.swift */,
 				89A931BD2BC0149E002A1E67 /* Attributes+iOS.swift */,
 				897F9DC42AEE4F8100709693 /* AttributedStringBuilding+iOS.swift */,
@@ -388,6 +391,7 @@
 				897F9DCB2AEE4F8100709693 /* AttributedStringBuilding+iOS.swift in Sources */,
 				897F9DBE2AEE4F6E00709693 /* SpellingState.swift in Sources */,
 				89A931BE2BC0149E002A1E67 /* Attributes+iOS.swift in Sources */,
+				898463582BC1516D00281D8B /* Attributes+multiPlatformParagraphStyles.swift in Sources */,
 				897F9DBC2AEE4F6E00709693 /* Newline.swift in Sources */,
 				897F9DC02AEE4F6E00709693 /* Spacing.swift in Sources */,
 				897F9DBF2AEE4F6E00709693 /* NSAttributedStringBuilder.swift in Sources */,
