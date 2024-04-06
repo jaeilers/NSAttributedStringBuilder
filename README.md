@@ -10,6 +10,7 @@ You can add more functionality by extending `AttributedStringBuilding`. All exte
 
 - [x] Supports most of `NSAttributedString.Key`
 - [x] Flexible composition of strings, images etc.
+- [x] Configure attributes separately (inspired by `AttributeContainer`)
 - [x] Declarative syntax
 - [x] SwiftUI compatible
 - [x] Fully covered by unit tests
@@ -97,6 +98,27 @@ let attributedString = UIImage.checkmark
     .text("The quick brown fox jumps over the lazy dog.")
     .newline()
     .image(UIImage.add)
+```
+
+You can also configure and reuse your attributes separately from your attributed strings:
+
+```Swift
+let attributes = Attributes()
+    .font(.systemFont(ofSize: 16))
+    .italic()
+    .underline()
+
+let attributedString = NSAttributedString {
+    "Hello"
+        .addingAttributes(attributes)
+        .foregroundColor(.systemBlue)
+
+    Space()
+
+    "World!"
+        .addingAttributes(attributes)
+        .foregroundColor(.systemTeal)
+}
 ```
 
 ## How to add your own modifiers

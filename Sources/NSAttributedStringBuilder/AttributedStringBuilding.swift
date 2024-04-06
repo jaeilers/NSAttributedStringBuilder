@@ -19,6 +19,27 @@ public typealias AColor = NSColor
 #endif
 
 /// Typealias for the attributed string dictionary.
+///
+/// You can configure your attributes separately from your attributed strings. For example:
+///
+/// ```
+/// let attributes = Attributes()
+///     .font(.systemFont(ofSize: 16))
+///     .italic()
+///     .underline()
+///
+/// let attributedString = NSAttributedString {
+///     "Hello"
+///         .addingAttributes(attributes)
+///         .foregroundColor(.systemBlue)
+///
+///     Space()
+///
+///     "World!"
+///         .addingAttributes(attributes)
+///         .foregroundColor(.systemTeal)
+/// }
+/// ```
 public typealias Attributes = [NSAttributedString.Key: Any]
 
 /// Provides methods to build an attributed string.
