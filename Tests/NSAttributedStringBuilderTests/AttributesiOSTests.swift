@@ -1,7 +1,7 @@
+#if canImport(UIKit)
 @testable import NSAttributedStringBuilder
 import XCTest
 
-#if canImport(UIKit)
 final class AttributesiOSTests: XCTestCase {
 
     func testBoldWithNoFont() throws {
