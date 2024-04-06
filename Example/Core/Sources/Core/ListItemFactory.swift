@@ -55,6 +55,28 @@ public enum ListItemFactory {
                     .bold()
             }),
             ListItem(text: NSAttributedString {
+                let attributes = Attributes()
+                    .font(.systemFont(ofSize: 16))
+                    .italic()
+                    .underline()
+
+                "Hello"
+                    .addingAttributes(attributes)
+                    .foregroundColor(.coreBlue)
+
+                Space()
+
+                "World"
+                    .addingAttributes(attributes)
+                    .foregroundColor(.coreTeal)
+
+                Space()
+
+                "again!"
+                    .addingAttributes(attributes)
+                    .foregroundColor(.coreGreen)
+            }),
+            ListItem(text: NSAttributedString {
                 L10n.pangramEnglish
                     .language(.english)
                     .font(.systemFont(ofSize: 30))
@@ -136,6 +158,14 @@ private extension AColor {
         return AColor(red: 0.25098039215686274, green: 0.7843137254901961, blue: 0.8784313725490196, alpha: 1.0)
         #else
         return AColor.systemTeal
+        #endif
+    }
+
+    static var coreGreen: AColor {
+        #if os(watchOS)
+        return AColor.green
+        #else
+        return AColor.systemGreen
         #endif
     }
 
