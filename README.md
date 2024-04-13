@@ -1,6 +1,6 @@
 # NSAttributedStringBuilder
 
-![CI workflow](https://github.com/jaeilers/NSAttributedStringBuilder/actions/workflows/ci.yml/badge.svg?branch=main) [![codecov](https://codecov.io/github/jaeilers/NSAttributedStringBuilder/graph/badge.svg?token=VzjqpuljEY)](https://codecov.io/github/jaeilers/NSAttributedStringBuilder) ![](https://img.shields.io/badge/Swift-5.8_|_5.9-orange) ![](https://img.shields.io/badge/Platforms-macOS_|_iOS_|_tvOS_|_watchOS-lightblue) ![](https://img.shields.io/badge/License-MIT-green) ![](https://img.shields.io/badge/SwiftUI-compatible-blue)
+![CI workflow](https://github.com/jaeilers/NSAttributedStringBuilder/actions/workflows/ci.yml/badge.svg?branch=main) [![codecov](https://codecov.io/github/jaeilers/NSAttributedStringBuilder/graph/badge.svg?token=VzjqpuljEY)](https://codecov.io/github/jaeilers/NSAttributedStringBuilder) ![](https://img.shields.io/badge/Swift-5.8_|_5.9-orange) ![](https://img.shields.io/badge/Platforms-macOS_|_iOS_|_tvOS_|_watchOS|_visionOS_-lightblue) ![](https://img.shields.io/badge/License-MIT-green) ![](https://img.shields.io/badge/SwiftUI-compatible-blue)
 
 The `NSAttributedStringBuilder` is an easy to use attributed string builder with extended modifier support (bold/italic, image, custom spacings etc.) that supports most platforms and can be extended easily.
 
