@@ -104,3 +104,20 @@ public extension Attributes {
     }
 }
 #endif
+
+// MARK: - All but watchOS
+
+#if canImport(UIKit) && !os(watchOS)
+public extension Attributes {
+
+    /// Set the superscript of the text.
+    /// - Parameters:
+    ///   - value: The superscript value as an integer. Default text has a value of 0.
+    ///   If supported by the specified font, a value of 1 enables superscripting
+    ///   and a value of -1 enables subscripting. Default is `1`.
+    /// - Returns: The modified attributes.
+    func superscript(_ value: Int = 1) -> Attributes {
+        addingAttribute(NSAttributedString.Key(kCTSuperscriptAttributeName as String), value: NSNumber(value: value))
+    }
+}
+#endif

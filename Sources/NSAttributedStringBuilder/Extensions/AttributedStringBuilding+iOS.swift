@@ -74,6 +74,8 @@ public extension AttributedStringBuilding {
 }
 #endif
 
+// MARK: - All but watchOS
+
 #if canImport(UIKit) && !os(watchOS)
 public extension AttributedStringBuilding {
 
@@ -114,6 +116,16 @@ public extension AttributedStringBuilding {
         }
 
         return image(img, bounds: bounds)
+    }
+
+    /// Set the superscript of the text.
+    /// - Parameters:
+    ///   - value: The superscript value as an integer. Default text has a value of 0.
+    ///   If supported by the specified font, a value of 1 enables superscripting
+    ///   and a value of -1 enables subscripting. Default is `1`.
+    /// - Returns: A copy of the current font where the trait has been added.
+    func superscript(_ value: Int = 1) -> NSAttributedString {
+        addingAttributes(Attributes().superscript(value))
     }
 }
 #endif

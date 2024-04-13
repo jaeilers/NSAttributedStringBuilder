@@ -251,5 +251,44 @@ final class AttributesiOSTests: XCTestCase {
         // Then
         XCTAssertTrue(result.isEqual(to: expected))
     }
+
+    // MARK: - All but watchOS
+
+    #if !os(watchOS)
+    func testSuperscriptWithDefaultValue() {
+        // Given
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            NSAttributedString.Key(kCTSuperscriptAttributeName as String): NSNumber(value: 1)
+        ]
+
+        // When
+        let result = attributes.superscript()
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+
+    func testSuperscriptWithCustomValue() {
+        // Given
+        let subscripting = -1
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            NSAttributedString.Key(kCTSuperscriptAttributeName as String): NSNumber(value: subscripting)
+        ]
+
+        // When
+        let result = attributes.superscript(subscripting)
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+    #endif
 }
 #endif
