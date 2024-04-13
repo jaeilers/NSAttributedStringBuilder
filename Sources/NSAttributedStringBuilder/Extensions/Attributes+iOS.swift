@@ -45,4 +45,62 @@ public extension Attributes {
         addingAttribute(.font, value: fontWithTrait(.traitCondensed))
     }
 }
+
+// MARK: - Accessibility
+
+public extension Attributes {
+
+    /// Set the language to use when speaking the text.
+    ///
+    /// Use this property for the attributed string in `accessibilityAttributedLabel`.
+    /// - Parameters:
+    ///   - language: The language to use for VoiceOver.
+    /// - Returns: The modified attributes.
+    func accessibilitySpeechLanguage(_ language: NSAttributedStringBuilder.LanguageCode) -> Attributes {
+        addingAttribute(.accessibilitySpeechLanguage, value: language.rawValue as NSString)
+    }
+
+    /// Set whether to speak punctuation or not.
+    ///
+    /// For example: "user.name" is spoken by VoiceOver as "user (pause) name".
+    /// When this property is enabled, VoiceOver reads "user period name".
+    /// Use this property for the attributed string in `accessibilityAttributedLabel`.
+    /// - Parameters:
+    ///   - isEnabled: A boolean value that indicates whether punctuation is spoken by VoiceOver or not.
+    /// - Returns: The modified attributes.
+    func accessibilitySpeechPunctuation(_ isEnabled: Bool) -> Attributes {
+        addingAttribute(.accessibilitySpeechPunctuation, value: NSNumber(value: isEnabled))
+    }
+
+    /// Set a boolean value whether each letter should be spoken separately.
+    ///
+    /// Use this property for the attributed string in `accessibilityAttributedLabel`.
+    /// - Parameters:
+    ///   - isEnabled: A boolean value whether each letter should be spoken separately.
+    /// - Returns: The modified attributes.
+    func accessibilitySpeechSpellOut(_ isEnabled: Bool) -> Attributes {
+        addingAttribute(.accessibilitySpeechSpellOut, value: NSNumber(value: isEnabled))
+    }
+
+    /// Set the pronunciation of a particular word or phrase in
+    /// [International Phonetic Alphabet](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet).
+    ///
+    /// Use this property for the attributed string in `accessibilityAttributedLabel`.
+    /// - Parameters:
+    ///   - phoneticString: The string in phonetic notation.
+    /// - Returns: The modified attributes.
+    func accessibilitySpeechIPANotation(_ phoneticString: String) -> Attributes {
+        addingAttribute(.accessibilitySpeechIPANotation, value: phoneticString as NSString)
+    }
+
+    /// Apply a pitch to the spoken text.
+    /// - Parameters:
+    ///   - pitch: The value indicates whether to speak the text with a higher or lower pitch than the default.
+    ///   The default value for this attribute is 1.0, which indicates a normal pitch. Values between 0.0 and 1.0
+    ///   result in a lower pitch, and values between 1.0 and 2.0 result in a higher pitch.
+    /// - Returns: The modified attributes.
+    func accessibilitySpeechPitch(_ pitch: Double) -> Attributes {
+        addingAttribute(.accessibilitySpeechPitch, value: NSNumber(value: pitch))
+    }
+}
 #endif

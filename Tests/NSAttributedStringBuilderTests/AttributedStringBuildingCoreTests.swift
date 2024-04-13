@@ -44,7 +44,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
     func testAttributesFromAttributedStringWithUniformAttributes() {
         // Given
-        let expected: [NSAttributedString.Key: Any] = [
+        let expected: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
             .foregroundColor: AColor.orange,
             .backgroundColor: AColor.black,
@@ -61,7 +61,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
     func testAttributesFromAttributedStringWithMixedAttributesReturnsLastCharacterAttributes() {
         // Given
-        let expected: [NSAttributedString.Key: Any] = [
+        let expected: Attributes = [
             .foregroundColor: AColor.white,
             .font: AFont.preferredFont(forTextStyle: .footnote)
         ]
@@ -101,7 +101,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -216,7 +216,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
     func testAddingAttributesToStringWithMultipleAttributes() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.yellow,
             .font: AFont.preferredFont(forTextStyle: .body),
             .kern: NSNumber(value: 1.0)
@@ -232,7 +232,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
     func testAddingAttributesToAttributedStringWithMultipleAttributes() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.yellow,
             .font: AFont.preferredFont(forTextStyle: .body),
             .kern: NSNumber(value: 1.0)
@@ -304,7 +304,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
     func testAddingStringToAttributedStringWithExistingAttributes() {
         // Given
         let newString = String.unique()
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.yellow,
             .font: AFont.preferredFont(forTextStyle: .body)
         ]
@@ -327,7 +327,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
             string: firstString,
             attributes: [.foregroundColor: AColor.yellow]
         )
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.cyan
         ]
         let second = NSAttributedString(
@@ -380,7 +380,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
     func testAddingAttributedStringToStringAndAttributesAreAdded() {
         // Given
         let newString = String.unique()
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .foregroundColor: AColor.blue,
             .backgroundColor: AColor.white
@@ -575,7 +575,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
     func testAddingAttributesToImage() throws {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.blue,
             .backgroundColor: AColor.yellow
         ]
@@ -611,7 +611,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
     func testAddingAttributedStringToImage() throws {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .foregroundColor: AColor.red,
             .kern: NSNumber(value: 2.0)

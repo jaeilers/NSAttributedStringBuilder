@@ -8,7 +8,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
     func testNSImageWithAttributedString() throws {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: NSFont.preferredFont(forTextStyle: .headline),
             .foregroundColor: NSColor.textColor,
             .kern: NSNumber(value: 1.0)
@@ -47,7 +47,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
     func testNSImageWithAttributedStringAndSystemName() throws {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: NSFont.preferredFont(forTextStyle: .headline),
             .foregroundColor: NSColor.textColor,
             .kern: NSNumber(value: 1.0)
@@ -99,7 +99,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
     func testCursorWithAttributedString() throws {
         // Given
         let cursor = NSCursor.pointingHand
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: NSFont.preferredFont(forTextStyle: .footnote)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -158,7 +158,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
     func testSpellingStateWithAttributedStringAndNoGrammarOrSpellingIssues() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 2.0)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -185,7 +185,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
     func testSpellingStateWithAttributedStringAndSpellingErrors() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 2.0),
             .spellingState: 0
         ]
@@ -213,7 +213,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
     func testSpellingStateWithAttributedStringAndGrammarErrors() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .kern: NSNumber(value: 1.0),
             .spellingState: 0
         ]
@@ -241,7 +241,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
     func testSuperscriptWithAttributedStringAndDefaultValue() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .kern: NSNumber(value: 1.0),
             .superscript: NSNumber(value: 5)
         ]
@@ -270,7 +270,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
     func testTextAlternativesWithAttributedString() throws {
         // Given
         let textAlternatives = NSTextAlternatives(primaryString: .unique(), alternativeStrings: [.unique()])
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: NSFont.preferredFont(forTextStyle: .footnote),
             .textAlternatives: textAlternatives
         ]
@@ -306,7 +306,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
     func testToolTipWithAttributedString() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: NSColor.red,
             .toolTip: String.unique()
         ]
@@ -340,7 +340,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let font = NSFont.systemFont(ofSize: 12)
         let glyphInfo = try XCTUnwrap(NSGlyphInfo(cgGlyph: 2590, for: font, baseString: baseString))
 
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: NSColor.gray,
             .font: font
         ]
@@ -360,7 +360,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let baseString = "\u{FFFD}" // �
         let font = NSFont.preferredFont(forTextStyle: .body)
         let glyphInfo = try XCTUnwrap(NSGlyphInfo(cgGlyph: 2590, for: font, baseString: baseString))
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .glyphInfo: glyphInfo,
             .font: font
         ]
@@ -408,7 +408,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headerLevel = 2
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: NSColor.red,
             .paragraphStyle: paragraphStyle
         ]
@@ -434,6 +434,253 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
         // When
         let result = string.headerLevel(3)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    // MARK: - Accessibility
+
+    func testAccessibilityAlignmentWithAttributedString() {
+        // Given
+        let alignment: NSTextAlignment = .center
+        let attributes: Attributes = [
+            .foregroundColor: AColor.orange
+        ]
+        let newAttributes: Attributes = [
+            .foregroundColor: AColor.orange,
+            .accessibilityAlignment: NSNumber(value: alignment.rawValue)
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.accessibilityAlignment(alignment)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityAlignmentWithString() {
+        // Given
+        let alignment: NSTextAlignment = .center
+        let attributes: Attributes = [
+            .accessibilityAlignment: NSNumber(value: alignment.rawValue)
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.accessibilityAlignment(alignment)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityAutocorrectedWithAttributedString() {
+        // Given
+        let isAutocorrected = Bool.random()
+        let attributes: Attributes = [
+            .foregroundColor: AColor.orange
+        ]
+        let newAttributes: Attributes = [
+            .foregroundColor: AColor.orange,
+            .accessibilityAutocorrected: NSNumber(value: isAutocorrected)
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.accessibilityAutocorrected(isAutocorrected)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityAutocorrectedWithString() {
+        // Given
+        let isAutocorrected = Bool.random()
+        let attributes: Attributes = [
+            .accessibilityAutocorrected: NSNumber(value: isAutocorrected)
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.accessibilityAutocorrected(isAutocorrected)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityForegroundColorWithAttributedString() {
+        // Given
+        let color = AColor.cyan
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let newAttributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilityForegroundColor: color.cgColor
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.accessibilityForegroundColor(color)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityForegroundColorWithString() {
+        // Given
+        let color = AColor.cyan
+        let attributes: Attributes = [
+            .accessibilityForegroundColor: color.cgColor
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.accessibilityForegroundColor(color)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityBackgroundColorWithAttributedString() {
+        // Given
+        let color = AColor.cyan
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let newAttributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilityBackgroundColor: color.cgColor
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.accessibilityBackgroundColor(color)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityBackgroundColorWithString() {
+        // Given
+        let color = AColor.orange
+        let attributes: Attributes = [
+            .accessibilityBackgroundColor: color.cgColor
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.accessibilityBackgroundColor(color)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityLanguageWithAttributedString() {
+        // Given
+        let language: NSAttributedStringBuilder.LanguageCode = .greek
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let newAttributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilityLanguage: language.rawValue as NSString
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.accessibilityLanguage(language)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityLanguageWithString() {
+        // Given
+        let language: NSAttributedStringBuilder.LanguageCode = .french
+        let attributes: Attributes = [
+            .accessibilityLanguage: language.rawValue as NSString
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.accessibilityLanguage(language)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityMarkedMisspelledWithAttributedString() {
+        // Given
+        let isMisspelled = Bool.random()
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let newAttributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilityMarkedMisspelled: NSNumber(value: isMisspelled)
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.accessibilityMarkedMisspelled(isMisspelled)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityMarkedMisspelledWithString() {
+        // Given
+        let isMisspelled = Bool.random()
+        let attributes: Attributes = [
+            .accessibilityMarkedMisspelled: NSNumber(value: isMisspelled)
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.accessibilityMarkedMisspelled(isMisspelled)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityShadowWithAttributedString() {
+        // Given
+        let hasShadow = Bool.random()
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let newAttributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilityShadow: NSNumber(value: hasShadow)
+        ]
+        let attributedString = NSAttributedString(string: string, attributes: attributes)
+        let expected = NSAttributedString(string: string, attributes: newAttributes)
+
+        // When
+        let result = attributedString.accessibilityShadow(hasShadow)
+
+        // Then
+        XCTAssertEqual(result, expected)
+    }
+
+    func testAccessibilityShadowWithString() {
+        // Given
+        let hasShadow = Bool.random()
+        let attributes: Attributes = [
+            .accessibilityShadow: NSNumber(value: hasShadow)
+        ]
+        let expected = NSAttributedString(string: string, attributes: attributes)
+
+        // When
+        let result = string.accessibilityShadow(hasShadow)
 
         // Then
         XCTAssertEqual(result, expected)
