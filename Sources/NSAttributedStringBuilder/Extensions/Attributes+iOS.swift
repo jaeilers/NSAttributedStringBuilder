@@ -94,6 +94,8 @@ public extension Attributes {
     }
 
     /// Apply a pitch to the spoken text.
+    ///
+    /// Use this property for the attributed string in `accessibilityAttributedLabel`.
     /// - Parameters:
     ///   - pitch: The value indicates whether to speak the text with a higher or lower pitch than the default.
     ///   The default value for this attribute is 1.0, which indicates a normal pitch. Values between 0.0 and 1.0
