@@ -19,7 +19,7 @@ final class AttributesiOSTests: XCTestCase {
         let result = Attributes().bold()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testBoldWithExistingFont() throws {
@@ -40,7 +40,7 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.bold()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testItalicWithNoFont() throws {
@@ -58,7 +58,7 @@ final class AttributesiOSTests: XCTestCase {
         let result = Attributes().italic()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testItalicWithExistingFont() throws {
@@ -79,7 +79,7 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.italic()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testMonospacedWithNoFont() throws {
@@ -97,7 +97,7 @@ final class AttributesiOSTests: XCTestCase {
         let result = Attributes().monospaced()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testMonospacedWithExistingFont() throws {
@@ -118,7 +118,7 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.monospaced()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testCondensedWithNoFont() throws {
@@ -136,7 +136,7 @@ final class AttributesiOSTests: XCTestCase {
         let result = Attributes().condensed()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testCondensedWithExistingFont() throws {
@@ -157,7 +157,138 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.condensed()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
+
+    // MARK: - Accessibility
+
+    func testAccessibilitySpeechLanguage() {
+        // Given
+        let language: NSAttributedStringBuilder.LanguageCode = .french
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilitySpeechLanguage: language.rawValue as NSString
+        ]
+
+        // When
+        let result = attributes.accessibilitySpeechLanguage(language)
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+
+    func testAccessibilitySpeechPunctuation() {
+        // Given
+        let isEnabled = Bool.random()
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilitySpeechPunctuation: NSNumber(value: isEnabled)
+        ]
+
+        // When
+        let result = attributes.accessibilitySpeechPunctuation(isEnabled)
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+
+    func testAccessibilitySpeechSpellOut() {
+        // Given
+        let isEnabled = Bool.random()
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilitySpeechSpellOut: NSNumber(value: isEnabled)
+        ]
+
+        // When
+        let result = attributes.accessibilitySpeechSpellOut(isEnabled)
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+
+    func testAccessibilitySpeechIPANotation() {
+        // Given
+        let phoneticString = "paɪˈɛlə" // Paella
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilitySpeechIPANotation: phoneticString as NSString
+        ]
+
+        // When
+        let result = attributes.accessibilitySpeechIPANotation(phoneticString)
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+
+    func testAccessibilitySpeechPitch() {
+        // Given
+        let pitch = 0.5
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            .accessibilitySpeechPitch: NSNumber(value: pitch)
+        ]
+
+        // When
+        let result = attributes.accessibilitySpeechPitch(pitch)
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+
+    // MARK: - All but watchOS
+
+    #if !os(watchOS)
+    func testSuperscriptWithDefaultValue() {
+        // Given
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            NSAttributedString.Key(kCTSuperscriptAttributeName as String): NSNumber(value: 1)
+        ]
+
+        // When
+        let result = attributes.superscript()
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+
+    func testSuperscriptWithCustomValue() {
+        // Given
+        let subscripting = -1
+        let attributes: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body)
+        ]
+        let expected: Attributes = [
+            .font: AFont.preferredFont(forTextStyle: .body),
+            NSAttributedString.Key(kCTSuperscriptAttributeName as String): NSNumber(value: subscripting)
+        ]
+
+        // When
+        let result = attributes.superscript(subscripting)
+
+        // Then
+        XCTAssertTrue(result.isEqual(to: expected))
+    }
+    #endif
 }
 #endif

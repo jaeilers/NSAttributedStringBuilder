@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added Attributes extensions to create attributes separately from attributed strings
 - Added visionOS support for Swift Package Manager
+- Added support for some accessibility keys
+- Added superscript for iOS and tvOS
 
 ### Changed
 

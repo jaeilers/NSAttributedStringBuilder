@@ -140,4 +140,65 @@ public extension AttributedStringBuilding {
         addingAttributes(attributes().headerLevel(headerLevel))
     }
 }
+
+// MARK: - Accessibility
+
+public extension AttributedStringBuilding {
+
+    /// Set the accessibility alignment of the text.
+    /// - Parameters:
+    ///   - alignment: The alignment of the text.
+    /// - Returns: A copy of the modified attributed string.
+    func accessibilityAlignment(_ alignment: NSTextAlignment) -> NSAttributedString {
+        addingAttributes(Attributes().accessibilityAlignment(alignment))
+    }
+
+    /// Set autocorrection for the text.
+    /// - Parameters:
+    ///   - isAutocorrected: A boolean value that indicates whether the text is autocorrected.
+    /// - Returns: A copy of the modified attributed string.
+    func accessibilityAutocorrected(_ isAutocorrected: Bool) -> NSAttributedString {
+        addingAttributes(Attributes().accessibilityAutocorrected(isAutocorrected))
+    }
+
+    /// Set the accessibility foreground color.
+    /// - Parameters:
+    ///   - color: The accessibility foreground color.
+    /// - Returns: A copy of the modified attributed string.
+    func accessibilityForegroundColor(_ color: NSColor) -> NSAttributedString {
+        addingAttributes(Attributes().accessibilityForegroundColor(color))
+    }
+
+    /// Set the accessibility background color.
+    /// - Parameters:
+    ///   - color: The accessibility background color.
+    /// - Returns: A copy of the modified attributed string.
+    func accessibilityBackgroundColor(_ color: NSColor) -> NSAttributedString {
+        addingAttributes(Attributes().accessibilityBackgroundColor(color))
+    }
+
+    /// The language of the text for VoiceOver.
+    /// - Parameters:
+    ///   - language: The language of the text for accessibility.
+    /// - Returns: The modified attributes.
+    func accessibilityLanguage(_ language: NSAttributedStringBuilder.LanguageCode) -> NSAttributedString {
+        addingAttributes(Attributes().accessibilityLanguage(language))
+    }
+
+    /// Mark misspelled text for VoiceOver.
+    /// - Parameters:
+    ///   - isMisspelled: A boolean value that indicates whether the text is misspelled.
+    /// - Returns: A copy of the modified attributed string.
+    func accessibilityMarkedMisspelled(_ isMisspelled: Bool) -> NSAttributedString {
+        addingAttributes(Attributes().accessibilityMarkedMisspelled(isMisspelled))
+    }
+
+    /// Set the accessibility text shadow.
+    /// - Parameters:
+    ///   - hasShadow: A boolean value that indicates whether the text has a shadow for accessibility.
+    /// - Returns: A copy of the modified attributed string.
+    func accessibilityShadow(_ hasShadow: Bool) -> NSAttributedString {
+        addingAttributes(Attributes().accessibilityShadow(hasShadow))
+    }
+}
 #endif

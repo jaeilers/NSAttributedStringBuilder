@@ -10,7 +10,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
     func testTextWithAttributedString() {
         // Given
         let newString = String.unique()
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.yellow
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -37,7 +37,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testKerningWithAttributedString() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .headline)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -53,7 +53,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testKerningWithString() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .kern: NSNumber(value: 1.0)
         ]
         let expected = NSAttributedString(string: string, attributes: attributes)
@@ -67,7 +67,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testSpaceWithAttributedStringAndStandardSpace() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 1)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -93,7 +93,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testSpaceWithAttributedStringAndENSpace() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -119,7 +119,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testSpaceWithAttributedStringAndEMSpace() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .backgroundColor: AColor.brown
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -145,7 +145,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testNonBreakingSpaceWithAttributedString() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .foregroundColor: AColor.blue
         ]
@@ -172,7 +172,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testNarrowNonBreakingSpaceWithAttributedString() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
             .foregroundColor: AColor.blue
         ]
@@ -199,7 +199,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testNewlineWithAttributedString() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .backgroundColor: AColor.black
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -226,7 +226,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
     func testLinkWithAttributedString() throws {
         // Given
         let url = try XCTUnwrap(URL(string: "https://apple.com"))
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .backgroundColor: AColor.yellow
         ]
         let expectedAttributes = attributes.merging([.link: url as NSURL], uniquingKeysWith: { _, new in new })
@@ -243,7 +243,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
     func testLinkWithString() throws {
         // Given
         let url = try XCTUnwrap(URL(string: "https://apple.com"))
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .link: url as NSURL
         ]
         let expected = NSAttributedString(string: string, attributes: attributes)
@@ -257,7 +257,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testBaselineOffsetWithAttributedString() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.lightGray
         ]
         let newAttributes = attributes.merging([.baselineOffset: NSNumber(value: 2.0)], uniquingKeysWith: { _, new in new })
@@ -284,7 +284,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testLigatureWithAttributedStringAndNoLigature() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .caption1)
         ]
         let newAttributes = attributes.merging([.ligature: NSNumber(value: 0)], uniquingKeysWith: { _, new in new })
@@ -311,7 +311,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testLigatureWithAttributedStringAndDefaultLigatures() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .kern: NSNumber(value: 5.0)
         ]
         let newAttributes = attributes.merging([.ligature: NSNumber(value: 1)], uniquingKeysWith: { _, new in new })
@@ -338,7 +338,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testTextEffectWithAttributedStringAndLetterpressStyle() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)
         ]
         let newAttributes = attributes.merging(
@@ -371,7 +371,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testWritingDirectionWithAttributedStringAndLeftToRightEmbedding() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
         ]
         let newAttributes = attributes.merging(
@@ -404,7 +404,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testWritingDirectionWithAttributedStringAndLeftToRightOverride() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .backgroundColor: AColor.black
         ]
         let newAttributes = attributes.merging(
@@ -434,7 +434,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testWritingDirectionWithAttributedStringAndRightToLeftEmbedding() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.blue
         ]
         let newAttributes = attributes.merging([.writingDirection: [NSWritingDirection.rightToLeft.rawValue | NSWritingDirectionFormatType.embedding.rawValue]], uniquingKeysWith: { _, new in new })
@@ -461,7 +461,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testWritingDirectionWithAttributedStringAndRightToLeftOverride() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .headline)
         ]
         let newAttributes = attributes.merging([.writingDirection: [NSWritingDirection.rightToLeft.rawValue | NSWritingDirectionFormatType.override.rawValue]], uniquingKeysWith: { _, new in new })
@@ -579,7 +579,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testParagraphStyleWithAttributedString() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -641,7 +641,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 2.0
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
             .paragraphStyle: paragraphStyle
         ]
@@ -676,7 +676,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .headline),
             .paragraphStyle: paragraphStyle
         ]
@@ -711,7 +711,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
             .paragraphStyle: paragraphStyle
         ]
@@ -746,7 +746,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
             .paragraphStyle: paragraphStyle
         ]
@@ -780,7 +780,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
             .paragraphStyle: paragraphStyle
         ]
@@ -815,7 +815,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 20.0
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -850,7 +850,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 8.0
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -885,7 +885,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .right
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -920,7 +920,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -954,7 +954,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -989,7 +989,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2.0
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -1024,7 +1024,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.hyphenationFactor = 2.0
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -1059,7 +1059,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -1095,7 +1095,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -1131,7 +1131,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -1166,7 +1166,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -1201,7 +1201,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
             .paragraphStyle: paragraphStyle
         ]
@@ -1237,7 +1237,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 13.0
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .paragraphStyle: paragraphStyle
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -1247,7 +1247,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         newParagraphStyle.paragraphSpacing = 3.0
         newParagraphStyle.lineBreakMode = .byWordWrapping
         newParagraphStyle.alignment = .center
-        let newAttributes: [NSAttributedString.Key: Any] = [
+        let newAttributes: Attributes = [
             .paragraphStyle: newParagraphStyle
         ]
         let expected = NSAttributedString(string: string, attributes: newAttributes)
@@ -1268,7 +1268,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testFontWithAttributedStringOverridesExistingFont() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -1294,7 +1294,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testForegroundColorWithAttributedStringOverridesExistingColor() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.black
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -1320,7 +1320,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testBackgroundColorWithAttributedStringOverridesExistingColor() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .backgroundColor: AColor.yellow
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -1346,7 +1346,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testUnderlineStyleWithAttributedStringOverridesExistingValue() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -1361,7 +1361,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testUnderlineStyleWithAttributedStringAndUnderlineColorOverridesExistingValues() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
             .underlineColor: AColor.black
         ]
@@ -1383,7 +1383,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testUnderlineStyleWithAttributedStringAndUnderlineColorNoColorDoesNotResetExistingValue() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
             .underlineColor: AColor.yellow
         ]
@@ -1438,7 +1438,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testStrikethroughWithAttributedStringOverridesExistingValue() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .strikethroughStyle: NSNumber(value: NSUnderlineStyle.double.rawValue)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -1458,7 +1458,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testStrikethroughWithAttributedStringAndColorOverridesExistingValues() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
             .strikethroughColor: AColor.black
         ]
@@ -1480,7 +1480,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testStrikethroughWithAttributedStringAndNoColorDoesNotOverrideExistingValue() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
             .strikethroughColor: AColor.orange
         ]
@@ -1634,7 +1634,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testStrokeWithAttributedStringOverridesExistingValueAndDefaultValueIsApplied() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .strokeWidth: NSNumber(value: 10)
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -1649,7 +1649,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testStrokeWithAttributedStringAndColorOverridesExistingValues() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .strokeWidth: NSNumber(value: 10),
             .strokeColor: AColor.orange
         ]
@@ -1673,7 +1673,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
     func testStrokeWithAttributedStringNoColorDoesNotOverrideExistingColor() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .strokeWidth: NSNumber(value: 10),
             .strokeColor: AColor.orange
         ]
@@ -1700,7 +1700,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
     #if !os(iOS)
     func testLigatureWithAttributedStringAndAllLigatures() {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 13)
         ]
         let newAttributes = attributes.merging([.ligature: NSNumber(value: 2)], uniquingKeysWith: { _, new in new })
@@ -1731,7 +1731,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
     #if !os(watchOS)
     func testSpaceWithAttributedStringAndCustomSpace() throws {
         // Given
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.red
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)
@@ -1780,7 +1780,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let attachment = NSTextAttachment()
         attachment.image = image
         attachment.bounds = bounds
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attributes: Attributes = [
             .foregroundColor: AColor.brown
         ]
         let attributedString = NSAttributedString(string: string, attributes: attributes)

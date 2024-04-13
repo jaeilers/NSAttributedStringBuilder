@@ -52,7 +52,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.addingAttributes(newAttributes)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testAddingAttributesNewAttributesOverrideExisting() {
@@ -77,7 +77,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.addingAttributes(newAttributes)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testAddingAttribute() {
@@ -90,7 +90,7 @@ final class AttributesTests: XCTestCase {
         let result = Attributes().addingAttribute(.foregroundColor, value: AColor.purple)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testAddingAttributeOverridesExistingValue() {
@@ -106,7 +106,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.addingAttribute(.font, value: AFont.preferredFont(forTextStyle: .footnote))
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testMutableParagraphStyle() {
@@ -148,7 +148,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.kerning(2.0)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testLink() throws {
@@ -166,7 +166,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.link(url)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testBaselineOffset() {
@@ -183,7 +183,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.baselineOffset(2.0)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testLigature() {
@@ -200,7 +200,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.ligature(.none)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testTextEffect() {
@@ -217,7 +217,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.textEffect(.letterpressStyle)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testWritingDirection() {
@@ -234,7 +234,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.writingDirection(.rightToLeftDirectionEmbedding)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testLanguage() {
@@ -251,7 +251,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.language(.dutch)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
@@ -269,7 +269,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.languageIdentifier(.german)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     @available(iOS 14, tvOS 14, watchOS 7, *)
@@ -287,7 +287,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.tracking(2.0)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     // MARK: - Platform dependent (typealias)
@@ -305,7 +305,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.font(.preferredFont(forTextStyle: .headline))
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testForegroundColor() {
@@ -322,7 +322,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.foregroundColor(.blue)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testBackgroundColor() {
@@ -339,7 +339,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.backgroundColor(.orange)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testUnderline() {
@@ -356,7 +356,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.underline(.double)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testUnderlineDefaultSingle() {
@@ -373,7 +373,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.underline()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testUnderlineWithColor() {
@@ -391,7 +391,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.underline(color: .orange)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testUnderlineDoesNotOverrideExistingColorWithNil() {
@@ -411,7 +411,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.underline(.double)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testStrikethrough() {
@@ -428,7 +428,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.strikethrough(.double)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testStrikethroughDefaultIsSingle() {
@@ -445,7 +445,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.strikethrough()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testStrikethroughWithColor() {
@@ -463,7 +463,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.strikethrough(color: .blue)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testStrikethroughDoesNotOverrideExistingColorWithNil() {
@@ -483,7 +483,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.strikethrough(.double)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testShadowDefaultValues() {
@@ -504,7 +504,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.shadow()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testShadowConfigured() {
@@ -530,7 +530,7 @@ final class AttributesTests: XCTestCase {
         )
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testShadowExistingColorIsNotOverriddenWithNil() {
@@ -558,7 +558,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.shadow()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testShadowIsCopiedWhenAttributesAreCopied() {
@@ -608,7 +608,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.stroke(width: 5.0, color: .purple)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testStrokeDefaultValues() {
@@ -625,7 +625,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.stroke()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testStrokeColorIsNotOverridden() {
@@ -644,7 +644,7 @@ final class AttributesTests: XCTestCase {
         let result = attributes.stroke()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testParagraphStyle() {
@@ -663,7 +663,7 @@ final class AttributesTests: XCTestCase {
         let result = Attributes().paragraphStyle(paragraphStyle)
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 
     func testParagraphStylesAreCopiedWhenAttributesAreCopied() {
@@ -818,6 +818,6 @@ final class AttributesTests: XCTestCase {
             .italic()
 
         // Then
-        XCTAssertTrue(NSDictionary(dictionary: result).isEqual(to: expected))
+        XCTAssertTrue(result.isEqual(to: expected))
     }
 }
