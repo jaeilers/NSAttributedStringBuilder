@@ -1575,7 +1575,7 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
-    func testShadowWithAttributedStringNoColorDoNotOverrideExistingColor() {
+    func testShadowWithAttributedStringExistingShadowIsOverridden() {
         // Given
         let shadow = NSShadow()
         shadow.shadowOffset = .init(width: 5, height: 5)
@@ -1585,7 +1585,6 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let newShadow = NSShadow()
         newShadow.shadowOffset = .init(width: 10, height: 10)
         newShadow.shadowBlurRadius = 1.0
-        newShadow.shadowColor = AColor.red
         let expected = NSAttributedString(string: string, attributes: [.shadow: newShadow])
 
         // When

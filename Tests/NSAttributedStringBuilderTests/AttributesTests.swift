@@ -394,7 +394,7 @@ final class AttributesTests: XCTestCase {
         XCTAssertTrue(result.isEqual(to: expected))
     }
 
-    func testUnderlineDoesNotOverrideExistingColorWithNil() {
+    func testUnderlineOverridesExistingColorWithNil() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -403,8 +403,7 @@ final class AttributesTests: XCTestCase {
         ]
         let expected: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
-            .underlineStyle: NSNumber(value: NSUnderlineStyle.double.rawValue),
-            .underlineColor: AColor.orange
+            .underlineStyle: NSNumber(value: NSUnderlineStyle.double.rawValue)
         ]
 
         // When
@@ -466,7 +465,7 @@ final class AttributesTests: XCTestCase {
         XCTAssertTrue(result.isEqual(to: expected))
     }
 
-    func testStrikethroughDoesNotOverrideExistingColorWithNil() {
+    func testStrikethroughExistingSettingsAreOverridden() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -475,8 +474,7 @@ final class AttributesTests: XCTestCase {
         ]
         let expected: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
-            .strikethroughStyle: NSNumber(value: NSUnderlineStyle.double.rawValue),
-            .strikethroughColor: AColor.blue
+            .strikethroughStyle: NSNumber(value: NSUnderlineStyle.double.rawValue)
         ]
 
         // When
@@ -533,7 +531,7 @@ final class AttributesTests: XCTestCase {
         XCTAssertTrue(result.isEqual(to: expected))
     }
 
-    func testShadowExistingColorIsNotOverriddenWithNil() {
+    func testShadowExistingSettingsAreOverridden() {
         // Given
         let shadow = NSShadow()
         shadow.shadowOffset = CGSize(width: 5, height: 5)
@@ -548,7 +546,6 @@ final class AttributesTests: XCTestCase {
         let newShadow = NSShadow()
         newShadow.shadowOffset = CGSize(width: 1, height: 1)
         newShadow.shadowBlurRadius = 5.0
-        newShadow.shadowColor = AColor.orange
         let expected: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
             .shadow: newShadow
@@ -628,7 +625,7 @@ final class AttributesTests: XCTestCase {
         XCTAssertTrue(result.isEqual(to: expected))
     }
 
-    func testStrokeColorIsNotOverridden() {
+    func testStrokeExistingSettingsAreOverridden() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -636,8 +633,7 @@ final class AttributesTests: XCTestCase {
         ]
         let expected: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
-            .strokeWidth: NSNumber(value: 2.0),
-            .strokeColor: AColor.orange
+            .strokeWidth: NSNumber(value: 2.0)
         ]
 
         // When

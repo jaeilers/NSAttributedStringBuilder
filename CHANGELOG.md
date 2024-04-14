@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Changed logic that existing colors (stroke, strikethrough & shadow) are overridden
 - Updated CI dependencies and Xcode project
 
 ## [0.2.1] - 2024-04-01
