@@ -165,9 +165,7 @@ public extension Attributes {
     func underline(_ style: NSUnderlineStyle = .single, color: AColor? = nil) -> Attributes {
         var newAttributes = self
         newAttributes[.underlineStyle] = NSNumber(value: style.rawValue)
-        color.map {
-            newAttributes[.underlineColor] = $0
-        }
+        newAttributes[.underlineColor] = color
 
         return newAttributes
     }
@@ -181,9 +179,7 @@ public extension Attributes {
     func strikethrough(_ style: NSUnderlineStyle = .single, color: AColor? = nil) -> Attributes {
         var newAttributes = self
         newAttributes[.strikethroughStyle] = NSNumber(value: style.rawValue)
-        color.map {
-            newAttributes[.strikethroughColor] = $0
-        }
+        newAttributes[.strikethroughColor] = color
 
         return newAttributes
     }
@@ -201,15 +197,12 @@ public extension Attributes {
         blurRadius: Double = 5.0,
         color: AColor? = nil
     ) -> Attributes {
-        let shadow: NSShadow? = attribute(.shadow)
-        let shadowCopy = (shadow?.copy() as? NSShadow) ?? NSShadow()
-        shadowCopy.shadowOffset = offset
-        shadowCopy.shadowBlurRadius = CGFloat(blurRadius)
-        color.map {
-            shadowCopy.shadowColor = $0
-        }
+        let shadow = NSShadow()
+        shadow.shadowOffset = offset
+        shadow.shadowBlurRadius = CGFloat(blurRadius)
+        shadow.shadowColor = color
 
-        return addingAttribute(.shadow, value: shadowCopy)
+        return addingAttribute(.shadow, value: shadow)
     }
 
     /// Set the stroke around the glyphs of the text.
@@ -226,9 +219,7 @@ public extension Attributes {
     func stroke(width: Double = 2.0, color: AColor? = nil) -> Attributes {
         var newAttributes = self
         newAttributes[.strokeWidth] = NSNumber(value: width)
-        color.map {
-            newAttributes[.strokeColor] = $0
-        }
+        newAttributes[.strokeColor] = color
 
         return newAttributes
     }
