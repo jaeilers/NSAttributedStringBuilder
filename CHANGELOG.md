@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added visionOS target to Xcode project
+- Added swift package index badges to readme
+
+### Fixed
+
+- Removed visionOS platform from package for Swift 5.8
+
 ## [0.3.0] - 2024-04-18
 
 ### Added
