@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2024-04-21
+
 ### Added
 
 - Added visionOS target to Xcode project
@@ -67,7 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Release
 
-[unreleased]: https://github.com/jaeilers/NSAttributedStringBuilder/compare/0.3.0...HEAD
+[unreleased]: https://github.com/jaeilers/NSAttributedStringBuilder/compare/0.3.1...HEAD
+[0.3.1]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.3.1
 [0.3.0]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.3.0
 [0.2.1]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.2.1
 [0.2.0]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.2.0
