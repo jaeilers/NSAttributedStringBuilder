@@ -1,11 +1,18 @@
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
+#endif
 @testable import NSAttributedStringBuilder
-import XCTest
+import Testing
 
-final class AttributesTests: XCTestCase {
+@Suite
+struct AttributesTests {
 
-    func testAttribute() throws {
+    @Test
+    func attribute() throws {
         // Given
-        let expected = try XCTUnwrap(URL(string: "https://apple.com"))
+        let expected = try #require(URL(string: "https://apple.com"))
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .headline),
             .foregroundColor: AColor.blue,
@@ -13,13 +20,14 @@ final class AttributesTests: XCTestCase {
         ]
 
         // When
-        let result: URL = try XCTUnwrap(attributes.attribute(.link))
+        let result: URL = try #require(attributes.attribute(.link))
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAttributeWhichDoesNotExist() {
+    @Test
+    func attributeWhichDoesNotExist() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .headline),
@@ -30,10 +38,11 @@ final class AttributesTests: XCTestCase {
         let result: URL? = attributes.attribute(.link)
 
         // Then
-        XCTAssertNil(result)
+        #expect(result == nil)
     }
 
-    func testAddingAttributes() {
+    @Test
+    func addingAttributes() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -52,10 +61,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.addingAttributes(newAttributes)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testAddingAttributesNewAttributesOverrideExisting() {
+    @Test
+    func addingAttributesNewAttributesOverrideExisting() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -77,10 +87,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.addingAttributes(newAttributes)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testAddingAttribute() {
+    @Test
+    func addingAttribute() {
         // Given
         let expected: Attributes = [
             .foregroundColor: AColor.purple
@@ -90,10 +101,11 @@ final class AttributesTests: XCTestCase {
         let result = Attributes().addingAttribute(.foregroundColor, value: AColor.purple)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testAddingAttributeOverridesExistingValue() {
+    @Test
+    func addingAttributeOverridesExistingValue() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -106,9 +118,10 @@ final class AttributesTests: XCTestCase {
         let result = attributes.addingAttribute(.font, value: AFont.preferredFont(forTextStyle: .footnote))
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
+    @Test
     func testMutableParagraphStyle() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
@@ -122,18 +135,20 @@ final class AttributesTests: XCTestCase {
         let result = attributes.mutableParagraphStyle()
 
         // Then
-        XCTAssertEqual(result, paragraphStyle)
+        #expect(result == paragraphStyle)
     }
 
+    @Test
     func testMutableParagraphStyleNewParagraphStyleIsReturned() {
         // When
         let result = Attributes().mutableParagraphStyle()
 
         // Then
-        XCTAssertEqual(result, NSMutableParagraphStyle())
+        #expect(result == NSMutableParagraphStyle())
     }
 
-    func testKerning() {
+    @Test
+    func kerning() {
         // Given
         let attributes: Attributes = [
             .kern: NSNumber(value: 1.0),
@@ -148,12 +163,13 @@ final class AttributesTests: XCTestCase {
         let result = attributes.kerning(2.0)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testLink() throws {
+    @Test
+    func link() throws {
         // Given
-        let url = try XCTUnwrap(URL(string: "https://apple.com"))
+        let url = try #require(URL(string: "https://apple.com"))
         let attributes: Attributes = [
             .foregroundColor: AColor.blue
         ]
@@ -166,10 +182,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.link(url)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testBaselineOffset() {
+    @Test
+    func baselineOffset() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -183,10 +200,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.baselineOffset(2.0)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testLigature() {
+    @Test
+    func ligature() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -200,10 +218,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.ligature(.none)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testTextEffect() {
+    @Test
+    func textEffect() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -217,10 +236,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.textEffect(.letterpressStyle)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testWritingDirection() {
+    @Test
+    func writingDirection() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -234,10 +254,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.writingDirection(.rightToLeftDirectionEmbedding)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testLanguage() {
+    @Test
+    func language() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -251,11 +272,12 @@ final class AttributesTests: XCTestCase {
         let result = attributes.language(.dutch)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
+    @Test
     @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
-    func testLanguageIdentifier() {
+    func languageIdentifier() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -269,11 +291,12 @@ final class AttributesTests: XCTestCase {
         let result = attributes.languageIdentifier(.german)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
+    @Test
     @available(iOS 14, tvOS 14, watchOS 7, *)
-    func testTracking() {
+    func tracking() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -287,12 +310,13 @@ final class AttributesTests: XCTestCase {
         let result = attributes.tracking(2.0)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
     // MARK: - Platform dependent (typealias)
 
-    func testFont() {
+    @Test
+    func font() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -305,10 +329,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.font(.preferredFont(forTextStyle: .headline))
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testForegroundColor() {
+    @Test
+    func foregroundColor() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -322,10 +347,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.foregroundColor(.blue)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testBackgroundColor() {
+    @Test
+    func backgroundColor() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -339,10 +365,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.backgroundColor(.orange)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testUnderline() {
+    @Test
+    func underline() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -356,10 +383,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.underline(.double)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testUnderlineDefaultSingle() {
+    @Test
+    func underlineDefaultSingle() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -373,10 +401,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.underline()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testUnderlineWithColor() {
+    @Test
+    func underlineWithColor() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -391,10 +420,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.underline(color: .orange)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testUnderlineOverridesExistingColorWithNil() {
+    @Test
+    func underlineOverridesExistingColorWithNil() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -410,10 +440,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.underline(.double)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testStrikethrough() {
+    @Test
+    func strikethrough() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -427,10 +458,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.strikethrough(.double)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testStrikethroughDefaultIsSingle() {
+    @Test
+    func strikethroughDefaultIsSingle() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -444,10 +476,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.strikethrough()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testStrikethroughWithColor() {
+    @Test
+    func strikethroughWithColor() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -462,10 +495,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.strikethrough(color: .blue)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testStrikethroughExistingSettingsAreOverridden() {
+    @Test
+    func strikethroughExistingSettingsAreOverridden() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -481,10 +515,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.strikethrough(.double)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testShadowDefaultValues() {
+    @Test
+    func shadowDefaultValues() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -502,10 +537,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.shadow()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testShadowConfigured() {
+    @Test
+    func shadowConfigured() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -528,10 +564,11 @@ final class AttributesTests: XCTestCase {
         )
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testShadowExistingSettingsAreOverridden() {
+    @Test
+    func shadowExistingSettingsAreOverridden() {
         // Given
         let shadow = NSShadow()
         shadow.shadowOffset = CGSize(width: 5, height: 5)
@@ -555,10 +592,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.shadow()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testShadowIsCopiedWhenAttributesAreCopied() {
+    @Test
+    func shadowIsCopiedWhenAttributesAreCopied() {
         // Given
         let shadow1 = NSShadow()
         shadow1.shadowOffset = CGSize(width: 1, height: 1)
@@ -585,12 +623,13 @@ final class AttributesTests: XCTestCase {
             .shadow(offset: .init(width: 3, height: 3), blurRadius: 2.0, color: .yellow)
 
         // Then
-        XCTAssertFalse(NSDictionary(dictionary: attributes1).isEqual(to: attributes2))
-        XCTAssertTrue(NSDictionary(dictionary: attributes1).isEqual(to: expected1))
-        XCTAssertTrue(NSDictionary(dictionary: attributes2).isEqual(to: expected2))
+        #expect(!NSDictionary(dictionary: attributes1).isEqual(to: attributes2))
+        #expect(NSDictionary(dictionary: attributes1).isEqual(to: expected1))
+        #expect(NSDictionary(dictionary: attributes2).isEqual(to: expected2))
     }
 
-    func testStroke() {
+    @Test
+    func stroke() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -605,10 +644,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.stroke(width: 5.0, color: .purple)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testStrokeDefaultValues() {
+    @Test
+    func strokeDefaultValues() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -622,10 +662,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.stroke()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testStrokeExistingSettingsAreOverridden() {
+    @Test
+    func strokeExistingSettingsAreOverridden() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -640,10 +681,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.stroke()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testParagraphStyle() {
+    @Test
+    func paragraphStyle() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .right
@@ -659,10 +701,11 @@ final class AttributesTests: XCTestCase {
         let result = Attributes().paragraphStyle(paragraphStyle)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testParagraphStylesAreCopiedWhenAttributesAreCopied() {
+    @Test
+    func paragraphStylesAreCopiedWhenAttributesAreCopied() {
         // Given
         let paragraphStyle1 = NSMutableParagraphStyle()
         paragraphStyle1.alignment = .center
@@ -689,15 +732,16 @@ final class AttributesTests: XCTestCase {
             .lineBreakMode(.byCharWrapping)
 
         // Then
-        XCTAssertFalse(NSDictionary(dictionary: attributes1).isEqual(to: attributes2))
-        XCTAssertTrue(NSDictionary(dictionary: attributes1).isEqual(to: expected1))
-        XCTAssertTrue(NSDictionary(dictionary: attributes2).isEqual(to: expected2))
+        #expect(!NSDictionary(dictionary: attributes1).isEqual(to: attributes2))
+        #expect(NSDictionary(dictionary: attributes1).isEqual(to: expected1))
+        #expect(NSDictionary(dictionary: attributes2).isEqual(to: expected2))
     }
 
     // MARK: - All but watchOS
 
     #if !os(watchOS)
-    func testAttachment() throws {
+    @Test
+    func attachment() throws {
         // Given
         let image = try AImage.pencil()
         let bounds = CGRect(origin: .zero, size: .init(width: 1, height: 1))
@@ -712,16 +756,17 @@ final class AttributesTests: XCTestCase {
         let result = attributes.attachment(attachment)
 
         // Then
-        let resultAttachment = try XCTUnwrap(result[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
-        XCTAssertEqual(resultAttachment.bounds, bounds)
-        XCTAssertEqual(result[.foregroundColor] as? AColor, AColor.brown)
+        let resultAttachment = try #require(result[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
+        #expect(resultAttachment.bounds == bounds)
+        #expect(result[.foregroundColor] as? AColor == AColor.brown)
     }
     #endif
 
     // MARK: - UIKit/AppKit
 
-    func testFontWithTraitWithNoFontAndAddBold() throws {
+    @Test
+    func fontWithTraitWithNoFontAndAddBold() throws {
         #if canImport(UIKit)
         let trait: UIFontDescriptor.SymbolicTraits = .traitBold
         #elseif canImport(AppKit)
@@ -729,19 +774,19 @@ final class AttributesTests: XCTestCase {
         #endif
         let font = AFont.preferredFont(forTextStyle: .body)
         let expected = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
-
 
         // When
         let result = Attributes().fontWithTrait(trait)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testFontWithTraitWithExistingFontAndAddItalic() throws {
+    @Test
+    func fontWithTraitWithExistingFontAndAddItalic() throws {
         #if canImport(UIKit)
         let trait: UIFontDescriptor.SymbolicTraits = .traitItalic
         #elseif canImport(AppKit)
@@ -749,7 +794,7 @@ final class AttributesTests: XCTestCase {
         #endif
         let font = AFont.preferredFont(forTextStyle: .headline)
         let expected = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
         let attributes: Attributes = [
@@ -760,10 +805,11 @@ final class AttributesTests: XCTestCase {
         let result = attributes.fontWithTrait(trait)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAttributeComposition() throws {
+    @Test
+    func attributeComposition() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
         #if canImport(UIKit)
@@ -774,12 +820,14 @@ final class AttributesTests: XCTestCase {
         let italicTrait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
 
-        let bold = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
+        let boldDescriptor = try #require(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits]))
+        let bold = try #require(AFont(
+            descriptor: boldDescriptor,
             size: 0.0
         ))
-        let boldItalic = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits])),
+        let boldItalicDescriptor = try #require(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits]))
+        let boldItalic = try #require(AFont(
+            descriptor: boldItalicDescriptor,
             size: 0.0
         ))
         let paragraphStyle = NSMutableParagraphStyle()
@@ -814,6 +862,6 @@ final class AttributesTests: XCTestCase {
             .italic()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 }

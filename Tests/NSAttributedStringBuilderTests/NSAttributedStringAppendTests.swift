@@ -1,9 +1,16 @@
 import NSAttributedStringBuilder
-import XCTest
+import Testing
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
+#endif
 
-final class NSAttributedStringAppendTests: XCTestCase {
+@Suite
+struct NSAttributedStringAppendTests {
 
-    func testAppend() {
+    @Test
+    func append() {
         // Given
         let lhs = NSAttributedString(
             string: .unique(),
@@ -28,6 +35,6 @@ final class NSAttributedStringAppendTests: XCTestCase {
         let result = lhs + rhs
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 }

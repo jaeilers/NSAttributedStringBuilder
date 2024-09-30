@@ -1,13 +1,18 @@
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
+#endif
 @testable import NSAttributedStringBuilder
-import XCTest
+import Testing
 
 extension AImage {
 
     static func pencil() throws -> AImage {
         #if canImport(UIKit)
-        return try XCTUnwrap(UIImage(systemName: "pencil"))
+        return try #require(UIImage(systemName: "pencil"))
         #elseif canImport(AppKit)
-        return try XCTUnwrap(NSImage(systemSymbolName: "pencil", accessibilityDescription: nil))
+        return try #require(NSImage(systemSymbolName: "pencil", accessibilityDescription: nil))
         #else
         return AImage()
         #endif
@@ -15,9 +20,9 @@ extension AImage {
 
     static func star() throws -> AImage {
         #if canImport(UIKit)
-        return try XCTUnwrap(UIImage(systemName: "star"))
+        return try #require(UIImage(systemName: "star"))
         #elseif canImport(AppKit)
-        return try XCTUnwrap(NSImage(systemSymbolName: "star", accessibilityDescription: nil))
+        return try #require(NSImage(systemSymbolName: "star", accessibilityDescription: nil))
         #else
         return AImage()
         #endif

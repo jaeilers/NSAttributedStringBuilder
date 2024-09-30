@@ -1,26 +1,31 @@
 import NSAttributedStringBuilder
-import XCTest
+import Testing
 #if canImport(UIKit)
+import UIKit
 typealias AFontDescriptor = UIFontDescriptor
 #elseif canImport(AppKit)
+import AppKit
 typealias AFontDescriptor = NSFontDescriptor
 #endif
 
-final class AttributedStringBuildingCoreTests: XCTestCase {
+@Suite
+struct AttributedStringBuildingCoreTests {
 
     private let string = String.unique()
 
     // MARK: - Platform independent
 
-    func testAttributeFromStringReturnsNil() {
+    @Test
+    func attributeFromStringReturnsNil() {
         // When
         let result: AColor? = String.unique().attribute(.backgroundColor)
 
         // Then
-        XCTAssertNil(result)
+        #expect(result == nil)
     }
 
-    func testAttributeFromAttributedStringReturnsAttribute() {
+    @Test
+    func attributeFromAttributedStringReturnsAttribute() {
         // Given
         let attributedString = NSAttributedString(string: string, attributes: [.backgroundColor: AColor.yellow])
 
@@ -28,10 +33,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let attribute: AColor? = attributedString.attribute(.backgroundColor)
 
         // Then
-        XCTAssertEqual(attribute, AColor.yellow)
+        #expect(attribute == AColor.yellow)
     }
 
-    func testAttributeFromAttributedStringAndAttributeDoesNotExistReturnsNil() {
+    @Test
+    func attributeFromAttributedStringAndAttributeDoesNotExistReturnsNil() {
         // Given
         let attributedString = NSAttributedString(string: string, attributes: [.foregroundColor: AColor.black])
 
@@ -39,10 +45,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let attribute: AColor? = attributedString.attribute(.paragraphStyle)
 
         // Then
-        XCTAssertNil(attribute)
+        #expect(attribute == nil)
     }
 
-    func testAttributesFromAttributedStringWithUniformAttributes() {
+    @Test
+    func attributesFromAttributedStringWithUniformAttributes() {
         // Given
         let expected: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -56,10 +63,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let attributes = attributedString.attributes()
 
         // Then
-        XCTAssertEqual(NSDictionary(dictionary: attributes), NSDictionary(dictionary: expected))
+        #expect(NSDictionary(dictionary: attributes) == NSDictionary(dictionary: expected))
     }
 
-    func testAttributesFromAttributedStringWithMixedAttributesReturnsLastCharacterAttributes() {
+    @Test
+    func attributesFromAttributedStringWithMixedAttributesReturnsLastCharacterAttributes() {
         // Given
         let expected: Attributes = [
             .foregroundColor: AColor.white,
@@ -78,26 +86,29 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let attributes = attributedString.attributes()
 
         // Then
-        XCTAssertEqual(NSDictionary(dictionary: attributes), NSDictionary(dictionary: expected))
+        #expect(NSDictionary(dictionary: attributes) == NSDictionary(dictionary: expected))
     }
 
-    func testAttributesFromEmptyAttributedStringReturnsEmpty() {
+    @Test
+    func attributesFromEmptyAttributedStringReturnsEmpty() {
         // When
         let attributes = NSAttributedString().attributes()
 
         // Then
-        XCTAssertTrue(attributes.isEmpty)
+        #expect(attributes.isEmpty)
     }
 
-    func testAttributesFromStringReturnsEmpty() {
+    @Test
+    func attributesFromStringReturnsEmpty() {
         // When
         let attributes = string.attributes()
 
         // Then
-        XCTAssertTrue(attributes.isEmpty)
+        #expect(attributes.isEmpty)
     }
 
-    func testMutableParagraphStyleFromAttributedStringReturnsCurrent() {
+    @Test
+    func mutableParagraphStyleFromAttributedStringReturnsCurrent() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -110,10 +121,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = attributedString.mutableParagraphStyle()
 
         // Then
-        XCTAssertEqual(result, paragraphStyle)
+        #expect(result == paragraphStyle)
     }
 
-    func testMutableParagraphStyleFromAttributedStringWithNoParagraphStyle() {
+    @Test
+    func mutableParagraphStyleFromAttributedStringWithNoParagraphStyle() {
         // Given
         let attributedString = NSAttributedString(string: string)
 
@@ -121,18 +133,20 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = attributedString.mutableParagraphStyle()
 
         // Then
-        XCTAssertEqual(result, NSMutableParagraphStyle())
+        #expect(result == NSMutableParagraphStyle())
     }
 
-    func testMutableParagraphStyleFromStringReturnsEmpty() {
+    @Test
+    func mutableParagraphStyleFromStringReturnsEmpty() {
         // When
         let result = string.mutableParagraphStyle()
 
         // Then
-        XCTAssertEqual(result, NSMutableParagraphStyle())
+        #expect(result == NSMutableParagraphStyle())
     }
 
-    func testMutableAttributedStringFromAttributedString() {
+    @Test
+    func mutableAttributedStringFromAttributedString() {
         // Given
         let attributedString = NSAttributedString(
             string: string,
@@ -147,18 +161,20 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = attributedString.mutableAttributedString()
 
         // Then
-        XCTAssertEqual(result, attributedString)
+        #expect(result == attributedString)
     }
 
-    func testMutableAttributedStringFromString() {
+    @Test
+    func mutableAttributedStringFromString() {
         // When
         let result = string.mutableAttributedString()
 
         // Then
-        XCTAssertEqual(result, NSMutableAttributedString(string: string))
+        #expect(result == NSMutableAttributedString(string: string))
     }
 
-    func testAttributedStringFromAttributedString() {
+    @Test
+    func attributedStringFromAttributedString() {
         // Given
         let attributedString = NSAttributedString(
             string: string,
@@ -173,18 +189,20 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = attributedString.attributedString()
 
         // Then
-        XCTAssertEqual(result, attributedString)
+        #expect(result == attributedString)
     }
 
-    func testAttributedStringFromString() {
+    @Test
+    func attributedStringFromString() {
         // When
         let result = string.attributedString()
 
         // Then
-        XCTAssertEqual(result, NSAttributedString(string: string))
+        #expect(result == NSAttributedString(string: string))
     }
 
-    func testAddingAttributeToAttributedString() {
+    @Test
+    func addingAttributeToAttributedString() {
         // Given
         let attributedString = NSAttributedString(string: string, attributes: [.foregroundColor: AColor.blue])
         let expected = NSAttributedString(
@@ -200,10 +218,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
             .addingAttribute(.font, value: AFont.preferredFont(forTextStyle: .footnote))
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingAttributeToString() {
+    @Test
+    func addingAttributeToString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.foregroundColor: AColor.red])
 
@@ -211,10 +230,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = string.addingAttribute(.foregroundColor, value: AColor.red)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingAttributesToStringWithMultipleAttributes() {
+    @Test
+    func addingAttributesToStringWithMultipleAttributes() {
         // Given
         let attributes: Attributes = [
             .foregroundColor: AColor.yellow,
@@ -227,10 +247,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = string.addingAttributes(attributes)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingAttributesToAttributedStringWithMultipleAttributes() {
+    @Test
+    func addingAttributesToAttributedStringWithMultipleAttributes() {
         // Given
         let attributes: Attributes = [
             .foregroundColor: AColor.yellow,
@@ -243,10 +264,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = NSAttributedString(string: string).addingAttributes(attributes)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingAttributesToEmptyAttributedString() {
+    @Test
+    func addingAttributesToEmptyAttributedString() {
         // Given
         let attributedString = NSAttributedString()
 
@@ -256,10 +278,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
             .attributes()
 
         // Then
-        XCTAssertTrue(result.isEmpty)
+        #expect(result.isEmpty)
     }
 
-    func testAddingStringToAttributedString() {
+    @Test
+    func addingStringToAttributedString() {
         // Given
         let expected = NSAttributedString(string: string)
 
@@ -267,10 +290,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = NSAttributedString().addingString(string)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingStringToString() {
+    @Test
+    func addingStringToString() {
         // Given
         let newString = String.unique()
         let expected = NSAttributedString(string: string + newString)
@@ -279,10 +303,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = string.addingString(newString)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingStringWithEmptyString() {
+    @Test
+    func addingStringWithEmptyString() {
         // Given
         let expected = NSAttributedString(string: string)
 
@@ -290,18 +315,20 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = "".addingString(string)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingStringWhereBothAreEmptyStrings() {
+    @Test
+    func addingStringWhereBothAreEmptyStrings() {
         // When
         let result = "".addingString("")
 
         // Then
-        XCTAssertEqual(result, NSAttributedString())
+        #expect(result == NSAttributedString())
     }
 
-    func testAddingStringToAttributedStringWithExistingAttributes() {
+    @Test
+    func addingStringToAttributedStringWithExistingAttributes() {
         // Given
         let newString = String.unique()
         let attributes: Attributes = [
@@ -315,10 +342,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = attributedString.addingString(newString)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingStringToMixedAttributedStringWithAttributes() {
+    @Test
+    func addingStringToMixedAttributedStringWithAttributes() {
         // Given
         let firstString = String.unique()
         let secondString = String.unique()
@@ -343,10 +371,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = combined.addingString(thirdString)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingAttributedStringToAttributedStringAndAttributesAreMerged() {
+    @Test
+    func addingAttributedStringToAttributedStringAndAttributesAreMerged() {
         // Given
         let newString = String.unique()
         let attributedString = NSAttributedString(
@@ -374,10 +403,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = attributedString.addingAttributedString(newAttributedString)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingAttributedStringToStringAndAttributesAreAdded() {
+    @Test
+    func addingAttributedStringToStringAndAttributesAreAdded() {
         // Given
         let newString = String.unique()
         let attributes: Attributes = [
@@ -391,28 +421,31 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = string.addingAttributedString(NSAttributedString(string: newString, attributes: attributes))
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAddingAttributedStringToEmptyAttributedString() {
+    @Test
+    func addingAttributedStringToEmptyAttributedString() {
         // When
         let result = NSAttributedString().addingAttributedString(NSAttributedString())
 
         // Then
-        XCTAssertEqual(result, NSAttributedString())
+        #expect(result == NSAttributedString())
     }
 
-    func testAddingAttributedStringToEmptyString() {
+    @Test
+    func addingAttributedStringToEmptyString() {
         // When
         let result = "".addingAttributedString(NSAttributedString())
 
         // Then
-        XCTAssertEqual(result, NSAttributedString())
+        #expect(result == NSAttributedString())
     }
 
     // MARK: - UIKit/AppKit
 
-    func testFontWithTraitToAttributedStringWithNoFontAndAddBold() throws {
+    @Test
+    func fontWithTraitToAttributedStringWithNoFontAndAddBold() throws {
         // Given
         #if canImport(UIKit)
         let trait: UIFontDescriptor.SymbolicTraits = .traitBold
@@ -422,7 +455,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         let font = AFont.preferredFont(forTextStyle: .body)
         let expected = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
 
@@ -430,10 +463,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = NSAttributedString(string: string).fontWithTrait(trait)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testFontWithTraitToAttributedStringWithExistingFontAndAddItalic() throws {
+    @Test
+    func fontWithTraitToAttributedStringWithExistingFontAndAddItalic() throws {
         // Given
         #if canImport(UIKit)
         let trait: UIFontDescriptor.SymbolicTraits = .traitItalic
@@ -442,7 +476,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         #endif
         let font = AFont.preferredFont(forTextStyle: .headline)
         let expected = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
         let attributedString = NSAttributedString(string: string, attributes: [.font: font])
@@ -451,10 +485,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = attributedString.fontWithTrait(trait)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testFontWithTraitToStringAndAddBold() throws {
+    @Test
+    func fontWithTraitToStringAndAddBold() throws {
         // Given
         #if canImport(UIKit)
         let trait: UIFontDescriptor.SymbolicTraits = .traitBold
@@ -464,7 +499,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         let font = AFont.preferredFont(forTextStyle: .body)
         let expected = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
 
@@ -472,10 +507,11 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = string.fontWithTrait(trait)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAttributedStringAndColorIsChangedResultIsCopied() {
+    @Test
+    func attributedStringAndColorIsChangedResultIsCopied() {
         // Given
         let string1 = String.unique()
             .foregroundColor(.red)
@@ -485,11 +521,12 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
             .foregroundColor(.blue)
 
         // Then
-        XCTAssertFalse(string1 === string2)
-        XCTAssertFalse(string1 == string2)
+        #expect(string1 !== string2)
+        #expect(string1 != string2)
     }
 
-    func testAttributedStringConcatStringsResultIsCopied() {
+    @Test
+    func attributedStringConcatStringsResultIsCopied() {
         // Given
         let string1 = String.unique()
             .alignment(.center)
@@ -502,38 +539,42 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = string1.addingAttributedString(string2)
 
         // Then
-        XCTAssertFalse(result === string1)
-        XCTAssertFalse(result == string1)
+        #expect(result !== string1)
+        #expect(result != string1)
     }
 
     // MARK: - All platforms but watchOS
 
     #if !os(watchOS)
-    func testAttributeFromImageReturnsNil() throws {
+    @Test
+    func attributeFromImageReturnsNil() throws {
         // When
         let result: AFont? = try AImage.pencil().attribute(.font)
 
         // Then
-        XCTAssertNil(result)
+        #expect(result == nil)
     }
 
-    func testAttributesFromImageReturnsEmpty() throws {
+    @Test
+    func attributesFromImageReturnsEmpty() throws {
         // When
         let attributes = try AImage.pencil().attributes()
 
         // Then
-        XCTAssertTrue(attributes.isEmpty)
+        #expect(attributes.isEmpty)
     }
 
-    func testMutableParagraphStyleFromImageReturnsEmpty() throws {
+    @Test
+    func mutableParagraphStyleFromImageReturnsEmpty() throws {
         // When
         let result = try AImage.pencil().mutableParagraphStyle()
 
         // Then
-        XCTAssertEqual(result, NSMutableParagraphStyle())
+        #expect(result == NSMutableParagraphStyle())
     }
 
-    func testMutableAttributedStringFromImage() throws {
+    @Test
+    func mutableAttributedStringFromImage() throws {
         // Given
         let image = try AImage.pencil()
 
@@ -542,11 +583,12 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
     }
 
-    func testAttributedStringFromImage() throws {
+    @Test
+    func attributedStringFromImage() throws {
         // Given
         let image = try AImage.pencil()
 
@@ -555,11 +597,12 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
     }
 
-    func testAddingAttributeToImage() throws {
+    @Test
+    func addingAttributeToImage() throws {
         // Given
         let image = try AImage.pencil()
 
@@ -568,12 +611,13 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        XCTAssertEqual(resultAttributes[.foregroundColor] as? AColor, AColor.red)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
+        #expect(resultAttributes[.foregroundColor] as? AColor == AColor.red)
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
     }
 
-    func testAddingAttributesToImage() throws {
+    @Test
+    func addingAttributesToImage() throws {
         // Given
         let attributes: Attributes = [
             .foregroundColor: AColor.blue,
@@ -586,13 +630,14 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: 0, effectiveRange: nil)
-        XCTAssertEqual(resultAttributes[.foregroundColor] as? AColor, AColor.blue)
-        XCTAssertEqual(resultAttributes[.backgroundColor] as? AColor, AColor.yellow)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
+        #expect(resultAttributes[.foregroundColor] as? AColor == AColor.blue)
+        #expect(resultAttributes[.backgroundColor] as? AColor == AColor.yellow)
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
     }
 
-    func testAddingStringToImage() throws {
+    @Test
+    func addingStringToImage() throws {
         // Given
         let image = try AImage.pencil()
 
@@ -601,15 +646,16 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         // Then
         let resultImageAttributes = result.attributes(at: 0, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultImageAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
+        let resultAttachment = try #require(resultImageAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
         let resultString = result.attributedSubstring(from: NSRange(location: 1, length: (string as NSString).length))
-        XCTAssertEqual(resultString.string, string)
+        #expect(resultString.string == string)
         let resultStringAttributes = resultString.attributes(at: 0, effectiveRange: nil)
-        XCTAssertNil(resultStringAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultStringAttributes[.attachment] as? NSTextAttachment == nil)
     }
 
-    func testAddingAttributedStringToImage() throws {
+    @Test
+    func addingAttributedStringToImage() throws {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
@@ -624,18 +670,19 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         // Then
         let resultAttributedString = result.attributedSubstring(from: NSRange(location: 1, length: attributedString.length))
-        XCTAssertEqual(resultAttributedString, attributedString)
+        #expect(resultAttributedString == attributedString)
 
         let resultImageAttributes = result.attributes(at: 0, effectiveRange: nil)
-        XCTAssertEqual(resultImageAttributes[.font] as? AFont, AFont.preferredFont(forTextStyle: .footnote))
-        XCTAssertEqual(resultImageAttributes[.foregroundColor] as? AColor, AColor.red)
-        XCTAssertEqual(resultImageAttributes[.kern] as? NSNumber, NSNumber(value: 2.0))
+        #expect(resultImageAttributes[.font] as? AFont == AFont.preferredFont(forTextStyle: .footnote))
+        #expect(resultImageAttributes[.foregroundColor] as? AColor == AColor.red)
+        #expect(resultImageAttributes[.kern] as? NSNumber == NSNumber(value: 2.0))
 
-        let resultAttachment = try XCTUnwrap(resultImageAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
+        let resultAttachment = try #require(resultImageAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
     }
 
-    func testFontWithTraitToImageAndAddBold() throws {
+    @Test
+    func fontWithTraitToImageAndAddBold() throws {
         // Given
         let image = try AImage.pencil()
         #if canImport(UIKit)
@@ -646,7 +693,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
 
         let font = AFont.preferredFont(forTextStyle: .body)
         let expected = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
 
@@ -654,7 +701,7 @@ final class AttributedStringBuildingCoreTests: XCTestCase {
         let result = image.fontWithTrait(trait)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
     #endif
 }
