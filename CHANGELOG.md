@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated Swift toolchain to Swift 6
+- Updated github actions pipeline to Xcode 16
+
 ## [0.3.1] - 2024-04-21
 
 ### Added
