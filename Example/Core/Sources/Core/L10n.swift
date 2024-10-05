@@ -1,6 +1,6 @@
 import Foundation
 
-enum L10n {
+enum L10n: Sendable {
     static let condensedText = NSLocalizedString("condensed.text", bundle: Bundle.module, comment: "")
     static let dummyTextGerman = NSLocalizedString("dummy.text.german", bundle: Bundle.module, comment: "")
     static let monospacedText = NSLocalizedString("monospaced.text", bundle: Bundle.module, comment: "")

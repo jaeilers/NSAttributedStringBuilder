@@ -10,7 +10,7 @@ struct ContentView: View {
     }
 
     private func makeRow(_ item: ListItem) -> some View {
-        Text(AttributedString(item.text))
+        Text(AttributedString(item.text()))
     }
 }
 

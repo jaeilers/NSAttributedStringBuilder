@@ -54,13 +54,14 @@ final class ViewController: UIViewController {
 
 private enum DataSourceFactory {
 
+    @MainActor
     static func makeDataSource(with tableView: UITableView) -> UITableViewDiffableDataSource<Int, ListItem> {
         UITableViewDiffableDataSource<Int, ListItem>(tableView: tableView) { tableView, indexPath, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
             cell.selectionStyle = .none
 
             var config = cell.defaultContentConfiguration()
-            config.attributedText = item.text
+            config.attributedText = item.text()
             cell.contentConfiguration = config
 
             return cell
