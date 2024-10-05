@@ -1,13 +1,20 @@
 import NSAttributedStringBuilder
-import XCTest
+import Testing
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
+#endif
 
-final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
+@Suite
+struct AttributedStringBuildingMultiPlatformTests {
 
     private let string = String.unique()
 
     // MARK: - Platform independent
 
-    func testTextWithAttributedString() {
+    @Test
+    func textWithAttributedString() {
         // Given
         let newString = String.unique()
         let attributes: Attributes = [
@@ -20,10 +27,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.text(newString)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTextWithString() {
+    @Test
+    func textWithString() {
         // Given
         let newString = String.unique()
         let expected = NSAttributedString(string: string + newString)
@@ -32,10 +40,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.text(newString)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testKerningWithAttributedString() {
+    @Test
+    func kerningWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .headline)
@@ -48,10 +57,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.kerning(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testKerningWithString() {
+    @Test
+    func kerningWithString() {
         // Given
         let attributes: Attributes = [
             .kern: NSNumber(value: 1.0)
@@ -62,10 +72,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.kerning(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpaceWithAttributedStringAndStandardSpace() {
+    @Test
+    func spaceWithAttributedStringAndStandardSpace() {
         // Given
         let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 1)
@@ -77,10 +88,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.space()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpaceWithStringAndStandardSpace() {
+    @Test
+    func spaceWithStringAndStandardSpace() {
         // Given
         let expected = NSAttributedString(string: string + " ")
 
@@ -88,10 +100,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.space()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpaceWithAttributedStringAndENSpace() {
+    @Test
+    func spaceWithAttributedStringAndENSpace() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
@@ -103,10 +116,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.space(.enSpace)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpaceWithStringAndENSpace() {
+    @Test
+    func spaceWithStringAndENSpace() {
         // Given
         let expected = NSAttributedString(string: string + "\u{2002}")
 
@@ -114,10 +128,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.space(.enSpace)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpaceWithAttributedStringAndEMSpace() {
+    @Test
+    func spaceWithAttributedStringAndEMSpace() {
         // Given
         let attributes: Attributes = [
             .backgroundColor: AColor.brown
@@ -129,10 +144,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.space(.emSpace)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpaceWithStringAndEMSpace() {
+    @Test
+    func spaceWithStringAndEMSpace() {
         // Given
         let expected = NSAttributedString(string: string + "\u{2003}")
 
@@ -140,10 +156,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.space(.emSpace)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testNonBreakingSpaceWithAttributedString() {
+    @Test
+    func nonBreakingSpaceWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote),
@@ -156,10 +173,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.nonBreakingSpace()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testNonBreakingSpaceWithString() {
+    @Test
+    func nonBreakingSpaceWithString() {
         // Given
         let expected = NSAttributedString(string: string + "\u{00A0}")
 
@@ -167,10 +185,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.nonBreakingSpace()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testNarrowNonBreakingSpaceWithAttributedString() {
+    @Test
+    func narrowNonBreakingSpaceWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -183,10 +202,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.space(.narrowNonBreakingSpace)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testNarrowNonBreakingSpaceWithString() {
+    @Test
+    func narrowNonBreakingSpaceWithString() {
         // Given
         let expected = NSAttributedString(string: string + "\u{202F}")
 
@@ -194,10 +214,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.space(.narrowNonBreakingSpace)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testNewlineWithAttributedString() {
+    @Test
+    func newlineWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .backgroundColor: AColor.black
@@ -209,10 +230,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.newline()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testNewlineWithString() {
+    @Test
+    func newlineWithString() {
         // Given
         let expected = NSAttributedString(string: string + "\n")
 
@@ -220,12 +242,13 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.newline()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLinkWithAttributedString() throws {
+    @Test
+    func linkWithAttributedString() throws {
         // Given
-        let url = try XCTUnwrap(URL(string: "https://apple.com"))
+        let url = try #require(URL(string: "https://apple.com"))
         let attributes: Attributes = [
             .backgroundColor: AColor.yellow
         ]
@@ -237,12 +260,13 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.link(url)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLinkWithString() throws {
+    @Test
+    func linkWithString() throws {
         // Given
-        let url = try XCTUnwrap(URL(string: "https://apple.com"))
+        let url = try #require(URL(string: "https://apple.com"))
         let attributes: Attributes = [
             .link: url as NSURL
         ]
@@ -252,10 +276,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.link(url)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBaselineOffsetWithAttributedString() {
+    @Test
+    func baselineOffsetWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .foregroundColor: AColor.lightGray
@@ -268,10 +293,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.baselineOffset(2.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBaselineOffsetWithString() {
+    @Test
+    func baselineOffsetWithString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.baselineOffset: NSNumber(value: 2.0)])
 
@@ -279,10 +305,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.baselineOffset(2.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLigatureWithAttributedStringAndNoLigature() {
+    @Test
+    func ligatureWithAttributedStringAndNoLigature() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .caption1)
@@ -295,10 +322,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.ligature(.none)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLigatureWithStringAndNoLigature() {
+    @Test
+    func ligatureWithStringAndNoLigature() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.ligature: NSNumber(value: 0)])
 
@@ -306,10 +334,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.ligature(.none)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLigatureWithAttributedStringAndDefaultLigatures() {
+    @Test
+    func ligatureWithAttributedStringAndDefaultLigatures() {
         // Given
         let attributes: Attributes = [
             .kern: NSNumber(value: 5.0)
@@ -322,10 +351,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.ligature(.default)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLigatureWithStringAndDefaultLigatures() {
+    @Test
+    func ligatureWithStringAndDefaultLigatures() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.ligature: NSNumber(value: 1)])
 
@@ -333,10 +363,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.ligature(.default)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTextEffectWithAttributedStringAndLetterpressStyle() {
+    @Test
+    func textEffectWithAttributedStringAndLetterpressStyle() {
         // Given
         let attributes: Attributes = [
             .strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)
@@ -352,10 +383,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.textEffect(.letterpressStyle)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTextEffectWithStringAndLetterpressStyle() {
+    @Test
+    func textEffectWithStringAndLetterpressStyle() {
         // Given
         let expected = NSAttributedString(
             string: string,
@@ -366,10 +398,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.textEffect(.letterpressStyle)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testWritingDirectionWithAttributedStringAndLeftToRightEmbedding() {
+    @Test
+    func writingDirectionWithAttributedStringAndLeftToRightEmbedding() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
@@ -385,10 +418,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.writingDirection(.leftToRightDirectionEmbedding)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testWritingDirectionWithStringAndLeftToRightEmbedding() {
+    @Test
+    func writingDirectionWithStringAndLeftToRightEmbedding() {
         // Given
         let expected = NSAttributedString(
             string: string,
@@ -399,10 +433,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.writingDirection(.leftToRightDirectionEmbedding)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testWritingDirectionWithAttributedStringAndLeftToRightOverride() {
+    @Test
+    func writingDirectionWithAttributedStringAndLeftToRightOverride() {
         // Given
         let attributes: Attributes = [
             .backgroundColor: AColor.black
@@ -418,10 +453,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.writingDirection(.leftToRightDirectionOverride)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testWritingDirectionWithStringAndLeftToRightOverride() {
+    @Test
+    func writingDirectionWithStringAndLeftToRightOverride() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.writingDirection: [NSWritingDirection.leftToRight.rawValue | NSWritingDirectionFormatType.override.rawValue]])
 
@@ -429,10 +465,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.writingDirection(.leftToRightDirectionOverride)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testWritingDirectionWithAttributedStringAndRightToLeftEmbedding() {
+    @Test
+    func writingDirectionWithAttributedStringAndRightToLeftEmbedding() {
         // Given
         let attributes: Attributes = [
             .foregroundColor: AColor.blue
@@ -445,10 +482,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.writingDirection(.rightToLeftDirectionEmbedding)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testWritingDirectionWithStringAndRightToLeftEmbedding() {
+    @Test
+    func writingDirectionWithStringAndRightToLeftEmbedding() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.writingDirection: [NSWritingDirection.rightToLeft.rawValue | NSWritingDirectionFormatType.embedding.rawValue]])
 
@@ -456,10 +494,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.writingDirection(.rightToLeftDirectionEmbedding)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testWritingDirectionWithAttributedStringAndRightToLeftOverride() {
+    @Test
+    func writingDirectionWithAttributedStringAndRightToLeftOverride() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .headline)
@@ -472,10 +511,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.writingDirection(.rightToLeftDirectionOverride)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testWritingDirectionWithStringAndRightToLeftOverride() {
+    @Test
+    func writingDirectionWithStringAndRightToLeftOverride() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.writingDirection: [NSWritingDirection.rightToLeft.rawValue | NSWritingDirectionFormatType.override.rawValue]])
 
@@ -483,10 +523,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.writingDirection(.rightToLeftDirectionOverride)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLanguageWithAttributedString() {
+    @Test
+    func languageWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
@@ -499,10 +540,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.language(.english)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLanguageIdentifierWithString() {
+    @Test
+    func languageIdentifierWithString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [NSAttributedString.Key(String(kCTLanguageAttributeName)): "de"])
 
@@ -510,11 +552,12 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.language(.german)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
+    @Test
     @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
-    func testLanguageIdentifierWithLanguageCodeAndAttributedString() {
+    func languageIdentifierWithLanguageCodeAndAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
@@ -527,11 +570,12 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.languageIdentifier(.italian)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
+    @Test
     @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
-    func testLanguageIdentifierWithLanguageIdentifierAndString() {
+    func languageIdentifierWithLanguageIdentifierAndString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.languageIdentifier: "fr"])
 
@@ -539,11 +583,12 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.languageIdentifier(.french)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
+    @Test
     @available(iOS 14, tvOS 14, watchOS 7, *)
-    func testTrackingWithAttributedString() {
+    func trackingWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body),
@@ -557,11 +602,12 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.tracking(2)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
+    @Test
     @available(iOS 14, tvOS 14, watchOS 7, *)
-    func testTrackingWithString() {
+    func trackingWithString() {
         // Given
         let attributes: Attributes = [
             .tracking: NSNumber(value: 5)
@@ -572,12 +618,13 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.tracking(5)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
     // MARK: - Paragraph Styles
 
-    func testParagraphStyleWithAttributedString() {
+    @Test
+    func paragraphStyleWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -595,10 +642,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.paragraphStyle(paragraphStyle)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testParagraphStyleWithString() {
+    @Test
+    func paragraphStyleWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.allowsDefaultTighteningForTruncation = true
@@ -611,10 +659,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.paragraphStyle(paragraphStyle)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testParagraphStyleWithAttributedStringOverrideExistingParagraphStyle() {
+    @Test
+    func paragraphStyleWithAttributedStringOverrideExistingParagraphStyle() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -633,10 +682,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.paragraphStyle(newParagraphStyle)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAlignmentWithAttributedString() {
+    @Test
+    func alignmentWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -656,10 +706,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.alignment(.natural)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAlignmentWithString() {
+    @Test
+    func alignmentWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -669,10 +720,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.alignment(.center)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testFirstLineHeadIndentWithAttributedString() {
+    @Test
+    func firstLineHeadIndentWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -691,10 +743,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.firstLineHeadIndent(123.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testFirstLineHeadIndentWithString() {
+    @Test
+    func firstLineHeadIndentWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.firstLineHeadIndent = 42.0
@@ -704,10 +757,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.firstLineHeadIndent(42.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testHeadIndentWithAttributedString() {
+    @Test
+    func headIndentWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
@@ -726,10 +780,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.headIndent(42.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testHeadIndentWithString() {
+    @Test
+    func headIndentWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headIndent = 1.0
@@ -739,10 +794,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.headIndent(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTailIndentWithAttributedString() {
+    @Test
+    func tailIndentWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
@@ -760,10 +816,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.tailIndent(13.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTailIndentWithString() {
+    @Test
+    func tailIndentWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.tailIndent = 2.0
@@ -773,10 +830,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.tailIndent(2.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLineHeightMultipleWithAttributedString() {
+    @Test
+    func lineHeightMultipleWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -795,10 +853,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.lineHeightMultiple(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLineHeightMultipleWithString() {
+    @Test
+    func lineHeightMultipleWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 4.0
@@ -808,10 +867,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.lineHeightMultiple(4.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMaximumLineHeightWithAttributedString() {
+    @Test
+    func maximumLineHeightWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 20.0
@@ -830,10 +890,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.maximumLineHeight(5.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMaximumLineHeightWithString() {
+    @Test
+    func maximumLineHeightWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.maximumLineHeight = 10.0
@@ -843,10 +904,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.maximumLineHeight(10.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMinimumLineHeightWithAttributedString() {
+    @Test
+    func minimumLineHeightWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 8.0
@@ -865,10 +927,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.minimumLineHeight(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMinimumLineHeightWithString() {
+    @Test
+    func minimumLineHeightWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = 3.0
@@ -878,10 +941,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.minimumLineHeight(3.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLineSpacingWithAttributedString() {
+    @Test
+    func lineSpacingWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .right
@@ -900,10 +964,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.lineSpacing(5.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLineSpacingWithString() {
+    @Test
+    func lineSpacingWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 1.0
@@ -913,10 +978,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.lineSpacing(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testParagraphSpacingWithAttributedString() {
+    @Test
+    func paragraphSpacingWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
@@ -934,10 +1000,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.paragraphSpacing(16.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testParagraphSpacingWithString() {
+    @Test
+    func paragraphSpacingWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.paragraphSpacing = 4.0
@@ -947,10 +1014,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.paragraphSpacing(4.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testParagraphSpacingBeforeWithAttributedString() {
+    @Test
+    func paragraphSpacingBeforeWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
@@ -969,10 +1037,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.paragraphSpacingBefore(3.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testParagraphSpacingBeforeWithString() {
+    @Test
+    func paragraphSpacingBeforeWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.paragraphSpacingBefore = 1.0
@@ -982,10 +1051,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.paragraphSpacingBefore(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLineBreakModeWithAttributedString() {
+    @Test
+    func lineBreakModeWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2.0
@@ -1004,10 +1074,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.lineBreakMode(.byTruncatingTail)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLineBreakModeWithString() {
+    @Test
+    func lineBreakModeWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
@@ -1017,10 +1088,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.lineBreakMode(.byWordWrapping)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLineBreakStrategyWithAttributedString() {
+    @Test
+    func lineBreakStrategyWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.hyphenationFactor = 2.0
@@ -1039,10 +1111,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.lineBreakStrategy(.pushOut)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLineBreakStrategyWithString() {
+    @Test
+    func lineBreakStrategyWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakStrategy = .pushOut
@@ -1052,10 +1125,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.lineBreakStrategy(.pushOut)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testHyphenationFactorWithAttributedString() {
+    @Test
+    func hyphenationFactorWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -1074,10 +1148,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.hyphenationFactor(0.5)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testHyphenationFactorWithString() {
+    @Test
+    func hyphenationFactorWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.hyphenationFactor = 1.0
@@ -1087,11 +1162,12 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.hyphenationFactor(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
+    @Test
     @available(iOS 15, macOS 13, watchOS 8, tvOS 15, *)
-    func testUsesDefaultHyphenationWithAttributedString() {
+    func usesDefaultHyphenationWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -1110,11 +1186,12 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.usesDefaultHyphenation(true)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
+    @Test
     @available(iOS 15, macOS 13, watchOS 8, tvOS 15, *)
-    func testUsesDefaultHyphenationWithString() {
+    func usesDefaultHyphenationWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.usesDefaultHyphenation = false
@@ -1124,10 +1201,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.usesDefaultHyphenation(false)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAllowsDefaultTighteningForTruncationWithAttributedString() {
+    @Test
+    func allowsDefaultTighteningForTruncationWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -1146,10 +1224,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.allowsDefaultTighteningForTruncation(true)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAllowsDefaultTighteningForTruncationWithString() {
+    @Test
+    func allowsDefaultTighteningForTruncationWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.allowsDefaultTighteningForTruncation = false
@@ -1159,10 +1238,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.allowsDefaultTighteningForTruncation(false)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBaseWritingDirectionWithAttributedString() {
+    @Test
+    func baseWritingDirectionWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -1181,10 +1261,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.baseWritingDirection(.leftToRight)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBaseWritingDirectionWithString() {
+    @Test
+    func baseWritingDirectionWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.baseWritingDirection = .rightToLeft
@@ -1194,10 +1275,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.baseWritingDirection(.rightToLeft)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTabStopsWithAttributedString() {
+    @Test
+    func tabStopsWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -1217,10 +1299,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.tabStops([NSTextTab(textAlignment: .left, location: 0)], defaultInterval: 3.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTabStopsWithString() {
+    @Test
+    func tabStopsWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.tabStops = [NSTextTab(textAlignment: .center, location: 0)]
@@ -1230,10 +1313,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.tabStops([NSTextTab(textAlignment: .center, location: 0)])
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMultipleParagraphStylesWithAttributedStringAndExistingParagraphStyle() {
+    @Test
+    func multipleParagraphStylesWithAttributedStringAndExistingParagraphStyle() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 13.0
@@ -1261,12 +1345,13 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
             .alignment(.center)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
     // MARK: - Platform dependent (typealias)
 
-    func testFontWithAttributedStringOverridesExistingFont() {
+    @Test
+    func fontWithAttributedStringOverridesExistingFont() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .footnote)
@@ -1278,10 +1363,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.font(AFont.preferredFont(forTextStyle: .headline))
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testFontWithString() {
+    @Test
+    func fontWithString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.font: AFont.preferredFont(forTextStyle: .caption1)])
 
@@ -1289,10 +1375,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.font(AFont.preferredFont(forTextStyle: .caption1))
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testForegroundColorWithAttributedStringOverridesExistingColor() {
+    @Test
+    func foregroundColorWithAttributedStringOverridesExistingColor() {
         // Given
         let attributes: Attributes = [
             .foregroundColor: AColor.black
@@ -1304,10 +1391,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.foregroundColor(AColor.yellow)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testForegroundColorWithString() {
+    @Test
+    func foregroundColorWithString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.foregroundColor: AColor.cyan])
 
@@ -1315,10 +1403,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.foregroundColor(AColor.cyan)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBackgroundColorWithAttributedStringOverridesExistingColor() {
+    @Test
+    func backgroundColorWithAttributedStringOverridesExistingColor() {
         // Given
         let attributes: Attributes = [
             .backgroundColor: AColor.yellow
@@ -1330,10 +1419,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.backgroundColor(AColor.blue)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBackgroundColorWithString() {
+    @Test
+    func backgroundColorWithString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.backgroundColor: AColor.cyan])
 
@@ -1341,10 +1431,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.backgroundColor(AColor.cyan)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testUnderlineStyleWithAttributedStringOverridesExistingValue() {
+    @Test
+    func underlineStyleWithAttributedStringOverridesExistingValue() {
         // Given
         let attributes: Attributes = [
             .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)
@@ -1356,10 +1447,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.underline(.double)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testUnderlineStyleWithAttributedStringAndUnderlineColorOverridesExistingValues() {
+    @Test
+    func underlineStyleWithAttributedStringAndUnderlineColorOverridesExistingValues() {
         // Given
         let attributes: Attributes = [
             .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
@@ -1378,10 +1470,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.underline(.double, color: AColor.brown)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testUnderlineStyleWithAttributedStringAndUnderlineColorNoColorDoesNotResetExistingValue() {
+    @Test
+    func underlineStyleWithAttributedStringAndUnderlineColorNoColorDoesNotResetExistingValue() {
         // Given
         let attributes: Attributes = [
             .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
@@ -1400,10 +1493,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.underline(.double)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testUnderlineStyleWithString() {
+    @Test
+    func underlineStyleWithString() {
         // Given
         let expected = NSAttributedString(
             string: string,
@@ -1416,10 +1510,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.underline(.single)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testUnderlineStyleWithStringAndUnderlineColor() {
+    @Test
+    func underlineStyleWithStringAndUnderlineColor() {
         // Given
         let expected = NSAttributedString(
             string: string,
@@ -1433,10 +1528,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.underline(.single, color: AColor.cyan)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testStrikethroughWithAttributedStringOverridesExistingValue() {
+    @Test
+    func strikethroughWithAttributedStringOverridesExistingValue() {
         // Given
         let attributes: Attributes = [
             .strikethroughStyle: NSNumber(value: NSUnderlineStyle.double.rawValue)
@@ -1453,10 +1549,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.strikethrough()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testStrikethroughWithAttributedStringAndColorOverridesExistingValues() {
+    @Test
+    func strikethroughWithAttributedStringAndColorOverridesExistingValues() {
         // Given
         let attributes: Attributes = [
             .strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
@@ -1475,10 +1572,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.strikethrough(.double, color: AColor.orange)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testStrikethroughWithAttributedStringAndNoColorDoesNotOverrideExistingValue() {
+    @Test
+    func strikethroughWithAttributedStringAndNoColorDoesNotOverrideExistingValue() {
         // Given
         let attributes: Attributes = [
             .strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue),
@@ -1497,10 +1595,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.strikethrough(.double)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testStrikethroughWithString() {
+    @Test
+    func strikethroughWithString() {
         // Given
         let expected = NSAttributedString(
             string: string,
@@ -1513,10 +1612,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.strikethrough()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testStrikethroughWithStringAndUnderlineColor() {
+    @Test
+    func strikethroughWithStringAndUnderlineColor() {
         // Given
         let expected = NSAttributedString(
             string: string,
@@ -1530,10 +1630,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.strikethrough(.single, color: AColor.cyan)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testShadowWithAttributedStringDefaultValuesAreAppliedAndOverrideExistingValues() {
+    @Test
+    func shadowWithAttributedStringDefaultValuesAreAppliedAndOverrideExistingValues() {
         // Given
         let shadow = NSShadow()
         shadow.shadowOffset = .init(width: 5, height: 5)
@@ -1548,10 +1649,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.shadow()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testShadowWithAttributedStringAndColor() {
+    @Test
+    func shadowWithAttributedStringAndColor() {
         // Given
         let shadow = NSShadow()
         shadow.shadowOffset = .init(width: 5, height: 5)
@@ -1572,10 +1674,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         )
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testShadowWithAttributedStringExistingShadowIsOverridden() {
+    @Test
+    func shadowWithAttributedStringExistingShadowIsOverridden() {
         // Given
         let shadow = NSShadow()
         shadow.shadowOffset = .init(width: 5, height: 5)
@@ -1595,10 +1698,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         )
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testShadowWithString() {
+    @Test
+    func shadowWithString() {
         // Given
         let shadow = NSShadow()
         shadow.shadowOffset = .init(width: 1, height: 1)
@@ -1609,10 +1713,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.shadow()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testShadowWithStringAndColor() {
+    @Test
+    func shadowWithStringAndColor() {
         // Given
         let shadow = NSShadow()
         shadow.shadowOffset = .init(width: 15, height: 15)
@@ -1628,10 +1733,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         )
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testStrokeWithAttributedStringOverridesExistingValueAndDefaultValueIsApplied() {
+    @Test
+    func strokeWithAttributedStringOverridesExistingValueAndDefaultValueIsApplied() {
         // Given
         let attributes: Attributes = [
             .strokeWidth: NSNumber(value: 10)
@@ -1643,10 +1749,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.stroke()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testStrokeWithAttributedStringAndColorOverridesExistingValues() {
+    @Test
+    func strokeWithAttributedStringAndColorOverridesExistingValues() {
         // Given
         let attributes: Attributes = [
             .strokeWidth: NSNumber(value: 10),
@@ -1667,10 +1774,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         )
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testStrokeWithAttributedStringNoColorDoesNotOverrideExistingColor() {
+    @Test
+    func strokeWithAttributedStringNoColorDoesNotOverrideExistingColor() {
         // Given
         let attributes: Attributes = [
             .strokeWidth: NSNumber(value: 10),
@@ -1691,13 +1799,14 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         )
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
     // MARK: - All platforms but iOS
 
     #if !os(iOS)
-    func testLigatureWithAttributedStringAndAllLigatures() {
+    @Test
+    func ligatureWithAttributedStringAndAllLigatures() {
         // Given
         let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 13)
@@ -1710,10 +1819,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.ligature(.all)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLigatureWithStringAndAllLigatures() {
+    @Test
+    func ligatureWithStringAndAllLigatures() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.ligature: NSNumber(value: 2)])
 
@@ -1721,14 +1831,15 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.ligature(.all)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
     #endif
 
     // MARK: - All platforms but watchOS
 
     #if !os(watchOS)
-    func testSpaceWithAttributedStringAndCustomSpace() throws {
+    @Test
+    func spaceWithAttributedStringAndCustomSpace() throws {
         // Given
         let attributes: Attributes = [
             .foregroundColor: AColor.red
@@ -1748,13 +1859,14 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        XCTAssertEqual(resultAttributes[.foregroundColor] as? AColor, AColor.red)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.bounds.size.width, 1.0)
-        XCTAssertEqual(resultAttachment.bounds.size.height, 0.001)
+        #expect(resultAttributes[.foregroundColor] as? AColor == AColor.red)
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.bounds.size.width == 1.0)
+        #expect(resultAttachment.bounds.size.height == 0.001)
     }
 
-    func testSpaceWithStringAndCustomSpace() throws {
+    @Test
+    func spaceWithStringAndCustomSpace() throws {
         // Given
         let attachment = NSTextAttachment()
         attachment.bounds = .init(origin: .zero, size: .init(width: 1.0, height: 0.001))
@@ -1767,12 +1879,13 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.bounds.size.width, 2.0)
-        XCTAssertEqual(resultAttachment.bounds.size.height, 0.001)
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.bounds.size.width == 2.0)
+        #expect(resultAttachment.bounds.size.height == 0.001)
     }
 
-    func testAttachmentWithAttributedString() throws {
+    @Test
+    func attachmentWithAttributedString() throws {
         // Given
         let image = try AImage.pencil()
         let bounds = CGRect(origin: .zero, size: .init(width: 1, height: 1))
@@ -1789,13 +1902,14 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
-        XCTAssertEqual(resultAttachment.bounds, bounds)
-        XCTAssertEqual(resultAttributes[.foregroundColor] as? AColor, AColor.brown)
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
+        #expect(resultAttachment.bounds == bounds)
+        #expect(resultAttributes[.foregroundColor] as? AColor == AColor.brown)
     }
 
-    func testAttachmentWithString() throws {
+    @Test
+    func attachmentWithString() throws {
         // Given
         let image = try AImage.pencil()
         let bounds = CGRect(origin: .zero, size: .init(width: 2, height: 2))
@@ -1808,15 +1922,16 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
-        XCTAssertEqual(resultAttachment.bounds, bounds)
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
+        #expect(resultAttachment.bounds == bounds)
     }
     #endif
 
     // MARK: - UIKit/AppKit
 
-    func testBoldWithAttributedStringWithNoFont() throws {
+    @Test
+    func boldWithAttributedStringWithNoFont() throws {
         // Given
         #if canImport(UIKit)
         let trait: UIFontDescriptor.SymbolicTraits = .traitBold
@@ -1826,8 +1941,9 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
 
         let attributedString = NSAttributedString(string: string)
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expectedFont = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
+        let expectedFont = try #require(AFont(
+            descriptor: descriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
@@ -1836,10 +1952,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.bold()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testItalicWithAttributedStringWithExistingFont() throws {
+    @Test
+    func italicWithAttributedStringWithExistingFont() throws {
         // Given
         #if canImport(UIKit)
         let trait: UIFontDescriptor.SymbolicTraits = .traitItalic
@@ -1848,8 +1965,9 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let expectedFont = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
+        let expectedFont = try #require(AFont(
+            descriptor: descriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
@@ -1859,10 +1977,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.italic()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBoldWithString() throws {
+    @Test
+    func boldWithString() throws {
         // Given
         #if canImport(UIKit)
         let trait: UIFontDescriptor.SymbolicTraits = .traitBold
@@ -1871,8 +1990,9 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expectedFont = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
+        let expectedFont = try #require(AFont(
+            descriptor: descriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
@@ -1881,10 +2001,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.bold()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBoldAndItalicAttributedString() throws {
+    @Test
+    func boldAndItalicAttributedString() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
         #if canImport(UIKit)
@@ -1896,12 +2017,14 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #endif
 
         let attributedString = NSAttributedString(string: string)
-        let bold = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
+        let boldDescriptor = try #require(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits]))
+        let bold = try #require(AFont(
+            descriptor: boldDescriptor,
             size: 0.0
         ))
-        let boldItalic = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits])),
+        let boldItalicDescriptor = try #require(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits]))
+        let boldItalic = try #require(AFont(
+            descriptor: boldItalicDescriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: boldItalic])
@@ -1912,10 +2035,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
             .italic()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testBoldAndItalicWithString() throws {
+    @Test
+    func boldAndItalicWithString() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
         #if canImport(UIKit)
@@ -1926,12 +2050,14 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let italicTrait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
 
-        let bold = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits])),
+        let boldDescriptor = try #require(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits]))
+        let bold = try #require(AFont(
+            descriptor: boldDescriptor,
             size: 0.0
         ))
-        let boldItalic = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits])),
+        let boldItalicDescriptor = try #require(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits]))
+        let boldItalic = try #require(AFont(
+            descriptor: boldItalicDescriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: boldItalic])
@@ -1942,10 +2068,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
             .italic()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMonospacedWithAttributedString() throws {
+    @Test
+    func monospacedWithAttributedString() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
         #if canImport(UIKit)
@@ -1955,8 +2082,9 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #endif
 
         let attributedString = NSAttributedString(string: string, attributes: [.font: font])
-        let monospaced = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
+        let monospaced = try #require(AFont(
+            descriptor: descriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: monospaced])
@@ -1965,10 +2093,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.monospaced()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMonospacedWithString() throws {
+    @Test
+    func monospacedWithString() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
         #if canImport(UIKit)
@@ -1977,8 +2106,9 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let trait: NSFontDescriptor.SymbolicTraits = .monoSpace
         #endif
 
-        let monospaced = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
+        let monospaced = try #require(AFont(
+            descriptor: descriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: monospaced])
@@ -1987,10 +2117,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.monospaced()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testCondensedWithAttributedString() throws {
+    @Test
+    func condensedWithAttributedString() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
         #if canImport(UIKit)
@@ -2000,8 +2131,9 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         #endif
 
         let attributedString = NSAttributedString(string: string, attributes: [.font: font])
-        let condensed = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
+        let condensed = try #require(AFont(
+            descriptor: descriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: condensed])
@@ -2010,10 +2142,11 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = attributedString.condensed()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testCondensedWithString() throws {
+    @Test
+    func condensedWithString() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
         #if canImport(UIKit)
@@ -2022,8 +2155,9 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let trait: NSFontDescriptor.SymbolicTraits = .condensed
         #endif
 
-        let condensed = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
+        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
+        let condensed = try #require(AFont(
+            descriptor: descriptor,
             size: 0.0
         ))
         let expected = NSAttributedString(string: string, attributes: [.font: condensed])
@@ -2032,6 +2166,6 @@ final class AttributedStringBuildingMultiPlatformTests: XCTestCase {
         let result = string.condensed()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 }

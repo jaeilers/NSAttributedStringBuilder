@@ -1,168 +1,111 @@
 #if canImport(UIKit)
+import UIKit
 @testable import NSAttributedStringBuilder
-import XCTest
+import Testing
 
-final class AttributesiOSTests: XCTestCase {
+@Suite
+struct AttributesiOSTests {
 
-    func testBoldWithNoFont() throws {
+    @Test("Apply bold with and without existing font", arguments: [nil, AFont.preferredFont(forTextStyle: .headline)])
+    func bold(with existingFont: AFont?) throws {
         // Given
-        let font = AFont.preferredFont(forTextStyle: .body)
-        let expectedFont = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([.traitBold, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        ))
-        let expected: Attributes = [
-            .font: expectedFont
-        ]
-
-        // When
-        let result = Attributes().bold()
-
-        // Then
-        XCTAssertTrue(result.isEqual(to: expected))
-    }
-
-    func testBoldWithExistingFont() throws {
-        // Given
-        let font = AFont.preferredFont(forTextStyle: .headline)
+        let font = existingFont ?? AFont.preferredFont(forTextStyle: .body)
         let expectedFont = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([.traitBold, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([.traitBold, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
-        let attributes: Attributes = [
-            .font: font
-        ]
         let expected: Attributes = [
             .font: expectedFont
         ]
+
+        var attributes = Attributes()
+        existingFont.map {
+            attributes[.font] = $0
+        }
 
         // When
         let result = attributes.bold()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testItalicWithNoFont() throws {
+    @Test("Apply italic with and without existing font", arguments: [nil, AFont.preferredFont(forTextStyle: .headline)])
+    func italic(with existingFont: AFont?) throws {
         // Given
-        let font = AFont.preferredFont(forTextStyle: .body)
+        let font = existingFont ?? AFont.preferredFont(forTextStyle: .body)
         let expectedFont = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([.traitItalic, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([.traitItalic, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
         let expected: Attributes = [
             .font: expectedFont
         ]
 
-        // When
-        let result = Attributes().italic()
-
-        // Then
-        XCTAssertTrue(result.isEqual(to: expected))
-    }
-
-    func testItalicWithExistingFont() throws {
-        // Given
-        let font = AFont.preferredFont(forTextStyle: .headline)
-        let expectedFont = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([.traitItalic, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
-        let attributes: Attributes = [
-            .font: font
-        ]
-        let expected: Attributes = [
-            .font: expectedFont
-        ]
+        var attributes = Attributes()
+        existingFont.map {
+            attributes[.font] = $0
+        }
 
         // When
         let result = attributes.italic()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testMonospacedWithNoFont() throws {
+    @Test("Apply monospace with and without existing font", arguments: [nil, AFont.preferredFont(forTextStyle: .headline)])
+    func monospaced(with existingFont: AFont?) throws {
         // Given
-        let font = AFont.preferredFont(forTextStyle: .body)
+        let font = existingFont ?? AFont.preferredFont(forTextStyle: .body)
         let expectedFont = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([.traitMonoSpace, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([.traitMonoSpace, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
         let expected: Attributes = [
             .font: expectedFont
         ]
 
-        // When
-        let result = Attributes().monospaced()
-
-        // Then
-        XCTAssertTrue(result.isEqual(to: expected))
-    }
-
-    func testMonospacedWithExistingFont() throws {
-        // Given
-        let font = AFont.preferredFont(forTextStyle: .headline)
-        let expectedFont = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([.traitMonoSpace, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
-        let attributes: Attributes = [
-            .font: font
-        ]
-        let expected: Attributes = [
-            .font: expectedFont
-        ]
+        var attributes = Attributes()
+        existingFont.map {
+            attributes[.font] = $0
+        }
 
         // When
         let result = attributes.monospaced()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testCondensedWithNoFont() throws {
+    @Test("Apply condensed with and without existing font", arguments: [nil, AFont.preferredFont(forTextStyle: .headline)])
+    func condensed(with existingFont: AFont?) throws {
         // Given
-        let font = AFont.preferredFont(forTextStyle: .body)
+        let font = existingFont ?? AFont.preferredFont(forTextStyle: .body)
         let expectedFont = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([.traitCondensed, font.fontDescriptor.symbolicTraits])),
+            descriptor: #require(font.fontDescriptor.withSymbolicTraits([.traitCondensed, font.fontDescriptor.symbolicTraits])),
             size: 0.0
         )
         let expected: Attributes = [
             .font: expectedFont
         ]
 
-        // When
-        let result = Attributes().condensed()
-
-        // Then
-        XCTAssertTrue(result.isEqual(to: expected))
-    }
-
-    func testCondensedWithExistingFont() throws {
-        // Given
-        let font = AFont.preferredFont(forTextStyle: .headline)
-        let expectedFont = try AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits([.traitCondensed, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
-        let attributes: Attributes = [
-            .font: font
-        ]
-        let expected: Attributes = [
-            .font: expectedFont
-        ]
+        var attributes = Attributes()
+        existingFont.map {
+            attributes[.font] = $0
+        }
 
         // When
         let result = attributes.condensed()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
     // MARK: - Accessibility
 
-    func testAccessibilitySpeechLanguage() {
+    @Test
+    func accessibilitySpeechLanguage() {
         // Given
         let language: NSAttributedStringBuilder.LanguageCode = .french
         let attributes: Attributes = [
@@ -177,10 +120,11 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.accessibilitySpeechLanguage(language)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testAccessibilitySpeechPunctuation() {
+    @Test
+    func accessibilitySpeechPunctuation() {
         // Given
         let isEnabled = Bool.random()
         let attributes: Attributes = [
@@ -195,10 +139,11 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.accessibilitySpeechPunctuation(isEnabled)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testAccessibilitySpeechSpellOut() {
+    @Test
+    func accessibilitySpeechSpellOut() {
         // Given
         let isEnabled = Bool.random()
         let attributes: Attributes = [
@@ -213,10 +158,11 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.accessibilitySpeechSpellOut(isEnabled)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testAccessibilitySpeechIPANotation() {
+    @Test
+    func accessibilitySpeechIPANotation() {
         // Given
         let phoneticString = "paɪˈɛlə" // Paella
         let attributes: Attributes = [
@@ -231,10 +177,11 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.accessibilitySpeechIPANotation(phoneticString)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testAccessibilitySpeechPitch() {
+    @Test
+    func accessibilitySpeechPitch() {
         // Given
         let pitch = 0.5
         let attributes: Attributes = [
@@ -249,13 +196,14 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.accessibilitySpeechPitch(pitch)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
     // MARK: - All but watchOS
 
     #if !os(watchOS)
-    func testSuperscriptWithDefaultValue() {
+    @Test
+    func superscriptWithDefaultValue() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -269,10 +217,11 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.superscript()
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
 
-    func testSuperscriptWithCustomValue() {
+    @Test
+    func superscriptWithCustomValue() {
         // Given
         let subscripting = -1
         let attributes: Attributes = [
@@ -287,7 +236,7 @@ final class AttributesiOSTests: XCTestCase {
         let result = attributes.superscript(subscripting)
 
         // Then
-        XCTAssertTrue(result.isEqual(to: expected))
+        #expect(result.isEqual(to: expected))
     }
     #endif
 }

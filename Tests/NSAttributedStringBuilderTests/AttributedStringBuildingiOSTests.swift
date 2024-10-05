@@ -1,14 +1,17 @@
 #if canImport(UIKit)
 import NSAttributedStringBuilder
-import XCTest
+import UIKit
+import Testing
 
-final class AttributedStringBuildingiOSTests: XCTestCase {
+@Suite
+struct AttributedStringBuildingiOSTests {
 
     private let string = String.unique()
 
     // MARK: - Accessibility
 
-    func testAccessibilitySpeechLanguageWithAttributedString() {
+    @Test
+    func accessibilitySpeechLanguageWithAttributedString() {
         // Given
         let language: NSAttributedStringBuilder.LanguageCode = .vietnamese
         let attributes: Attributes = [
@@ -25,10 +28,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = attributedString.accessibilitySpeechLanguage(language)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechLanguageWithString() {
+    @Test
+    func accessibilitySpeechLanguageWithString() {
         // Given
         let language: NSAttributedStringBuilder.LanguageCode = .vietnamese
         let attributes: Attributes = [
@@ -40,10 +44,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = string.accessibilitySpeechLanguage(language)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechPunctuationWithAttributedString() {
+    @Test
+    func accessibilitySpeechPunctuationWithAttributedString() {
         // Given
         let isEnabled = Bool.random()
         let attributes: Attributes = [
@@ -60,10 +65,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = attributedString.accessibilitySpeechPunctuation(isEnabled)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechPunctuationWithString() {
+    @Test
+    func accessibilitySpeechPunctuationWithString() {
         // Given
         let isEnabled = Bool.random()
         let attributes: Attributes = [
@@ -75,10 +81,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = string.accessibilitySpeechPunctuation(isEnabled)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechSpellOutWithAttributedString() {
+    @Test
+    func accessibilitySpeechSpellOutWithAttributedString() {
         // Given
         let isEnabled = Bool.random()
         let attributes: Attributes = [
@@ -95,10 +102,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = attributedString.accessibilitySpeechSpellOut(isEnabled)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechSpellOutWithString() {
+    @Test
+    func accessibilitySpeechSpellOutWithString() {
         // Given
         let isEnabled = Bool.random()
         let attributes: Attributes = [
@@ -110,10 +118,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = string.accessibilitySpeechSpellOut(isEnabled)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechIPANotationWithAttributedString() {
+    @Test
+    func accessibilitySpeechIPANotationWithAttributedString() {
         // Given
         let phoneticString = "paɪˈɛlə" // Paella
         let attributes: Attributes = [
@@ -130,10 +139,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = attributedString.accessibilitySpeechIPANotation(phoneticString)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechIPANotationWithString() {
+    @Test
+    func accessibilitySpeechIPANotationWithString() {
         // Given
         let phoneticString = "paɪˈɛlə" // Paella
         let attributes: Attributes = [
@@ -145,10 +155,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = string.accessibilitySpeechIPANotation(phoneticString)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechPitchWithAttributedString() {
+    @Test
+    func accessibilitySpeechPitchWithAttributedString() {
         // Given
         let pitch = 1.5
         let attributes: Attributes = [
@@ -165,10 +176,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = attributedString.accessibilitySpeechPitch(pitch)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilitySpeechPitchWithString() {
+    @Test
+    func accessibilitySpeechPitchWithString() {
         // Given
         let pitch = 1.5
         let attributes: Attributes = [
@@ -180,13 +192,14 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = string.accessibilitySpeechPitch(pitch)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
     // MARK: - All but watchOS
 
     #if !os(watchOS)
-    func testUIImageWithAttributedString() throws {
+    @Test
+    func imageWithAttributedString() throws {
         // Given
         let attributes: Attributes = [
             .font: UIFont.preferredFont(forTextStyle: .body),
@@ -202,17 +215,18 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertEqual(resultAttachment.image, image)
-        XCTAssertEqual(resultAttributes[.font] as? UIFont, UIFont.preferredFont(forTextStyle: .body))
-        XCTAssertEqual(resultAttributes[.foregroundColor] as? UIColor, UIColor.blue)
-        XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image == image)
+        #expect(resultAttributes[.font] as? UIFont == UIFont.preferredFont(forTextStyle: .body))
+        #expect(resultAttributes[.foregroundColor] as? UIColor == UIColor.blue)
+        #expect(resultAttributes[.kern] as? NSNumber == NSNumber(value: 1.0))
 
         let resultAttributedString = result.attributedSubstring(from: NSRange(location: 0, length: attributedString.length))
-        XCTAssertEqual(resultAttributedString, attributedString)
+        #expect(resultAttributedString == attributedString)
     }
 
-    func testUIImageWithAttributedStringAndSystemName() throws {
+    @Test
+    func imageWithAttributedStringAndSystemName() throws {
         // Given
         let attributes: Attributes = [
             .font: UIFont.preferredFont(forTextStyle: .body),
@@ -227,17 +241,18 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertNotNil(resultAttachment.image)
-        XCTAssertEqual(resultAttributes[.font] as? UIFont, UIFont.preferredFont(forTextStyle: .body))
-        XCTAssertEqual(resultAttributes[.foregroundColor] as? UIColor, UIColor.orange)
-        XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image != nil)
+        #expect(resultAttributes[.font] as? UIFont == UIFont.preferredFont(forTextStyle: .body))
+        #expect(resultAttributes[.foregroundColor] as? UIColor == UIColor.orange)
+        #expect(resultAttributes[.kern] as? NSNumber == NSNumber(value: 1.0))
 
         let resultAttributedString = result.attributedSubstring(from: NSRange(location: 0, length: attributedString.length))
-        XCTAssertEqual(resultAttributedString, attributedString)
+        #expect(resultAttributedString == attributedString)
     }
 
-    func testUIImageWithAttributedStringAndWrongSystemName() {
+    @Test
+    func imageWithAttributedStringAndWrongSystemName() {
         // Given
         let attributedString = NSAttributedString(
             string: string, attributes: [
@@ -251,10 +266,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = attributedString.image(systemName: .unique())
 
         // Then
-        XCTAssertEqual(result, attributedString)
+        #expect(result == attributedString)
     }
 
-    func testSuperscriptWithDefaultValueAndAttributedString() {
+    @Test
+    func superscriptWithDefaultValueAndAttributedString() {
         // Given
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
@@ -270,10 +286,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = attributedString.superscript()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSuperscriptWithDefaultValueAndString() {
+    @Test
+    func superscriptWithDefaultValueAndString() {
         // Given
         let attributes: Attributes = [
             NSAttributedString.Key(kCTSuperscriptAttributeName as String): NSNumber(value: 1)
@@ -284,10 +301,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = string.superscript()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSuperscriptWithCustomValueAndAttributedString() {
+    @Test
+    func superscriptWithCustomValueAndAttributedString() {
         // Given
         let subscripting = -1
         let attributes: Attributes = [
@@ -304,10 +322,11 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = attributedString.superscript(subscripting)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSuperscriptWithCustomValueAndString() {
+    @Test
+    func superscriptWithCustomValueAndString() {
         // Given
         let subscripting = -1
         let attributes: Attributes = [
@@ -319,7 +338,7 @@ final class AttributedStringBuildingiOSTests: XCTestCase {
         let result = string.superscript(subscripting)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
     #endif
 }

@@ -1,12 +1,15 @@
 #if canImport(AppKit)
+import AppKit
 import NSAttributedStringBuilder
-import XCTest
+import Testing
 
-final class AttributedStringBuildingMacOSTests: XCTestCase {
+@Suite
+struct AttributedStringBuildingMacOSTests {
 
     private let string = String.unique()
 
-    func testNSImageWithAttributedString() throws {
+    @Test
+    func imageWithAttributedString() throws {
         // Given
         let attributes: Attributes = [
             .font: NSFont.preferredFont(forTextStyle: .headline),
@@ -33,19 +36,20 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertNotNil(resultAttachment.image)
-        XCTAssertEqual(resultAttachment.image?.accessibilityDescription, accessibilityDescription)
-        XCTAssertEqual(resultAttachment.bounds, bounds)
-        XCTAssertEqual(resultAttributes[.font] as? NSFont, NSFont.preferredFont(forTextStyle: .headline))
-        XCTAssertEqual(resultAttributes[.foregroundColor] as? NSColor, NSColor.textColor)
-        XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image != nil)
+        #expect(resultAttachment.image?.accessibilityDescription == accessibilityDescription)
+        #expect(resultAttachment.bounds == bounds)
+        #expect(resultAttributes[.font] as? NSFont == NSFont.preferredFont(forTextStyle: .headline))
+        #expect(resultAttributes[.foregroundColor] as? NSColor == NSColor.textColor)
+        #expect(resultAttributes[.kern] as? NSNumber == NSNumber(value: 1.0))
 
         let resultAttributedString = result.attributedSubstring(from: NSRange(location: 0, length: attributedString.length))
-        XCTAssertEqual(resultAttributedString, attributedString)
+        #expect(resultAttributedString == attributedString)
     }
 
-    func testNSImageWithAttributedStringAndSystemName() throws {
+    @Test
+    func imageWithAttributedStringAndSystemName() throws {
         // Given
         let attributes: Attributes = [
             .font: NSFont.preferredFont(forTextStyle: .headline),
@@ -72,19 +76,20 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultAttachment = try XCTUnwrap(resultAttributes[.attachment] as? NSTextAttachment)
-        XCTAssertNotNil(resultAttachment.image)
-        XCTAssertEqual(resultAttachment.image?.accessibilityDescription, accessibilityDescription)
-        XCTAssertEqual(resultAttachment.bounds, bounds)
-        XCTAssertEqual(resultAttributes[.font] as? NSFont, NSFont.preferredFont(forTextStyle: .headline))
-        XCTAssertEqual(resultAttributes[.foregroundColor] as? NSColor, NSColor.textColor)
-        XCTAssertEqual(resultAttributes[.kern] as? NSNumber, NSNumber(value: 1.0))
+        let resultAttachment = try #require(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttachment.image != nil)
+        #expect(resultAttachment.image?.accessibilityDescription == accessibilityDescription)
+        #expect(resultAttachment.bounds == bounds)
+        #expect(resultAttributes[.font] as? NSFont == NSFont.preferredFont(forTextStyle: .headline))
+        #expect(resultAttributes[.foregroundColor] as? NSColor == NSColor.textColor)
+        #expect(resultAttributes[.kern] as? NSNumber == NSNumber(value: 1.0))
 
         let resultAttributedString = result.attributedSubstring(from: NSRange(location: 0, length: attributedString.length))
-        XCTAssertEqual(resultAttributedString, attributedString)
+        #expect(resultAttributedString == attributedString)
     }
 
-    func testNSImageWithAttributedStringAndSystemNameIsUnknown() {
+    @Test
+    func imageWithAttributedStringAndSystemNameIsUnknown() {
         // Given
         let attributedString = NSAttributedString(string: string)
 
@@ -93,10 +98,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        XCTAssertNil(resultAttributes[.attachment] as? NSTextAttachment)
+        #expect(resultAttributes[.attachment] as? NSTextAttachment == nil)
     }
 
-    func testCursorWithAttributedString() throws {
+    @Test
+    func cursorWithAttributedString() throws {
         // Given
         let cursor = NSCursor.pointingHand
         let attributes: Attributes = [
@@ -110,10 +116,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.cursor(cursor)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testCursorWithString() throws {
+    @Test
+    func cursorWithString() throws {
         // Given
         let cursor = NSCursor.arrow
         let expected = NSAttributedString(string: string, attributes: [.cursor: cursor])
@@ -122,10 +129,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.cursor(cursor)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTighteningFactorForTruncationWithAttributedString() {
+    @Test
+    func tighteningFactorForTruncationWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.hyphenationFactor = 2.0
@@ -140,10 +148,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.tighteningFactorForTruncation(5.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTighteningFactorForTruncationWithString() {
+    @Test
+    func tighteningFactorForTruncationWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.tighteningFactorForTruncation = 1.0
@@ -153,10 +162,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.tighteningFactorForTruncation(1.0)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpellingStateWithAttributedStringAndNoGrammarOrSpellingIssues() {
+    @Test
+    func spellingStateWithAttributedStringAndNoGrammarOrSpellingIssues() {
         // Given
         let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 2.0)
@@ -169,10 +179,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.spellingState(.noGrammarOrSpellingIssues)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpellingStateWithStringAndNoGrammarOrSpellingIssues() {
+    @Test
+    func spellingStateWithStringAndNoGrammarOrSpellingIssues() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.spellingState: 0])
 
@@ -180,10 +191,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.spellingState(.noGrammarOrSpellingIssues)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpellingStateWithAttributedStringAndSpellingErrors() {
+    @Test
+    func spellingStateWithAttributedStringAndSpellingErrors() {
         // Given
         let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 2.0),
@@ -197,10 +209,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.spellingState(.spellingErrors)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpellingStateWithStringAndSpellingErrors() {
+    @Test
+    func spellingStateWithStringAndSpellingErrors() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.spellingState: 1])
 
@@ -208,10 +221,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.spellingState(.spellingErrors)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpellingStateWithAttributedStringAndGrammarErrors() {
+    @Test
+    func spellingStateWithAttributedStringAndGrammarErrors() {
         // Given
         let attributes: Attributes = [
             .kern: NSNumber(value: 1.0),
@@ -225,10 +239,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.spellingState(.grammarErrors)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSpellingStateWithStringAndGrammarErrors() {
+    @Test
+    func spellingStateWithStringAndGrammarErrors() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.spellingState: 2])
 
@@ -236,10 +251,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.spellingState(.grammarErrors)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSuperscriptWithAttributedStringAndDefaultValue() {
+    @Test
+    func superscriptWithAttributedStringAndDefaultValue() {
         // Given
         let attributes: Attributes = [
             .kern: NSNumber(value: 1.0),
@@ -253,10 +269,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.superscript()
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testSuperscriptWithString() {
+    @Test
+    func superscriptWithString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.superscript: NSNumber(value: 2)])
 
@@ -264,10 +281,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.superscript(2)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testTextAlternativesWithAttributedString() throws {
+    @Test
+    func textAlternativesWithAttributedString() throws {
         // Given
         let textAlternatives = NSTextAlternatives(primaryString: .unique(), alternativeStrings: [.unique()])
         let attributes: Attributes = [
@@ -283,13 +301,14 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        XCTAssertEqual(resultAttributes[.font] as? NSFont, NSFont.preferredFont(forTextStyle: .footnote))
-        let resultTextAlternatives = try XCTUnwrap(resultAttributes[.textAlternatives] as? NSTextAlternatives)
-        XCTAssertEqual(resultTextAlternatives.primaryString, primaryString)
-        XCTAssertEqual(resultTextAlternatives.alternativeStrings, alternatives)
+        #expect(resultAttributes[.font] as? NSFont == NSFont.preferredFont(forTextStyle: .footnote))
+        let resultTextAlternatives = try #require(resultAttributes[.textAlternatives] as? NSTextAlternatives)
+        #expect(resultTextAlternatives.primaryString == primaryString)
+        #expect(resultTextAlternatives.alternativeStrings == alternatives)
     }
 
-    func testTextAlternativesWithString() throws {
+    @Test
+    func textAlternativesWithString() throws {
         // Given
         let primaryString = String.unique()
         let alternatives = [String.unique()]
@@ -299,12 +318,13 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
 
         // Then
         let resultAttributes = result.attributes(at: result.length - 1, effectiveRange: nil)
-        let resultTextAlternatives = try XCTUnwrap(resultAttributes[.textAlternatives] as? NSTextAlternatives)
-        XCTAssertEqual(resultTextAlternatives.primaryString, primaryString)
-        XCTAssertEqual(resultTextAlternatives.alternativeStrings, alternatives)
+        let resultTextAlternatives = try #require(resultAttributes[.textAlternatives] as? NSTextAlternatives)
+        #expect(resultTextAlternatives.primaryString == primaryString)
+        #expect(resultTextAlternatives.alternativeStrings == alternatives)
     }
 
-    func testToolTipWithAttributedString() {
+    @Test
+    func toolTipWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .foregroundColor: NSColor.red,
@@ -319,10 +339,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.toolTip(toolTip)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testToolTipWithString() {
+    @Test
+    func toolTipWithString() {
         // Given
         let toolTip = String.unique()
         let expected = NSAttributedString(string: string, attributes: [.toolTip: toolTip as NSString])
@@ -331,14 +352,15 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.toolTip(toolTip)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testGlpyhInfoWithAttributedString() throws {
+    @Test
+    func glyphInfoWithAttributedString() throws {
         // Given
         let baseString = "\u{FFFD}" // �
         let font = NSFont.systemFont(ofSize: 12)
-        let glyphInfo = try XCTUnwrap(NSGlyphInfo(cgGlyph: 2590, for: font, baseString: baseString))
+        let glyphInfo = try #require(NSGlyphInfo(cgGlyph: 2590, for: font, baseString: baseString))
 
         let attributes: Attributes = [
             .foregroundColor: NSColor.gray,
@@ -352,14 +374,15 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.glyphInfo(glyphInfo)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testGlpyhInfoWithString() throws {
+    @Test
+    func glyphInfoWithString() throws {
         // Given
         let baseString = "\u{FFFD}" // �
         let font = NSFont.preferredFont(forTextStyle: .body)
-        let glyphInfo = try XCTUnwrap(NSGlyphInfo(cgGlyph: 2590, for: font, baseString: baseString))
+        let glyphInfo = try #require(NSGlyphInfo(cgGlyph: 2590, for: font, baseString: baseString))
         let attributes: Attributes = [
             .glyphInfo: glyphInfo,
             .font: font
@@ -370,10 +393,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = baseString.glyphInfo(glyphInfo)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMarkedClauseSegmentWithAttributedString() {
+    @Test
+    func markedClauseSegmentWithAttributedString() {
         // Given
         let attributes: Attributes = [
             .baselineOffset: NSNumber(value: 1),
@@ -388,10 +412,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
             .markedClauseSegment(2)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testMarkedClauseSegmentWithString() {
+    @Test
+    func markedClauseSegmentWithString() {
         // Given
         let expected = NSAttributedString(string: string, attributes: [.markedClauseSegment: NSNumber(value: 1)])
 
@@ -400,10 +425,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
             .markedClauseSegment(1)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testHeaderLevelWithAttributedString() {
+    @Test
+    func headerLevelWithAttributedString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headerLevel = 2
@@ -423,10 +449,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.headerLevel(1)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testHeaderLevelWithString() {
+    @Test
+    func headerLevelWithString() {
         // Given
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headerLevel = 3
@@ -436,12 +463,13 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.headerLevel(3)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
     // MARK: - Accessibility
 
-    func testAccessibilityAlignmentWithAttributedString() {
+    @Test
+    func accessibilityAlignmentWithAttributedString() {
         // Given
         let alignment: NSTextAlignment = .center
         let attributes: Attributes = [
@@ -458,10 +486,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.accessibilityAlignment(alignment)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityAlignmentWithString() {
+    @Test
+    func accessibilityAlignmentWithString() {
         // Given
         let alignment: NSTextAlignment = .center
         let attributes: Attributes = [
@@ -473,10 +502,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.accessibilityAlignment(alignment)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityAutocorrectedWithAttributedString() {
+    @Test
+    func accessibilityAutocorrectedWithAttributedString() {
         // Given
         let isAutocorrected = Bool.random()
         let attributes: Attributes = [
@@ -493,10 +523,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.accessibilityAutocorrected(isAutocorrected)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityAutocorrectedWithString() {
+    @Test
+    func accessibilityAutocorrectedWithString() {
         // Given
         let isAutocorrected = Bool.random()
         let attributes: Attributes = [
@@ -508,10 +539,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.accessibilityAutocorrected(isAutocorrected)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityForegroundColorWithAttributedString() {
+    @Test
+    func accessibilityForegroundColorWithAttributedString() {
         // Given
         let color = AColor.cyan
         let attributes: Attributes = [
@@ -528,10 +560,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.accessibilityForegroundColor(color)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityForegroundColorWithString() {
+    @Test
+    func accessibilityForegroundColorWithString() {
         // Given
         let color = AColor.cyan
         let attributes: Attributes = [
@@ -543,10 +576,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.accessibilityForegroundColor(color)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityBackgroundColorWithAttributedString() {
+    @Test
+    func accessibilityBackgroundColorWithAttributedString() {
         // Given
         let color = AColor.cyan
         let attributes: Attributes = [
@@ -563,10 +597,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.accessibilityBackgroundColor(color)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityBackgroundColorWithString() {
+    @Test
+    func accessibilityBackgroundColorWithString() {
         // Given
         let color = AColor.orange
         let attributes: Attributes = [
@@ -578,10 +613,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.accessibilityBackgroundColor(color)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityLanguageWithAttributedString() {
+    @Test
+    func accessibilityLanguageWithAttributedString() {
         // Given
         let language: NSAttributedStringBuilder.LanguageCode = .greek
         let attributes: Attributes = [
@@ -598,10 +634,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.accessibilityLanguage(language)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityLanguageWithString() {
+    @Test
+    func accessibilityLanguageWithString() {
         // Given
         let language: NSAttributedStringBuilder.LanguageCode = .french
         let attributes: Attributes = [
@@ -613,10 +650,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.accessibilityLanguage(language)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityMarkedMisspelledWithAttributedString() {
+    @Test
+    func accessibilityMarkedMisspelledWithAttributedString() {
         // Given
         let isMisspelled = Bool.random()
         let attributes: Attributes = [
@@ -633,10 +671,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.accessibilityMarkedMisspelled(isMisspelled)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityMarkedMisspelledWithString() {
+    @Test
+    func accessibilityMarkedMisspelledWithString() {
         // Given
         let isMisspelled = Bool.random()
         let attributes: Attributes = [
@@ -648,10 +687,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.accessibilityMarkedMisspelled(isMisspelled)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityShadowWithAttributedString() {
+    @Test
+    func accessibilityShadowWithAttributedString() {
         // Given
         let hasShadow = Bool.random()
         let attributes: Attributes = [
@@ -668,10 +708,11 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = attributedString.accessibilityShadow(hasShadow)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testAccessibilityShadowWithString() {
+    @Test
+    func accessibilityShadowWithString() {
         // Given
         let hasShadow = Bool.random()
         let attributes: Attributes = [
@@ -683,7 +724,7 @@ final class AttributedStringBuildingMacOSTests: XCTestCase {
         let result = string.accessibilityShadow(hasShadow)
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 }
 #endif

@@ -1,37 +1,47 @@
+import Foundation
 import NSAttributedStringBuilder
-import XCTest
+import Testing
 
-final class NSAttributedStringConvenienceMethodsTests: XCTestCase {
+@Suite
+struct NSAttributedStringConvenienceMethodsTests {
 
-    func testSpace() {
-        XCTAssertEqual(Space(), NSAttributedString(string: " "))
+    @Test
+    func space() {
+        #expect(Space() == NSAttributedString(string: " "))
     }
 
-    func testSpaceWithStandard() {
-        XCTAssertEqual(Space(.standard), NSAttributedString(string: " "))
+    @Test
+    func spaceWithStandard() {
+        #expect(Space(.standard) == NSAttributedString(string: " "))
     }
 
-    func testSpaceWithOptionEnSpace() {
-        XCTAssertEqual(Space(.enSpace), NSAttributedString(string: "\u{2002}"))
+    @Test
+    func spaceWithOptionEnSpace() {
+        #expect(Space(.enSpace) == NSAttributedString(string: "\u{2002}"))
     }
 
-    func testSpaceWithOptionEmSpace() {
-        XCTAssertEqual(Space(.emSpace), NSAttributedString(string: "\u{2003}"))
+    @Test
+    func spaceWithOptionEmSpace() {
+        #expect(Space(.emSpace) == NSAttributedString(string: "\u{2003}"))
     }
 
-    func testSpaceWithOptionNonBreaking() {
-        XCTAssertEqual(Space(.nonBreakingSpace), NSAttributedString(string: "\u{00A0}"))
+    @Test
+    func spaceWithOptionNonBreaking() {
+        #expect(Space(.nonBreakingSpace) == NSAttributedString(string: "\u{00A0}"))
     }
 
-    func testSpaceWithOptionNarrowNonBreaking() {
-        XCTAssertEqual(Space(.narrowNonBreakingSpace), NSAttributedString(string: "\u{202F}"))
+    @Test
+    func spaceWithOptionNarrowNonBreaking() {
+        #expect(Space(.narrowNonBreakingSpace) == NSAttributedString(string: "\u{202F}"))
     }
 
-    func testNonBreakingSpace() {
-        XCTAssertEqual(NonBreakingSpace(), NSAttributedString(string: "\u{00A0}"))
+    @Test
+    func nonBreakingSpace() {
+        #expect(NonBreakingSpace() == NSAttributedString(string: "\u{00A0}"))
     }
 
-    func testNewline() {
-        XCTAssertEqual(Newline(), NSAttributedString(string: "\n"))
+    @Test
+    func newline() {
+        #expect(Newline() == NSAttributedString(string: "\n"))
     }
 }

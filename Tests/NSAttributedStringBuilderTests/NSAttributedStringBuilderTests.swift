@@ -1,11 +1,18 @@
 import NSAttributedStringBuilder
-import XCTest
+import Testing
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
+#endif
 
-final class NSAttributedStringBuilderTests: XCTestCase {
+@Suite
+struct NSAttributedStringBuilderTests {
 
     private let string = String.unique()
 
-    func testBuilder() throws {
+    @Test
+    func builder() throws {
         // Given
         let font = AFont.systemFont(ofSize: 10)
         #if canImport(UIKit)
@@ -25,8 +32,9 @@ final class NSAttributedStringBuilderTests: XCTestCase {
 
         let space = NSAttributedString(string: " ")
 
-        let worldFont = try XCTUnwrap(AFont(
-            descriptor: XCTUnwrap(font.fontDescriptor.withSymbolicTraits(traits)),
+        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits(traits))
+        let worldFont = try #require(AFont(
+            descriptor: descriptor,
             size: 0.0
         ))
         let world = NSAttributedString(
@@ -58,10 +66,11 @@ final class NSAttributedStringBuilderTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testOptionalValueIsPresent() throws {
+    @Test
+    func optionalValueIsPresent() throws {
         // Given
         let text: String? = .unique()
         let expected = NSMutableAttributedString()
@@ -70,7 +79,7 @@ final class NSAttributedStringBuilderTests: XCTestCase {
             attributes: [.foregroundColor: AColor.blue]
         )
         let second = NSAttributedString(
-            string: try XCTUnwrap(text),
+            string: try #require(text),
             attributes: [.foregroundColor: AColor.red]
         )
         expected.append(first)
@@ -86,10 +95,11 @@ final class NSAttributedStringBuilderTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testOptionalValueIsNotPresent() {
+    @Test
+    func optionalValueIsNotPresent() {
         // Given
         let text: String? = nil
         let expected = NSAttributedString(string: string, attributes: [.foregroundColor: AColor.blue])
@@ -104,10 +114,11 @@ final class NSAttributedStringBuilderTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testConditionWithoutElseIsTrue() {
+    @Test
+    func conditionWithoutElseIsTrue() {
         // Given
         let isUnderlined = true
         let anotherString = String.unique()
@@ -138,10 +149,11 @@ final class NSAttributedStringBuilderTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testConditionalWithElseIsTrue() {
+    @Test
+    func conditionalWithElseIsTrue() {
         // Given
         let hasLigature = true
         let anotherString = String.unique()
@@ -174,10 +186,11 @@ final class NSAttributedStringBuilderTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testConditionalWithElseIsFalse() {
+    @Test
+    func conditionalWithElseIsFalse() {
         // Given
         let hasLigature = false
         let anotherString = String.unique()
@@ -210,10 +223,11 @@ final class NSAttributedStringBuilderTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 
-    func testLimitedAvailability() {
+    @Test
+    func limitedAvailability() {
         // Given
         let attributes: Attributes
 
@@ -240,6 +254,6 @@ final class NSAttributedStringBuilderTests: XCTestCase {
         }
 
         // Then
-        XCTAssertEqual(result, expected)
+        #expect(result == expected)
     }
 }
