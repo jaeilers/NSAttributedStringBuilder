@@ -28,10 +28,11 @@ final class ViewController: NSViewController {
 
 private enum DataSourceFactory {
 
+    @MainActor
     static func makeDataSource(for tableView: NSTableView) -> NSTableViewDiffableDataSource<Int, ListItem> {
         NSTableViewDiffableDataSource<Int, ListItem>(tableView: tableView) { tableView, _, _, item in
             let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("cell"), owner: nil) as? NSTableCellView
-            cell?.textField?.attributedStringValue = item.text
+            cell?.textField?.attributedStringValue = item.text()
             return cell ?? NSTableCellView()
         }
     }

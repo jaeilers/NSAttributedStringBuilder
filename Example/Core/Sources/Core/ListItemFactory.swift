@@ -1,134 +1,150 @@
 import Foundation
 import NSAttributedStringBuilder
 
-public enum ListItemFactory {
+public enum ListItemFactory: Sendable {
 
     public static func makeListItems() -> [ListItem] {
         [
-            ListItem(text: NSAttributedString {
-                #if !os(watchOS)
-                AImage.globe()
-                    .image(systemName: "star.fill", bounds: .init(origin: .zero, size: .init(width: 100, height: 90)))
-                    .image(.globe())
-                    .foregroundColor(.coreOrange)
-                    .alignment(.center)
-                    .underline()
+            ListItem {
+                NSAttributedString {
+                    #if !os(watchOS)
+                    AImage.globe()
+                        .image(systemName: "star.fill", bounds: .init(origin: .zero, size: .init(width: 100, height: 90)))
+                        .image(.globe())
+                        .foregroundColor(.coreOrange)
+                        .alignment(.center)
+                        .underline()
 
-                Newline()
-                #endif
+                    Newline()
+                    #endif
 
-                "Hello,"
-                    .alignment(.center)
-                    .italic()
-                    .bold()
+                    "Hello,"
+                        .alignment(.center)
+                        .italic()
+                        .bold()
 
-                Space()
+                    Space()
 
-                "world!"
-                    .foregroundColor(.coreRed)
-                    .bold()
-                    .strikethrough(color: .coreOrange)
-                    .backgroundColor(.coreYellow)
-            }),
-            ListItem(text: NSAttributedString {
-                "Hello"
-                    .italic()
+                    "world!"
+                        .foregroundColor(.coreRed)
+                        .bold()
+                        .strikethrough(color: .coreOrange)
+                        .backgroundColor(.coreYellow)
+                }
+            },
+            ListItem {
+                NSAttributedString {
+                    "Hello"
+                        .italic()
 
-                Space()
+                    Space()
 
-                "SwiftUI!"
-                    .bold()
-                    .foregroundColor(.corePurple)
-            }),
-            ListItem(text: L10n.monospacedText.foregroundColor(.coreBlue).monospaced()),
-            ListItem(text: NSAttributedString {
-                "Hello"
-                    .foregroundColor(.coreOrange)
-                    .underline()
-                    .italic()
-                    .kerning(1.5)
+                    "SwiftUI!"
+                        .bold()
+                        .foregroundColor(.corePurple)
+                }
+            },
+            ListItem { L10n.monospacedText.foregroundColor(.coreBlue).monospaced() },
+            ListItem {
+                NSAttributedString {
+                    "Hello"
+                        .foregroundColor(.coreOrange)
+                        .underline()
+                        .italic()
+                        .kerning(1.5)
 
-                Space()
+                    Space()
 
-                "World."
-                    .foregroundColor(.coreRed)
-                    .bold()
-            }),
-            ListItem(text: NSAttributedString {
-                let attributes = Attributes()
-                    .font(.systemFont(ofSize: 16))
-                    .italic()
-                    .underline()
+                    "World."
+                        .foregroundColor(.coreRed)
+                        .bold()
+                }
+            },
+            ListItem {
+                NSAttributedString {
+                    let attributes = Attributes()
+                        .font(.systemFont(ofSize: 16))
+                        .italic()
+                        .underline()
 
-                "Hello"
-                    .addingAttributes(attributes)
-                    .foregroundColor(.coreBlue)
+                    "Hello"
+                        .addingAttributes(attributes)
+                        .foregroundColor(.coreBlue)
 
-                Space()
+                    Space()
 
-                "World"
-                    .addingAttributes(attributes)
-                    .foregroundColor(.coreTeal)
+                    "World"
+                        .addingAttributes(attributes)
+                        .foregroundColor(.coreTeal)
 
-                Space()
+                    Space()
 
-                "again!"
-                    .addingAttributes(attributes)
-                    .foregroundColor(.coreGreen)
-            }),
-            ListItem(text: NSAttributedString {
-                L10n.pangramEnglish
-                    .language(.english)
-                    .font(.systemFont(ofSize: 30))
-                    .stroke()
-                    .foregroundColor(.coreTeal)
-            }),
-            ListItem(text: L10n.condensedText.condensed().alignment(.center)),
-            ListItem(text: NSAttributedString {
-                L10n.pangramGreek
-                    .kerning(5.0)
-                    .language(.greek)
-            }),
-            ListItem(text: NSAttributedString {
-                "ABCDEF".tracking(-3)
-                Newline()
-                "ABCDEF".tracking(0)
-                Newline()
-                "ABCDEF".tracking(3)
-            }),
-            ListItem(
-                text: L10n.dummyTextGerman
+                    "again!"
+                        .addingAttributes(attributes)
+                        .foregroundColor(.coreGreen)
+                }
+            },
+            ListItem {
+                NSAttributedString {
+                    L10n.pangramEnglish
+                        .language(.english)
+                        .font(.systemFont(ofSize: 30))
+                        .stroke()
+                        .foregroundColor(.coreTeal)
+                }
+            },
+            ListItem { L10n.condensedText.condensed().alignment(.center) },
+            ListItem {
+                NSAttributedString {
+                    L10n.pangramGreek
+                        .kerning(5.0)
+                        .language(.greek)
+                }
+            },
+            ListItem {
+                NSAttributedString {
+                    "ABCDEF".tracking(-3)
+                    Newline()
+                    "ABCDEF".tracking(0)
+                    Newline()
+                    "ABCDEF".tracking(3)
+                }
+            },
+            ListItem {
+                L10n.dummyTextGerman
                     .hyphenationFactor(1.0)
                     .language(.german)
                     .lineBreakMode(.byWordWrapping)
                     .lineBreakStrategy(.standard)
                     .font(.systemFont(ofSize: 20))
-            ),
-            ListItem(text: NSAttributedString {
-                L10n.pangramEnglish
-                    .writingDirection(.rightToLeftDirectionOverride)
-                    .baseWritingDirection(.rightToLeft)
+            },
+            ListItem {
+                NSAttributedString {
+                    L10n.pangramEnglish
+                        .writingDirection(.rightToLeftDirectionOverride)
+                        .baseWritingDirection(.rightToLeft)
 
-                Newline()
+                    Newline()
 
-                "—"
-                    .newline()
-                    .text(L10n.pangramArabic)
-                    .font(.systemFont(ofSize: 40))
-                    .baseWritingDirection(.rightToLeft)
-                    .language(.arabic)
+                    "—"
+                        .newline()
+                        .text(L10n.pangramArabic)
+                        .font(.systemFont(ofSize: 40))
+                        .baseWritingDirection(.rightToLeft)
+                        .language(.arabic)
 
-                Newline()
+                    Newline()
 
-                "—"
-                    .font(.systemFont(ofSize: 40))
-                    .baseWritingDirection(.leftToRight)
+                    "—"
+                        .font(.systemFont(ofSize: 40))
+                        .baseWritingDirection(.leftToRight)
 
-                Newline()
+                    Newline()
 
-                L10n.pangramHebrew
-                    .baseWritingDirection(.rightToLeft)
-            })
+                    L10n.pangramHebrew
+                        .baseWritingDirection(.rightToLeft)
+                }
+            }
         ]
     }
 }
