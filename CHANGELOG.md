@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added conformance to `Hashable`, `Codable` and `Sendable` to custom types: `LanguageCode`, `Ligature`, `Spacing`, `SpellingState` & `WritingDirection`
+
 ### Changed
 
 - Updated Swift toolchain to Swift 6
