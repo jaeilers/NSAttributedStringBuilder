@@ -10,7 +10,7 @@ public extension NSAttributedStringBuilder {
     /// This language code provides the functionality of [Locale.LanguageCode](https://developer.apple.com/documentation/foundation/locale/languagecode)
     /// and `NSAttributedString.Key`
     /// [languageIdentifier](https://developer.apple.com/documentation/foundation/nsattributedstring/key/3809904-languageidentifier).
-    enum LanguageCode: String, Codable, Hashable {
+    enum LanguageCode: String, Codable, Hashable, Sendable {
 
         case ainu = "ain"
         case albanian = "sq"

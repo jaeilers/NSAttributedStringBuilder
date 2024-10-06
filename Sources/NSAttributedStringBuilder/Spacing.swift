@@ -1,5 +1,5 @@
 /// The type of whitespace that can be added to an attributed string.
-public enum Spacing: Equatable {
+public enum Spacing: Hashable, Codable, Sendable {
 
     /// The default whitespace.
     case standard
