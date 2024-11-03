@@ -1,6 +1,7 @@
 import Foundation
 
 /// The ligature options for characters in an attributed string.
+@frozen
 public enum Ligature: NSNumber, Hashable, Codable, Sendable {
 
     /// Indicates that no ligatures are used.
