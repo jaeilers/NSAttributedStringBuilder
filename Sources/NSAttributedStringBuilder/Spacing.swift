@@ -1,4 +1,5 @@
 /// The type of whitespace that can be added to an attributed string.
+@frozen
 public enum Spacing: Hashable, Codable, Sendable {
 
     /// The default whitespace.

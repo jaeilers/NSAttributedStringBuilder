@@ -2,6 +2,7 @@ import Foundation
 
 /// The `NSAttributedStringBuilder` is a result builder that can be used to build and combine
 /// multiple attributed strings into one `NSAttributedString`.
+@frozen
 @resultBuilder
 public enum NSAttributedStringBuilder {
 
