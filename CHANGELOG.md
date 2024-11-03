@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added conformance to `Hashable`, `Codable` and `Sendable` to custom types: `LanguageCode`, `Ligature`, `Spacing`, `SpellingState` & `WritingDirection`
+- Added `@frozen` annotations to enums and resultbuilder struct
 
 ### Changed
 
