@@ -19,7 +19,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane test_all
 ```
 
-Run all tests for: macOS, iOS, tvOS & watchOS
+Run all tests for: macOS, iOS, tvOS, watchOS & visionOS
 
 ### test
 
@@ -27,7 +27,7 @@ Run all tests for: macOS, iOS, tvOS & watchOS
 [bundle exec] fastlane test
 ```
 
-Run tests for a specific platform. Use --env to select an environment. (ios, macos, tvos or watchos)
+Run tests for a specific platform. Use --env to select an environment. (ios, macos, tvos, watchos or visionos)
 
 ### code_coverage_all
 
@@ -43,7 +43,7 @@ Generate code coverage reports for: macOS, iOS, tvOS & watchOS
 [bundle exec] fastlane code_coverage
 ```
 
-Generate code coverage report for a specific platform. Use --env to select the environment. (ios, macos, tvos or watchos)
+Generate code coverage report for a specific platform. Use --env to select the environment. (ios, macos, tvos, watchos or visionos)
 
 ----
 

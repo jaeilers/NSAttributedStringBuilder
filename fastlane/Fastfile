@@ -9,7 +9,7 @@ before_all do |lane, options|
   end
 end
 
-desc "Run all tests for: macOS, iOS, tvOS & watchOS"
+desc "Run all tests for: macOS, iOS, tvOS, watchOS & visionOS"
 lane :test_all do
   env_names.each do |env|
     Dotenv.overload "#{env}"
@@ -17,7 +17,7 @@ lane :test_all do
   end
 end
 
-desc "Run tests for a specific platform. Use --env to select an environment. (ios, macos, tvos or watchos)"
+desc "Run tests for a specific platform. Use --env to select an environment. (ios, macos, tvos, watchos or visionos)"
 lane :test do |options|
   UI.important("Test #{ENV['PLATFORM_BUILD_DIRECTORY']}")
   scan(
@@ -41,7 +41,7 @@ lane :code_coverage_all do |options|
   end
 end
 
-desc "Generate code coverage report for a specific platform. Use --env to select the environment. (ios, macos, tvos or watchos)"
+desc "Generate code coverage report for a specific platform. Use --env to select the environment. (ios, macos, tvos, watchos or visionos)"
 lane :code_coverage do |options|
   UI.important("Generate coverage for #{ENV['PLATFORM_BUILD_DIRECTORY']}")
   slather(
@@ -74,5 +74,5 @@ def coverage_output_directory
 end
 
 def env_names
-  [".env.ios", ".env.macos", ".env.tvos", ".env.watchos"]
+  [".env.ios", ".env.macos", ".env.tvos", ".env.watchos", ".env.visionos"]
 end
