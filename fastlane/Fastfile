@@ -33,7 +33,7 @@ lane :test do |options|
   )
 end
 
-desc "Generate code coverage reports for: macOS, iOS, tvOS & watchOS"
+desc "Generate code coverage reports for: macOS, iOS, tvOS, watchOS & visionOS"
 lane :code_coverage_all do |options|
   env_names.each do |env|
     Dotenv.overload "#{env}"

@@ -35,7 +35,7 @@ Run tests for a specific platform. Use --env to select an environment. (ios, mac
 [bundle exec] fastlane code_coverage_all
 ```
 
-Generate code coverage reports for: macOS, iOS, tvOS & watchOS
+Generate code coverage reports for: macOS, iOS, tvOS, watchOS & visionOS
 
 ### code_coverage
 
