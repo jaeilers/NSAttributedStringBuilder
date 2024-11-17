@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added conformance to `Hashable`, `Codable` and `Sendable` to custom types: `LanguageCode`, `Ligature`, `Spacing`, `SpellingState` & `WritingDirection`
 - Added `@frozen` annotations to enums and resultbuilder struct
+- Added visionOS tests to CI pipeline
 
 ### Changed
 
