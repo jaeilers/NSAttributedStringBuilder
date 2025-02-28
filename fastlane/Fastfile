@@ -4,7 +4,7 @@ opt_out_usage
 
 before_all do |lane, options|
   if is_ci
-    xcodes(version: "#{ENV['XC_VERSION']}")
+    xcode_select(ENV["XC_PATH"])
     setup_ci
   end
 end
