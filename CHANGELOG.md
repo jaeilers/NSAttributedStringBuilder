@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2025-05-23
+
 ### Added
 
 - Added conformance to `Hashable`, `Codable` and `Sendable` to custom types: `LanguageCode`, `Ligature`, `Spacing`, `SpellingState` & `WritingDirection`
@@ -80,7 +82,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Release
 
-[unreleased]: https://github.com/jaeilers/NSAttributedStringBuilder/compare/0.3.1...HEAD
+[unreleased]: https://github.com/jaeilers/NSAttributedStringBuilder/compare/0.4.0...HEAD
+[0.4.0]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.4.0
 [0.3.1]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.3.1
 [0.3.0]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.3.0
 [0.2.1]: https://github.com/jaeilers/NSAttributedStringBuilder/releases/tag/0.2.1
