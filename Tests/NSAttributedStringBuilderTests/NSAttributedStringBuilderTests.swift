@@ -256,4 +256,34 @@ struct NSAttributedStringBuilderTests {
         // Then
         #expect(result == expected)
     }
+
+    @Test
+    func buildArray() {
+        // Given
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineBreakMode = .byTruncatingTail
+        let expected = NSAttributedString(
+            string: "abcde",
+            attributes: [
+                .font: AFont.systemFont(ofSize: 10),
+                .foregroundColor: AColor.blue,
+                .paragraphStyle: paragraphStyle
+            ]
+        )
+
+        // When
+        let result = NSAttributedString {
+            for character in ["a", "b", "c", "d", "e"] {
+                character
+                    .font(.systemFont(ofSize: 10))
+                    .foregroundColor(.blue)
+                    .alignment(.center)
+                    .lineBreakMode(.byTruncatingTail)
+            }
+        }
+
+        // Then
+        #expect(result == expected)
+    }
 }

@@ -12,6 +12,12 @@ public enum NSAttributedStringBuilder {
         }
     }
 
+    public static func buildArray(_ components: [NSAttributedString]) -> NSAttributedString {
+        components.reduce(into: NSMutableAttributedString()) { result, element in
+            result.append(element)
+        }
+    }
+
     public static func buildOptional(_ component: NSAttributedString?) -> NSAttributedString {
         component ?? NSAttributedString()
     }
