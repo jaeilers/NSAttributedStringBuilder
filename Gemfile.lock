@@ -347,7 +347,6 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane
-  ostruct
   slather
 
 CHECKSUMS
