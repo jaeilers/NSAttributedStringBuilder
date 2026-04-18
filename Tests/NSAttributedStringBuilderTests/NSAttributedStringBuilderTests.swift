@@ -32,11 +32,7 @@ struct NSAttributedStringBuilderTests {
 
         let space = NSAttributedString(string: " ")
 
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits(traits))
-        let worldFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let worldFont = try #require(font.applying(traits: traits))
         let world = NSAttributedString(
             string: "World!",
             attributes: [

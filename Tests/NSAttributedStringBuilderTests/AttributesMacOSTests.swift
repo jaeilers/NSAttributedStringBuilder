@@ -10,11 +10,7 @@ struct AttributesMacOSTests {
     func boldWithNoFont() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([.bold, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: .bold))
         let expected: Attributes = [
             .font: expectedFont
         ]
@@ -30,11 +26,7 @@ struct AttributesMacOSTests {
     func boldWithExistingFont() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([.bold, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: .bold))
         let attributes: Attributes = [
             .font: font
         ]
@@ -53,11 +45,7 @@ struct AttributesMacOSTests {
     func italicWithNoFont() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([.italic, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: .italic))
         let expected: Attributes = [
             .font: expectedFont
         ]
@@ -73,11 +61,7 @@ struct AttributesMacOSTests {
     func italicWithExistingFont() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([.italic, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: .italic))
         let attributes: Attributes = [
             .font: font
         ]
@@ -96,11 +80,7 @@ struct AttributesMacOSTests {
     func monospacedWithNoFont() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([.monoSpace, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: .monoSpace))
         let expected: Attributes = [
             .font: expectedFont
         ]
@@ -116,11 +96,7 @@ struct AttributesMacOSTests {
     func monospacedWithExistingFont() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([.monoSpace, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: .monoSpace))
         let attributes: Attributes = [
             .font: font
         ]
@@ -139,11 +115,7 @@ struct AttributesMacOSTests {
     func condensedWithNoFont() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .body)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([.condensed, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: .condensed))
         let expected: Attributes = [
             .font: expectedFont
         ]
@@ -159,11 +131,7 @@ struct AttributesMacOSTests {
     func condensedWithExistingFont() throws {
         // Given
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([.condensed, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: .condensed))
         let attributes: Attributes = [
             .font: font
         ]

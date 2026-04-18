@@ -1941,11 +1941,7 @@ struct AttributedStringBuildingMultiPlatformTests {
 
         let attributedString = NSAttributedString(string: string)
         let font = AFont.preferredFont(forTextStyle: .body)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: trait))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
 
         // When
@@ -1965,11 +1961,7 @@ struct AttributedStringBuildingMultiPlatformTests {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: trait))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
         let attributedString = NSAttributedString(string: string, attributes: [.font: font])
 
@@ -1990,11 +1982,7 @@ struct AttributedStringBuildingMultiPlatformTests {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .body)
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
-        let expectedFont = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let expectedFont = try #require(font.applying(traits: trait))
         let expected = NSAttributedString(string: string, attributes: [.font: expectedFont])
 
         // When
@@ -2017,16 +2005,8 @@ struct AttributedStringBuildingMultiPlatformTests {
         #endif
 
         let attributedString = NSAttributedString(string: string)
-        let boldDescriptor = try #require(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits]))
-        let bold = try #require(AFont(
-            descriptor: boldDescriptor,
-            size: 0.0
-        ))
-        let boldItalicDescriptor = try #require(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits]))
-        let boldItalic = try #require(AFont(
-            descriptor: boldItalicDescriptor,
-            size: 0.0
-        ))
+        let bold = try #require(font.applying(traits: boldTrait))
+        let boldItalic = try #require(bold.applying(traits: italicTrait))
         let expected = NSAttributedString(string: string, attributes: [.font: boldItalic])
 
         // When
@@ -2050,16 +2030,8 @@ struct AttributedStringBuildingMultiPlatformTests {
         let italicTrait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
 
-        let boldDescriptor = try #require(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits]))
-        let bold = try #require(AFont(
-            descriptor: boldDescriptor,
-            size: 0.0
-        ))
-        let boldItalicDescriptor = try #require(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits]))
-        let boldItalic = try #require(AFont(
-            descriptor: boldItalicDescriptor,
-            size: 0.0
-        ))
+        let bold = try #require(font.applying(traits: boldTrait))
+        let boldItalic = try #require(bold.applying(traits: italicTrait))
         let expected = NSAttributedString(string: string, attributes: [.font: boldItalic])
 
         // When
@@ -2082,11 +2054,7 @@ struct AttributedStringBuildingMultiPlatformTests {
         #endif
 
         let attributedString = NSAttributedString(string: string, attributes: [.font: font])
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
-        let monospaced = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let monospaced = try #require(font.applying(traits: trait))
         let expected = NSAttributedString(string: string, attributes: [.font: monospaced])
 
         // When
@@ -2106,11 +2074,7 @@ struct AttributedStringBuildingMultiPlatformTests {
         let trait: NSFontDescriptor.SymbolicTraits = .monoSpace
         #endif
 
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
-        let monospaced = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let monospaced = try #require(font.applying(traits: trait))
         let expected = NSAttributedString(string: string, attributes: [.font: monospaced])
 
         // When
@@ -2131,11 +2095,7 @@ struct AttributedStringBuildingMultiPlatformTests {
         #endif
 
         let attributedString = NSAttributedString(string: string, attributes: [.font: font])
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
-        let condensed = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let condensed = try #require(font.applying(traits: trait))
         let expected = NSAttributedString(string: string, attributes: [.font: condensed])
 
         // When
@@ -2155,11 +2115,7 @@ struct AttributedStringBuildingMultiPlatformTests {
         let trait: NSFontDescriptor.SymbolicTraits = .condensed
         #endif
 
-        let descriptor = try #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits]))
-        let condensed = try #require(AFont(
-            descriptor: descriptor,
-            size: 0.0
-        ))
+        let condensed = try #require(font.applying(traits: trait))
         let expected = NSAttributedString(string: string, attributes: [.font: condensed])
 
         // When

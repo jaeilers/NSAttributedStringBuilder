@@ -454,10 +454,7 @@ struct AttributedStringBuildingCoreTests {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expected = try AFont(
-            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
+        let expected = try #require(font.applying(traits: trait))
 
         // When
         let result = NSAttributedString(string: string).fontWithTrait(trait)
@@ -475,10 +472,7 @@ struct AttributedStringBuildingCoreTests {
         let trait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let expected = try AFont(
-            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
+        let expected = try #require(font.applying(traits: trait))
         let attributedString = NSAttributedString(string: string, attributes: [.font: font])
 
         // When
@@ -498,10 +492,7 @@ struct AttributedStringBuildingCoreTests {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expected = try AFont(
-            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
+        let expected = try #require(font.applying(traits: trait))
 
         // When
         let result = string.fontWithTrait(trait)
@@ -692,10 +683,7 @@ struct AttributedStringBuildingCoreTests {
         #endif
 
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expected = try AFont(
-            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
+        let expected = try #require(font.applying(traits: trait))
 
         // When
         let result = image.fontWithTrait(trait)
