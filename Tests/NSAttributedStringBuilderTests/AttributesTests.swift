@@ -773,10 +773,7 @@ struct AttributesTests {
         let trait: NSFontDescriptor.SymbolicTraits = .bold
         #endif
         let font = AFont.preferredFont(forTextStyle: .body)
-        let expected = try AFont(
-            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
+        let expected = try #require(font.applying(traits: trait))
 
         // When
         let result = Attributes().fontWithTrait(trait)
@@ -793,10 +790,7 @@ struct AttributesTests {
         let trait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
         let font = AFont.preferredFont(forTextStyle: .headline)
-        let expected = try AFont(
-            descriptor: #require(font.fontDescriptor.withSymbolicTraits([trait, font.fontDescriptor.symbolicTraits])),
-            size: 0.0
-        )
+        let expected = try #require(font.applying(traits: trait))
         let attributes: Attributes = [
             .font: font
         ]
@@ -820,16 +814,8 @@ struct AttributesTests {
         let italicTrait: NSFontDescriptor.SymbolicTraits = .italic
         #endif
 
-        let boldDescriptor = try #require(font.fontDescriptor.withSymbolicTraits([boldTrait, font.fontDescriptor.symbolicTraits]))
-        let bold = try #require(AFont(
-            descriptor: boldDescriptor,
-            size: 0.0
-        ))
-        let boldItalicDescriptor = try #require(bold.fontDescriptor.withSymbolicTraits([italicTrait, bold.fontDescriptor.symbolicTraits]))
-        let boldItalic = try #require(AFont(
-            descriptor: boldItalicDescriptor,
-            size: 0.0
-        ))
+        let bold = try #require(font.applying(traits: boldTrait))
+        let boldItalic = try #require(bold.applying(traits: italicTrait))
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 12
