@@ -4,7 +4,7 @@ import UIKit
 import AppKit
 #endif
 
-// Multiplatform extension to support paragraph styles.
+/// Multiplatform extension to support paragraph styles.
 public extension AttributedStringBuilding {
 
     /// Set the paragraph style of the attributed string.
