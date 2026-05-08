@@ -88,7 +88,7 @@ public extension Attributes {
     /// - Parameters:
     ///   - direction: The direction options for string. See `WritingDirection` for options.
     /// - Returns: The modified attributes.
-    func writingDirection(_ direction: NSAttributedStringBuilder.WritingDirection) -> Attributes {
+    func writingDirection(_ direction: AttributedStringBuilder.WritingDirection) -> Attributes {
         addingAttribute(.writingDirection, value: [direction.rawValue])
     }
 
@@ -100,7 +100,7 @@ public extension Attributes {
     /// - Parameters:
     ///   - languageCode: The language code of the language.
     /// - Returns: The modified attributes.
-    func language(_ languageCode: NSAttributedStringBuilder.LanguageCode) -> Attributes {
+    func language(_ languageCode: AttributedStringBuilder.LanguageCode) -> Attributes {
         addingAttribute(NSAttributedString.Key(kCTLanguageAttributeName as String), value: languageCode.rawValue)
     }
 

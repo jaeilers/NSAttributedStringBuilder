@@ -138,7 +138,7 @@ public extension AttributedStringBuilding {
     /// - Parameters:
     ///   - direction: The direction options for string. See `WritingDirection` for options.
     /// - Returns: A copy of the modified attributed string.
-    func writingDirection(_ direction: NSAttributedStringBuilder.WritingDirection) -> NSAttributedString {
+    func writingDirection(_ direction: AttributedStringBuilder.WritingDirection) -> NSAttributedString {
         addingAttributes(Attributes().writingDirection(direction))
     }
 
@@ -150,7 +150,7 @@ public extension AttributedStringBuilding {
     /// - Parameters:
     ///   - languageCode: The language code of the language.
     /// - Returns: A copy of the modified attributed string.
-    func language(_ languageCode: NSAttributedStringBuilder.LanguageCode) -> NSAttributedString {
+    func language(_ languageCode: AttributedStringBuilder.LanguageCode) -> NSAttributedString {
         addingAttributes(Attributes().language(languageCode))
     }
 

@@ -107,7 +107,7 @@ struct AttributesiOSTests {
     @Test
     func accessibilitySpeechLanguage() {
         // Given
-        let language: NSAttributedStringBuilder.LanguageCode = .french
+        let language: AttributedStringBuilder.LanguageCode = .french
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
         ]

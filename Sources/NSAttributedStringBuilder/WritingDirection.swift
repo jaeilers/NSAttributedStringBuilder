@@ -1,6 +1,6 @@
 import Foundation
 
-public extension NSAttributedStringBuilder {
+public extension AttributedStringBuilder {
 
     /// Combines `NSWritingDirection` and `NSWritingDirectionFormatType`
     /// into one type that can be used with `writingDirection(_:)`.

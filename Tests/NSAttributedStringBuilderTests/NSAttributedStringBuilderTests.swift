@@ -7,7 +7,7 @@ import UIKit
 #endif
 
 @Suite
-struct NSAttributedStringBuilderTests {
+struct AttributedStringBuilderTests {
 
     private let string = String.unique()
 
@@ -233,7 +233,7 @@ struct NSAttributedStringBuilderTests {
             ]
         } else {
             attributes = [
-                NSAttributedString.Key(kCTLanguageAttributeName as String): NSAttributedStringBuilder.LanguageCode.greek.rawValue
+                NSAttributedString.Key(kCTLanguageAttributeName as String): AttributedStringBuilder.LanguageCode.greek.rawValue
             ]
         }
         let expected = NSAttributedString(string: string,attributes: attributes)

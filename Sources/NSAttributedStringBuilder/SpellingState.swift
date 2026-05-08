@@ -1,5 +1,5 @@
 #if canImport(AppKit)
-public extension NSAttributedStringBuilder {
+public extension AttributedStringBuilder {
 
     /// Defines a spelling state for the attributed string. (macOS only)
     @frozen

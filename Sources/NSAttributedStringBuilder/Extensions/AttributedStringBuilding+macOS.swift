@@ -75,7 +75,7 @@ public extension AttributedStringBuilding {
     /// - Parameters:
     ///   - state: The spelling state of the string.
     /// - Returns: A copy of the modified attributed string.
-    func spellingState(_ state: NSAttributedStringBuilder.SpellingState) -> NSAttributedString {
+    func spellingState(_ state: AttributedStringBuilder.SpellingState) -> NSAttributedString {
         addingAttributes(Attributes().spellingState(state))
     }
 
@@ -181,7 +181,7 @@ public extension AttributedStringBuilding {
     /// - Parameters:
     ///   - language: The language of the text for accessibility.
     /// - Returns: The modified attributes.
-    func accessibilityLanguage(_ language: NSAttributedStringBuilder.LanguageCode) -> NSAttributedString {
+    func accessibilityLanguage(_ language: AttributedStringBuilder.LanguageCode) -> NSAttributedString {
         addingAttributes(Attributes().accessibilityLanguage(language))
     }
 

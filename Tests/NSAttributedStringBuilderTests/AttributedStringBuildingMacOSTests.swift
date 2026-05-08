@@ -619,7 +619,7 @@ struct AttributedStringBuildingMacOSTests {
     @Test
     func accessibilityLanguageWithAttributedString() {
         // Given
-        let language: NSAttributedStringBuilder.LanguageCode = .greek
+        let language: AttributedStringBuilder.LanguageCode = .greek
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
         ]
@@ -640,7 +640,7 @@ struct AttributedStringBuildingMacOSTests {
     @Test
     func accessibilityLanguageWithString() {
         // Given
-        let language: NSAttributedStringBuilder.LanguageCode = .french
+        let language: AttributedStringBuilder.LanguageCode = .french
         let attributes: Attributes = [
             .accessibilityLanguage: language.rawValue as NSString
         ]
