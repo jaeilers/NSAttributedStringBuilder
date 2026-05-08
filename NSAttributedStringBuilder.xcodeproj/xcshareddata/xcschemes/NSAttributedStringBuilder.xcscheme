@@ -4,7 +4,8 @@
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "897F9D912AEE4BF300709693"
+               BlueprintIdentifier = "DD4672902FAE0373002C870E"
                BuildableName = "NSAttributedStringBuilder.framework"
                BlueprintName = "NSAttributedStringBuilder"
                ReferencedContainer = "container:NSAttributedStringBuilder.xcodeproj">
@@ -34,7 +35,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "897F9D992AEE4BF400709693"
+               BlueprintIdentifier = "DD4672992FAE0373002C870E"
                BuildableName = "NSAttributedStringBuilderTests.xctest"
                BlueprintName = "NSAttributedStringBuilderTests"
                ReferencedContainer = "container:NSAttributedStringBuilder.xcodeproj">
@@ -51,7 +52,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      queueDebuggingEnableBacktraceRecording = "Yes">
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -62,7 +64,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "897F9D912AEE4BF300709693"
+            BlueprintIdentifier = "DD4672902FAE0373002C870E"
             BuildableName = "NSAttributedStringBuilder.framework"
             BlueprintName = "NSAttributedStringBuilder"
             ReferencedContainer = "container:NSAttributedStringBuilder.xcodeproj">

@@ -56,7 +56,7 @@ public extension Attributes {
     /// - Parameters:
     ///   - language: The language to use for VoiceOver.
     /// - Returns: The modified attributes.
-    func accessibilitySpeechLanguage(_ language: NSAttributedStringBuilder.LanguageCode) -> Attributes {
+    func accessibilitySpeechLanguage(_ language: AttributedStringBuilder.LanguageCode) -> Attributes {
         addingAttribute(.accessibilitySpeechLanguage, value: language.rawValue as NSString)
     }
 

@@ -13,7 +13,7 @@ struct AttributedStringBuildingiOSTests {
     @Test
     func accessibilitySpeechLanguageWithAttributedString() {
         // Given
-        let language: NSAttributedStringBuilder.LanguageCode = .vietnamese
+        let language: AttributedStringBuilder.LanguageCode = .vietnamese
         let attributes: Attributes = [
             .font: AFont.preferredFont(forTextStyle: .body)
         ]
@@ -34,7 +34,7 @@ struct AttributedStringBuildingiOSTests {
     @Test
     func accessibilitySpeechLanguageWithString() {
         // Given
-        let language: NSAttributedStringBuilder.LanguageCode = .vietnamese
+        let language: AttributedStringBuilder.LanguageCode = .vietnamese
         let attributes: Attributes = [
             .accessibilitySpeechLanguage: language.rawValue as NSString
         ]

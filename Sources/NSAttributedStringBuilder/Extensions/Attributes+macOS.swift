@@ -60,7 +60,7 @@ public extension Attributes {
     /// - Parameters:
     ///   - state: The spelling state of the string.
     /// - Returns: The modified attributes.
-    func spellingState(_ state: NSAttributedStringBuilder.SpellingState) -> Attributes {
+    func spellingState(_ state: AttributedStringBuilder.SpellingState) -> Attributes {
         addingAttribute(.spellingState, value: state.rawValue)
     }
 
@@ -172,7 +172,7 @@ public extension Attributes {
     /// - Parameters:
     ///   - language: The language of the text for accessibility.
     /// - Returns: The modified attributes.
-    func accessibilityLanguage(_ language: NSAttributedStringBuilder.LanguageCode) -> Attributes {
+    func accessibilityLanguage(_ language: AttributedStringBuilder.LanguageCode) -> Attributes {
         addingAttribute(.accessibilityLanguage, value: language.rawValue as NSString)
     }
 

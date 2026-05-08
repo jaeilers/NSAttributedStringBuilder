@@ -2,7 +2,7 @@ import Foundation
 
 // swiftlint:disable line_length
 
-public extension NSAttributedStringBuilder {
+public extension AttributedStringBuilder {
 
     /// The language code describes the code associated with a language.
     ///
@@ -128,13 +128,13 @@ public extension NSAttributedStringBuilder {
     }
 }
 
-extension NSAttributedStringBuilder.LanguageCode: ExpressibleByStringLiteral {
+extension AttributedStringBuilder.LanguageCode: ExpressibleByStringLiteral {
 
     /// Initializes the `LanguageCode` with the language code string.
     /// - Parameters:
     ///   - value: The language code as string. Unknown codes are mapped to `unknown`.
     public init(stringLiteral value: StringLiteralType) {
-        self = NSAttributedStringBuilder.LanguageCode(rawValue: value) ?? .unknown
+        self = AttributedStringBuilder.LanguageCode(rawValue: value) ?? .unknown
     }
 }
 

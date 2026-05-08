@@ -1,10 +1,10 @@
 import Foundation
 
-/// The `NSAttributedStringBuilder` is a result builder that can be used to build and combine
+/// The `AttributedStringBuilder` is a result builder that can be used to build and combine
 /// multiple attributed strings into one `NSAttributedString`.
 @frozen
 @resultBuilder
-public enum NSAttributedStringBuilder {
+public enum AttributedStringBuilder {
 
     public static func buildBlock(_ components: NSAttributedString...) -> NSAttributedString {
         components.reduce(into: NSMutableAttributedString()) { result, element in
@@ -38,7 +38,7 @@ public enum NSAttributedStringBuilder {
 public extension NSAttributedString {
 
     /// Initializes an attributed string from given attributed strings provided by the result builder.
-    convenience init(@NSAttributedStringBuilder _ builder: () -> NSAttributedString) {
+    convenience init(@AttributedStringBuilder _ builder: () -> NSAttributedString) {
         self.init(attributedString: builder())
     }
 }
