@@ -19,8 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup
-        uses: ./.github/actions/setup
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       - name: Run tests
         run: bundle exec fastlane test_all

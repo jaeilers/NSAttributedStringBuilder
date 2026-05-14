@@ -8,11 +8,6 @@ updates:
 
   # Composite actions need to be updated separately
   - package-ecosystem: "github-actions"
-    directory: "/.github/actions/setup"
-    schedule:
-      interval: "weekly"
-
-  - package-ecosystem: "github-actions"
     directory: "/.github/actions/code-coverage"
     schedule:
       interval: "weekly"
