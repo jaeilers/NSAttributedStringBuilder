@@ -29,3 +29,20 @@ jobs:
         uses: ./.github/actions/code-coverage
         with:
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
+
+  dependabot-auto-merge:
+    runs-on: ubuntu-latest
+    needs: run-tests
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event_name == 'pull_request'
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Approve PR
+        run: gh pr review --approve "$PR_URL"
+
+      - name: Enable auto merge
+        run: gh pr merge --auto --merge "$PR_URL"
