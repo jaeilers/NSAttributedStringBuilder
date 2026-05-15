@@ -17,14 +17,4 @@ extension AImage {
         return AImage()
         #endif
     }
-
-    static func star() throws -> AImage {
-        #if canImport(UIKit)
-        return try #require(UIImage(systemName: "star"))
-        #elseif canImport(AppKit)
-        return try #require(NSImage(systemSymbolName: "star", accessibilityDescription: nil))
-        #else
-        return AImage()
-        #endif
-    }
 }
