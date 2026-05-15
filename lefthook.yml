@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: true
+  fail_on_changes: "always"
+  fail_on_changes_diff: false
+  jobs:
+    - name: Format Swift files & abort commit if needed
+      run: swiftformat Sources --config .swiftformat
