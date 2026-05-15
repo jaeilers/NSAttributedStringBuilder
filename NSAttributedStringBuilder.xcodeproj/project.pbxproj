@@ -97,7 +97,7 @@
 				DD46728E2FAE0373002C870E /* Frameworks */,
 				DD46728F2FAE0373002C870E /* Resources */,
 				DD4672F92FAE0963002C870E /* Swiftlint Run Script */,
-				DD4672FA2FAE098A002C870E /* SwiftFormat Commit Hook Run Script */,
+				DD4672FA2FAE098A002C870E /* Install Commit Hooks Run Script */,
 			);
 			buildRules = (
 			);
@@ -210,7 +210,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
 		};
-		DD4672FA2FAE098A002C870E /* SwiftFormat Commit Hook Run Script */ = {
+		DD4672FA2FAE098A002C870E /* Install Commit Hooks Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,14 +219,14 @@
 			);
 			inputPaths = (
 			);
-			name = "SwiftFormat Commit Hook Run Script";
+			name = "Install Commit Hooks Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Installs the swift-format pre-commit hook\nbash \"${SRCROOT}/scripts/setup_pre_commit_hook.sh\"\n";
+			shellScript = "# Installs commit hooks\nif [[ -d \"$HOME/.rbenv\" ]]; then\n    export PATH=~/.rbenv/shims:$PATH\n    bundle exec lefthook install\nelse\n    echo \"warning: Please install rbenv\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
