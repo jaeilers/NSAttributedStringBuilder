@@ -2,10 +2,8 @@ import NSAttributedStringBuilder
 import Testing
 #if canImport(UIKit)
 import UIKit
-typealias AFontDescriptor = UIFontDescriptor
 #elseif canImport(AppKit)
 import AppKit
-typealias AFontDescriptor = NSFontDescriptor
 #endif
 
 @Suite
