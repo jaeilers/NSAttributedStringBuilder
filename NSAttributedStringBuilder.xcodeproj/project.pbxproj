@@ -226,7 +226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Installs commit hooks\nif [[ -d \"$HOME/.rbenv\" ]]; then\n    export PATH=~/.rbenv/shims:$PATH\n    bundle exec lefthook install\nelse\n    echo \"warning: Please install rbenv\"\nfi\n";
+			shellScript = "# Installs commit hooks\nif [[ -d \"$HOME/.rbenv\" ]]; then\n    export PATH=\"$HOME/.rbenv/shims:$PATH\"\n    bundle exec lefthook install\nelse\n    echo \"warning: Please install rbenv\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
